@@ -1,0 +1,117 @@
+body {
+  margin: 0; 
+  height: 100vh;
+  font-family: roboto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  color: whitesmoke;
+}
+
+/*Top Buttons */
+#top-buttons {
+  margin-bottom: 20px;
+  background: white;
+  border-color: gray 1px solid;
+  border-radius: 3px;
+  
+  
+}
+.welcome {
+  margin-bottom: 10px;
+}
+button {
+  padding: 10px;
+  margin: 5px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+
+.form-container {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.form-container.show {
+  display: block;
+  opacity: 1;
+}
+
+.change-pass {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.change-pass.show{
+  display: block;
+  opacity: 1;
+}
+
+/* Form Style*/
+form {
+  background: #1e293b;
+  padding: 25px; 
+  border-radius: 10px;
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+
+}
+
+/*Input*/
+input {
+  padding: 10px; 
+  margin: 8px 0; 
+  border: none; 
+  border-radius: 5px;
+}
+
+input::placeholder {
+  font-family: roboto;
+}
+
+label{
+  display: inline-block;
+}
+
+legend {
+  text-align: center;
+}
+fieldset {
+  border: 1px solid rgba(28,110,164,0.25);
+  border-radius: 5px;
+  outline: 1px solid rgba(28,110,164,0.25);
+outline-offset: 0px;
+
+}
+
+/*Button*/ 
+form button {
+  background: #22c55e;
+  color: white;
+  margin-top: 10px;
+}
+
+form button:hover {
+  background: #16a34a;
+}
+
+dialog {
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+}
+
+
+dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5);
+}
+.hidden {
+  display: none;
+}

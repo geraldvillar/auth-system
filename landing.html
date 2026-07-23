@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Auth Page</title>
+        <link rel="stylesheet" href="landing.css">
+       <script src="landingPageOsimplified.js" defer> </script>
+        <link rel="icon" type="image/icon" href="imgResources/tracking.png">
+        <meta charset="utf-8">
+    </head>
+<body>
+     
+
+    <!---Buttons--->
+    <div id="top-buttons" class="top-buttons">
+        <button id="sign-up-btn">Sign Up</button>
+        <button id="login-btn">Login </button>
+    </div>
+
+    <h2 id="welcome">Welcome!</h2>
+   
+   
+    <!---Sign Up-->
+
+    <div id="user-info" class="form-container">
+        <form action="#" id="sign-form">
+            <h2>Sign Up</h2>
+
+            <fieldset>
+                <legend>Personal Information</legend>
+            <label for="user">
+            Name:
+                <input type="text" id="name" name="name"  placeholder="Enter your full name" required/>
+            </label>
+            <label for="email">
+        
+                Email: 
+                <input type="email" id="email" name="email"  placeholder="example@email.com" required autocorrect="on"/>
+                </label>
+
+                <label for="age">
+                    Age:
+                    <input type="number" id="age" name="age" min="18" max="70" placeholder="18-70" required/>
+                </label>
+            <label for="username">
+                Username:
+                <input type="text" id="username" name="username" placeholder="Choose username" required/>
+            </label>
+            
+            <label for="password">
+                Password: 
+                <input type="password" id="password" name="password" placeholder="Enter password" required/>
+            </label>
+            <label for="confirmation">
+                Confirm Password:
+                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required/>
+            </label>
+            </fieldset>
+            <button type="submit" id="account-created">Create Account</button>
+        </form>
+    </div>
+
+    <!---Login Page-->
+
+    <div id="login-user" class="form-container">
+        
+        <form action="#">
+            <h2>Login Page</h2>
+            <fieldset>
+                <legend>Login</legend>
+        <label for="login-email">
+            Email:
+            <input type="email" id="login-email" name="login-email" placeholder="Enter your email"/>
+        </label>
+        <label for="user-password">
+            Password:
+            <input type="password" id="user-password" name="user-password" placeholder="Enter Password"/>
+        </label>
+        <button id ="submit-data" type="submit">Login</button>
+        <button id="recover-password" type="button">Forgot Password?</button>
+
+        </fieldset>
+        </form>
+    </div>
+
+    <div id="forgot-password" class="change-pass">
+        <form action="">
+            <h2>Change Password</h2>
+            <fieldset>
+                <label for="new-password">
+                    New Password:
+                    <input type="password" id="new-password" name="new-password" placeholder="Enter new password"/>
+                </label>
+                <button id="confirm-new-password" type="button">Confirm Password</button>
+            </fieldset>
+        </form>
+    </div>
+
+    <!---Account Creation Message-->
+    <div id="user-to-users">
+    <dialog id="account-new">
+        <p>Successfully Created</p>
+        <button type="button" id="closeModalAccountCreated">Close</button>
+    </dialog>
+    <dialog id="account-failed">
+        <p>Account Creation Failed, Please Check Your Info</p>
+        <button type="button" id="closeModalFailed">Close</button>
+    </dialog>
+    
+    </div>
+
+    <!---Password Change Message-->
+<div id="change-pass-msg">
+    <dialog id="changed-pass">
+        <p>Password Changed.</p>
+        <button type="button" id="close-changed-pass">Close</button>
+    </dialog>
+</div>
+
+
+<div id="matched-error">
+    <dialog id="matched-error-msg">
+        <p>The new password must be different from old password. </p>
+        <button id="matchClose">Close</button>
+    </dialog>
+</div>
+
+<div id="insufficient-length">
+    <dialog id="insufficient-length-msg">
+        <p>Password cannot be empty</p>
+        <button type="button" id="insufficientClose">Close</button>
+    </dialog>
+</div>
+
+<div id="lessThanSix">
+    <dialog id="lessThanSix-msg">
+        <p>The password must be at least 6</p>
+        <button type="button" id="lessThanSixClose">Close</button>
+    </dialog>
+    </div>
+
+    <!---Modal For Sign Up Messages-->
+    <div class="empty-input" id="empty-input">
+        <dialog id="empty-input-msg">
+            <p>Please fill the form properly.</p>
+            <button type="button" id="empty-input-btn">Close</button>
+        </dialog>
+    </div>
+
+    <div id="initial-password">
+        <dialog id="initial-password-msg">
+            <p>The password does not match.</p>
+        </dialog>
+    </div>
+
+    <div id="lessThanSixChar">
+        <dialog id="lessThanSixChar-msg"> 
+            <p>Password must be at least 6 characters long.</p>
+            <button id="lessThanSix-msg-btn">Close</button>
+        </dialog>
+    </div>
+
+    <div id="mismatched">
+        <dialog id="mismatched-msg">
+            <p>Password mismatched.</p>
+            <button type="button" id="mismatched-btn">Close</button>
+        </dialog>
+    </div>
+
+    <footer>
+
+    </footer>
+</body>
+</html>
