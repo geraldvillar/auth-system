@@ -140,7 +140,7 @@ const pairs = [
 const confirmPassBtn = $("confirm-new-password");
 
 if(confirmPassBtn) {
-confirmPassBtn.addEventListener("click", () => {
+confirmPassBtn.addEventListener("click", (event) => {
 const oldPassword = $("user-password")?.value;
 const newPassword = $("new-password")?.value;
 
@@ -212,5 +212,29 @@ if(createAccountBtn) {
     });
     
     }
-    
+//eye icon toggle//
+
+const passwordInputs = {
+    login: $("password"), 
+    current: $("user-password"),
+    new: $("new-password"),
+    confirm: $("confirm-password")
+};
+
+const toggleButton = document.querySelectorAll(".togglePassword");
+
+    toggleButton.forEach(icon => {
+        icon.addEventListener("click", () => {
+            const target = icon.dataset.target; 
+            const input = passwordInputs[target]; 
+            
+            if(!input) return;
+
+            const isHidden = input.type === "password"; 
+
+            input.type = isHidden ? "text" : "password"; 
+
+            icon.src = isHidden ? "imgResources/close-eye.png" : "imgResources/view.png";
+        });
+    });
 });

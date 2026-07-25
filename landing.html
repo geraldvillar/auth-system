@@ -8,18 +8,31 @@
         <meta charset="utf-8">
     </head>
 <body>
-    
 
-    <!---Buttons--->
+     <!--LANDING PAGE-->
+    <div class="landing-container">
+
+    <h1 class="logo">Auth System</h1>
+    <p class="tagline">Secure your account. Simple. Fast.</p>
+>>>>>>> 3fb21973935d12b2aa7c0ef9978847a9c85bba1b
+
     <div id="top-buttons" class="top-buttons">
         <button id="sign-up-btn">Sign Up</button>
         <button id="login-btn">Login </button>
     </div>
 
+</div>
+
     <h2 id="welcome">Welcome!</h2>
 
 
+
     <!---Sign Up-->
+
+   
+   
+    <!---SIGN UP PAGE-->
+
 
     <div id="user-info" class="form-container">
         <form action="#" id="sign-form">
@@ -45,15 +58,19 @@
                 Username:
                 <input type="text" id="username" name="username" placeholder="Choose username" required/>
             </label>
-            
+            <div class="input-group">
             <label for="password">
-                Password: 
+                Password:  </label>
                 <input type="password" id="password" name="password" placeholder="Enter password" required/>
-            </label>
+                <img src="imgResources/close-eye.png" class="togglePassword" data-target="login">
+            </div>
+
+            <div class="input-group">
             <label for="confirmation">
-                Confirm Password:
+                Confirm Password:</label>
                 <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required/>
-            </label>
+                <img src="imgResources/close-eye.png" class="togglePassword" data-target="confirm">
+            </div>
             </fieldset>
             <button type="submit" id="account-created">Create Account</button>
         </form>
@@ -71,10 +88,12 @@
             Email:
             <input type="email" id="login-email" name="login-email" placeholder="Enter your email"/>
         </label>
+        <div class="input-group">
         <label for="user-password">
-            Password:
+            Password: </label>
             <input type="password" id="user-password" name="user-password" placeholder="Enter Password"/>
-        </label>
+            <img src="imgResources/close-eye.png" class="togglePassword" data-target="current">
+      </div>
         <button id ="submit-data" type="submit">Login</button>
         <button id="recover-password" type="button">Forgot Password?</button>
 
@@ -82,14 +101,17 @@
         </form>
     </div>
 
-    <div id="forgot-password" class="change-pass">
+    <div id="forgot-password" class="form-container">
         <form action="">
             <h2>Change Password</h2>
             <fieldset>
+                <div class="input-group">
                 <label for="new-password">
-                    New Password:
+                    New Password: </label>
                     <input type="password" id="new-password" name="new-password" placeholder="Enter new password"/>
-                </label>
+              <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
+              
+                </div>
                 <button id="confirm-new-password" type="button">Confirm Password</button>
             </fieldset>
         </form>
@@ -116,6 +138,7 @@
     </dialog>
 </div>
 
+<!---Password error messages-->
 
 <div id="matched-error">
     <dialog id="matched-error-msg">

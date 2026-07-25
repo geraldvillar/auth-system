@@ -11,23 +11,9 @@ body {
 }
 
 /*Top Buttons */
-#top-buttons {
-  margin-bottom: 20px;
-  background: white;
-  border-color: gray 1px solid;
-  border-radius: 3px;
-  
-  
-}
+
 .welcome {
   margin-bottom: 10px;
-}
-button {
-  padding: 10px;
-  margin: 5px;
-  cursor: pointer;
-  border: none;
-  border-radius: 5px;
 }
 
 .form-container {
@@ -95,6 +81,9 @@ form button {
   background: #22c55e;
   color: white;
   margin-top: 10px;
+  padding: 12px 20px; 
+  border: none; 
+  border-radius: 6px;
 }
 
 form button:hover {
@@ -114,4 +103,61 @@ dialog::backdrop {
 }
 .hidden {
   display: none;
+}
+
+.input-group {
+    position: relative;
+    width: 100%;
+}
+
+/* input */
+.input-group input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; 
+    box-sizing: border-box;
+}
+
+/*icon*/
+.togglePassword {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    right: 10px;      
+    top: 50%;
+    transform: translate(-50%);
+    cursor: pointer;
+}
+
+.landing-container {
+  text-align: center;
+}
+
+.logo {
+  font-size: 40px;
+  font-weight: bold; 
+  margin-bottom: 10px;
+}
+
+.tagline {
+  color: #94a3b8; 
+  margin-bottom: 30px; 
+}
+
+.top-buttons button {
+  padding: 12px 20px;
+  font-size: 14px; 
+  border-radius: 6px;
+  border: none; 
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#sign-up-btn {
+  background:  #22c55e;
+  color: whitesmoke;
+}
+
+.top-buttons button:hover {
+  transform: scale(1.05);
 }
