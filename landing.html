@@ -1,36 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Auth Page</title>
-        <link rel="stylesheet" href="landing.css">
+
+<head>
+    <title>Auth Page</title>
+    <link rel="stylesheet" href="landing.css">
     <script src="landingPageOsimplified.js" defer> </script>
-        <link rel="icon" type="image/icon" href="imgResources/tracking.png">
-        <meta charset="utf-8">
-    </head>
+    <link rel="icon" type="image/icon" href="imgResources/tracking.png">
+    <meta charset="utf-8">
+</head>
+
 <body>
 
-     <!--LANDING PAGE-->
+    <!--LANDING PAGE-->
     <div class="landing-container">
 
-    <h1 class="logo">Auth System</h1>
-    <p class="tagline">Secure your account. Simple. Fast.</p>
+        <h1 class="logo">Auth System</h1>
+        <p class="tagline">Secure your account. Simple. Fast.</p>
 
 
-    <div id="top-buttons" class="top-buttons">
-        <button id="sign-up-btn">Sign Up</button>
-        <button id="login-btn">Login </button>
+        <div id="top-buttons" class="top-buttons">
+            <button id="sign-up-btn">Sign Up</button>
+            <button id="login-btn">Login </button>
+        </div>
+
     </div>
-
-</div>
 
     <h2 id="welcome">Welcome!</h2>
 
 
-
-    <!---Sign Up-->
-
-   
-   
     <!---SIGN UP PAGE-->
 
 
@@ -40,44 +37,66 @@
 
             <fieldset>
                 <legend>Personal Information</legend>
-            <div class="name-icon">
-                <label for="user">
-            Name:  </label>
-                <input type="text" id="name" name="name"  placeholder="Enter your full name" required/>
 
-            </label>
+                <div class="input-group">
+                    <label for="user">Name:</label>
 
+                    <div class="input-wrapper">
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+                    <img src="imgResources/user.png" class="input-icon">
+                    </div>
 
-                <img src="auth-system/imgResources/tracking.png" class="name-ico">
-            </div>
-
-            <div class="email-des">
-            <label for="email">
-                Email: </label>
-                <input type="email" id="email" name="email"  placeholder="example@email.com" required autocorrect="on"/>
-                <img src="imgResources/email.png" class="email-icon">
                 </div>
-                <label for="age">
-                    Age:
-                    <input type="number" id="age" name="age" min="18" max="70" placeholder="18-70" required/>
-                </label>
-            <label for="username">
-                Username:
-                <input type="text" id="username" name="username" placeholder="Choose username" required/>
-            </label>
-            <div class="input-group">
-            <label for="password">
-                Password:  </label>
-                <input type="password" id="password" name="password" placeholder="Enter password" required/>
-                <img src="imgResources/close-eye.png" class="togglePassword" data-target="login">
-            </div>
 
-            <div class="input-group">
-            <label for="confirmation">
-                Confirm Password:</label>
-                <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password" required/>
-                <img src="imgResources/close-eye.png" class="togglePassword" data-target="confirm">
-            </div>
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <div class="input-wrapper">
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required
+                        autocorrect="on" />
+                    <img src="imgResources/email.png" class="input-icon">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="age">Age:</label>
+                    <div class="input-wrapper">
+                    <input type="number" id="age" name="age" min="18" max="70" placeholder="18-70" required />
+                    <img src="imgResources/age.png" class="input-icon">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="username">Username:</label>
+
+                    <div class="input-wrapper">
+                    <input type="text" id="username" name="username" placeholder="Choose username" required />
+                    <img src="imgResources/id-cardii.png" class="input-icon">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password:</label>
+
+                    <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Enter password" required />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="login">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmation">Confirm Password:</label>
+                    
+                    <div class="input-wrapper">
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password"
+                        required />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="confirm">
+                    </div>
+
+                </div>
             </fieldset>
             <button type="submit" id="account-created">Create Account</button>
         </form>
@@ -86,25 +105,29 @@
     <!---Login Page-->
 
     <div id="login-user" class="form-container">
-        
+
         <form action="#">
             <h2>Login Page</h2>
             <fieldset>
                 <legend>Login</legend>
-        <label for="login-email">
-            Email:
-            <input type="email" id="login-email" name="login-email" placeholder="Enter your email"/>
-        </label>
-        <div class="input-group">
-        <label for="user-password">
-            Password: </label>
-            <input type="password" id="user-password" name="user-password" placeholder="Enter Password"/>
-            <img src="imgResources/close-eye.png" class="togglePassword" data-target="current">
-      </div>
-        <button id ="submit-data" type="submit">Login</button>
-        <button id="recover-password" type="button">Forgot Password?</button>
+                <div class="input-group">
 
-        </fieldset>
+                <label for="login-email">Email:</label>
+                    <input type="email" id="login-email" name="login-email" placeholder="Enter your email" />
+                    <img src="imgResources/email.png" class="input-icon">
+                </div>
+                <div class="input-group">
+                    <label for="user-password">Password:</label>  
+                    <div class="input-wrapper">
+                    <input type="password" id="user-password" name="user-password" placeholder="Enter Password" />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="current">
+                    </div>
+
+                </div>
+                <button id="submit-data" type="submit">Login</button>
+                <button id="recover-password" type="button">Forgot Password?</button>
+
+            </fieldset>
         </form>
     </div>
 
@@ -113,12 +136,12 @@
             <h2>Change Password</h2>
             <fieldset>
                 <div class="input-group">
-                <label for="new-password">
-                    New Password: </label>
-                    <input type="password" id="new-password" name="new-password" placeholder="Enter new password"/>
-              <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
-              
-                </div>
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Enter new password" />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
+                    </div>
+
+            
                 <button id="confirm-new-password" type="button">Confirm Password</button>
             </fieldset>
         </form>
@@ -126,46 +149,46 @@
 
     <!---Account Creation Message-->
     <div id="user-to-users">
-    <dialog id="account-new">
-        <p>Successfully Created</p>
-        <button type="button" id="closeModalAccountCreated">Close</button>
-    </dialog>
-    <dialog id="account-failed">
-        <p>Account Creation Failed, Please Check Your Info</p>
-        <button type="button" id="closeModalFailed">Close</button>
-    </dialog>
-    
+        <dialog id="account-new">
+            <p>Successfully Created</p>
+            <button type="button" id="closeModalAccountCreated">Close</button>
+        </dialog>
+        <dialog id="account-failed">
+            <p>Account Creation Failed, Please Check Your Info</p>
+            <button type="button" id="closeModalFailed">Close</button>
+        </dialog>
+
     </div>
 
     <!---Password Change Message-->
-<div id="change-pass-msg">
-    <dialog id="changed-pass">
-        <p>Password Changed.</p>
-        <button type="button" id="close-changed-pass">Close</button>
-    </dialog>
-</div>
+    <div id="change-pass-msg">
+        <dialog id="changed-pass">
+            <p>Password Changed.</p>
+            <button type="button" id="close-changed-pass">Close</button>
+        </dialog>
+    </div>
 
-<!---Password error messages-->
+    <!---Password error messages-->
 
-<div id="matched-error">
-    <dialog id="matched-error-msg">
-        <p>The new password must be different from old password. </p>
-        <button id="matchClose">Close</button>
-    </dialog>
-</div>
+    <div id="matched-error">
+        <dialog id="matched-error-msg">
+            <p>The new password must be different from old password. </p>
+            <button id="matchClose">Close</button>
+        </dialog>
+    </div>
 
-<div id="insufficient-length">
-    <dialog id="insufficient-length-msg">
-        <p>Password cannot be empty</p>
-        <button type="button" id="insufficientClose">Close</button>
-    </dialog>
-</div>
+    <div id="insufficient-length">
+        <dialog id="insufficient-length-msg">
+            <p>Password cannot be empty</p>
+            <button type="button" id="insufficientClose">Close</button>
+        </dialog>
+    </div>
 
-<div id="lessThanSix">
-    <dialog id="lessThanSix-msg">
-        <p>The password must be at least 6</p>
-        <button type="button" id="lessThanSixClose">Close</button>
-    </dialog>
+    <div id="lessThanSix">
+        <dialog id="lessThanSix-msg">
+            <p>The password must be at least 6</p>
+            <button type="button" id="lessThanSixClose">Close</button>
+        </dialog>
     </div>
 
     <!---Modal For Sign Up Messages-->
@@ -183,7 +206,7 @@
     </div>
 
     <div id="lessThanSixChar">
-        <dialog id="lessThanSixChar-msg"> 
+        <dialog id="lessThanSixChar-msg">
             <p>Password must be at least 6 characters long.</p>
             <button id="lessThanSix-msg-btn">Close</button>
         </dialog>
@@ -200,4 +223,5 @@
 
     </footer>
 </body>
+
 </html>

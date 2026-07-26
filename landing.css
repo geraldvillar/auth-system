@@ -173,9 +173,7 @@ dialog::backdrop {
 }
 
 
-.togglePassword,
-
-.email-icon {
+.togglePassword {
 
   width: 20px;
   height: 20px;
@@ -186,12 +184,12 @@ dialog::backdrop {
 }
 
 
-.email-des {
+.input-group {
   width: 100%; 
   position: relative;
 }
 
-.email-des input {
+.input-group input {
   width: 100%;
   padding-right: 40px;
 }
@@ -206,3 +204,12 @@ h2 {
 }
 
 
+.input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translate(-50%); 
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
