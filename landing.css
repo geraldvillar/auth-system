@@ -62,12 +62,28 @@ input::placeholder {
 }
 
 label{
-  display: inline-block;
+  display: block;
+  margin-top: 10px;
 }
 
 legend {
   text-align: center;
 }
+
+input {
+  width: 100%;
+  padding: 10px; 
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  box-sizing: border-box;
+}
+
+input[type="number"] {
+  width: 100%; 
+}
+
+
 fieldset {
   border: 1px solid rgba(28,110,164,0.25);
   border-radius: 5px;
@@ -120,12 +136,6 @@ dialog::backdrop {
 
 /*icon*/
 .togglePassword {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    right: 10px;      
-    top: 50%;
-    transform: translate(-50%);
     cursor: pointer;
 }
 
@@ -162,6 +172,50 @@ dialog::backdrop {
   transform: scale(1.05);
 }
 
+
 h2 {
   text-align: center;
+}
+
+.togglePassword {
+
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translate(-50%);
+}
+
+
+.input-group {
+  width: 100%; 
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding-right: 40px;
+}
+
+form {
+  gap: 10px;
+}
+
+h2 {
+  text-align: center;
+
+}
+
+
+
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
 }
