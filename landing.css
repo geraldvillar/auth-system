@@ -174,7 +174,9 @@ dialog::backdrop {
 
 
 .togglePassword,
+
 .email-icon {
+
   width: 20px;
   height: 20px;
   position: absolute;
@@ -200,4 +202,7 @@ form {
 
 h2 {
   text-align: center;
+
 }
+
+
