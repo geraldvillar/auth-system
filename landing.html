@@ -14,7 +14,7 @@
 
     <h1 class="logo">Auth System</h1>
     <p class="tagline">Secure your account. Simple. Fast.</p>
->>>>>>> 3fb21973935d12b2aa7c0ef9978847a9c85bba1b
+
 
     <div id="top-buttons" class="top-buttons">
         <button id="sign-up-btn">Sign Up</button>
@@ -44,12 +44,13 @@
             Name:
                 <input type="text" id="name" name="name"  placeholder="Enter your full name" required/>
             </label>
-            <label for="email">
-        
-                Email: 
-                <input type="email" id="email" name="email"  placeholder="example@email.com" required autocorrect="on"/>
-                </label>
 
+            <div class="email-des">
+            <label for="email">
+                Email: </label>
+                <input type="email" id="email" name="email"  placeholder="example@email.com" required autocorrect="on"/>
+                <img src="imgResources/email.png" class="email-icon">
+                </div>
                 <label for="age">
                     Age:
                     <input type="number" id="age" name="age" min="18" max="70" placeholder="18-70" required/>
