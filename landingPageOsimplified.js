@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const $ = (id) => document.getElementById(id); 
     const topButtons = $("top-buttons");
     const welcome = $("welcome");
+    const header = $("landing-container");
+    const formLoader = $("form-loader");
 
 
 //Navigation Buttons and Forms//
@@ -12,6 +14,7 @@ const UI = {
     signUp: $("sign-up-btn"),
     login: $("login-btn"), 
     forgot: $("recover-password"),
+    existingAccount: $("login-link")
 },
 
 forms : {
@@ -22,26 +25,47 @@ forms : {
 } 
 };
 
+//Loading Animation//
+const showLoader = () => {
+    formLoader.classList.remove("hidden");
+};
+
+const hideLoader = () => {
+    formLoader.classList.add("hidden");
+};
+
+
 //Navigation//
 //Helper Function For Navigation Modal//
+
 const showForm = (activeForm) =>{
     if(!activeForm) return; 
+
+    showLoader();
+
+
 
     Object.values(UI.forms).forEach(form =>{
 
         if (!form) return;
 
         form.classList.remove("show");
-        
-        
     });
 
+setTimeout(() => {
+    
     activeForm.classList.add("show"); 
     topButtons.classList.add("hidden");
     welcome.classList.add("hidden");
+    header.classList.add("hidden");
+
+    hideLoader();
+
+}, 500);
 
 
-}
+
+};
 //Call the helper//
 //show sign up//
 UI.buttons.signUp?.addEventListener("click", () => {
@@ -61,6 +85,10 @@ UI.buttons.forgot?.addEventListener("click", () => {
     
 });
 
+UI.buttons.existingAccount?.addEventListener("click", () => {
+    showForm(UI.forms.login);
+});
+
 
 //ACCOUNT CREATION//
 
@@ -78,46 +106,6 @@ const modals = {
 
 
 };
-
-const modalButtons = {
-    successBtn: $("closeModalAccountCreated"), 
-    failedBtn: $("closeModalFailed"),
-    changedPassBtn: $("close-changed-pass"), 
-    matchedBtn: $("matchClose"), 
-    emptyBtn: $("insufficientClose"), 
-    shortBtn: $("lessThanSixClose"), 
-    emptyInputBtn: $("empty-input-btn"), 
-    lessThanSixBtn: $("lessThanSix-msg-btn"),
-    mismatchedBtn: $("mismatched-btn")
-
-    
-};
-
-const pairs = [
-    
-    {btn: modalButtons.successBtn, modal: modals.success},
-    {btn: modalButtons.failedBtn, modal: modals.failed}, 
-    {btn: modalButtons.changedPassBtn, modal: modals.changedPassword},
-    {btn: modalButtons.matchedBtn, modal: modals.matchedError}, 
-    {btn: modalButtons.emptyBtn, modal: modals.emptyError}, 
-    {btn: modalButtons.shortBtn, modal: modals.shortError}, 
-    {btn: modalButtons.emptyInputBtn, modal: modals.emptyInputsMsg}, 
-    {btn: modalButtons.lessThanSixBtn, modal: modals.lessThanSix}, 
-    {btn: modalButtons.mismatchedBtn, modal: modals.mismatched}
-    
-];
-
-//Account Creation Messages Interaction to Users//
-//MODALS//
-//Modal Closers//
-    pairs.forEach(pair => {
-    if(!pair.btn || !pair.modal) return; 
-
-    pair.btn.addEventListener("click", () =>{
-        pair.modal.close();
-    });
-    });
-
 
 //VERIFICATION AND APPROVAL//
 
@@ -212,10 +200,11 @@ if(createAccountBtn) {
     });
     
     }
+
 //eye icon toggle//
 
 const passwordInputs = {
-    login: $("password"), 
+    signup: $("password"), 
     current: $("user-password"),
     new: $("new-password"),
     confirm: $("confirm-password")
@@ -245,9 +234,11 @@ const closeIcons = document.querySelectorAll(".close-icon");
 
 closeIcons.forEach(icon => {
     icon.addEventListener("click", ()=> {
-        const targetBtnId = icon.dataset.target; 
-        const btn = document.getElementById(targetBtnId);
+        const modalId = icon.dataset.modal; 
+        const modal = document.getElementById(modalId);
 
-        if(btn) btn.click();
+        if(modal) modal.close();
     });
+
+    
 });
