@@ -18,16 +18,10 @@
     <h1 class="logo">Auth System</h1>
     <p class="tagline">Secure your account. Simple. Fast.</p>
 
-
-        <h1 class="logo">Auth System</h1>
-        <p class="tagline">Secure your account. Simple. Fast.</p>
-
-
         <div id="top-buttons" class="top-buttons">
             <button id="sign-up-btn">Sign Up</button>
             <button id="login-btn">Login </button>
         </div>
->>>>>>> 39e70db4beea0e459aaf470e02c079aa4d1dbce2
 
     </div>
 
@@ -155,10 +149,13 @@
 
     <!---Account Creation Message-->
     <div id="user-to-users">
+        
         <dialog id="account-new">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalAccountCreated">
             <p>Successfully Created</p>
             <button type="button" id="closeModalAccountCreated">Close</button>
         </dialog>
+        
         <dialog id="account-failed">
             <p>Account Creation Failed, Please Check Your Info</p>
             <button type="button" id="closeModalFailed">Close</button>
@@ -169,6 +166,7 @@
     <!---Password Change Message-->
     <div id="change-pass-msg">
         <dialog id="changed-pass">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalPasswordChanged">
             <p>Password Changed.</p>
             <button type="button" id="close-changed-pass">Close</button>
         </dialog>
@@ -178,6 +176,7 @@
 
     <div id="matched-error">
         <dialog id="matched-error-msg">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="CloseModalMatchedErrorMsg">
             <p>The new password must be different from old password. </p>
             <button id="matchClose">Close</button>
         </dialog>
@@ -185,6 +184,7 @@
 
     <div id="insufficient-length">
         <dialog id="insufficient-length-msg">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalInsufficientMsg">
             <p>Password cannot be empty</p>
             <button type="button" id="insufficientClose">Close</button>
         </dialog>
@@ -192,6 +192,7 @@
 
     <div id="lessThanSix">
         <dialog id="lessThanSix-msg">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalLessThanSix">
             <p>The password must be at least 6</p>
             <button type="button" id="lessThanSixClose">Close</button>
         </dialog>
@@ -200,6 +201,7 @@
     <!---Modal For Sign Up Messages-->
     <div class="empty-input" id="empty-input">
         <dialog id="empty-input-msg">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalEmptyInput">
             <p>Please fill the form properly.</p>
             <button type="button" id="empty-input-btn">Close</button>
         </dialog>
@@ -207,12 +209,14 @@
 
     <div id="initial-password">
         <dialog id="initial-password-msg">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalMismatchedMsg">
             <p>The password does not match.</p>
         </dialog>
     </div>
 
     <div id="lessThanSixChar">
         <dialog id="lessThanSixChar-msg">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalLessThanSixCharMsg">
             <p>Password must be at least 6 characters long.</p>
             <button id="lessThanSix-msg-btn">Close</button>
         </dialog>
@@ -220,6 +224,7 @@
 
     <div id="mismatched">
         <dialog id="mismatched-msg">
+            <img src="imgResources/closeModal.png" class="close-icon" data-target="closeModalPasswordNotMatched">
             <p>Password mismatched.</p>
             <button type="button" id="mismatched-btn">Close</button>
         </dialog>

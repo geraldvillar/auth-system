@@ -238,3 +238,16 @@ const toggleButton = document.querySelectorAll(".togglePassword");
         });
     });
 });
+
+//close icon button//
+
+const closeIcons = document.querySelectorAll(".close-icon"); 
+
+closeIcons.forEach(icon => {
+    icon.addEventListener("click", ()=> {
+        const targetBtnId = icon.dataset.target; 
+        const btn = document.getElementById(targetBtnId);
+
+        if(btn) btn.click();
+    });
+});
