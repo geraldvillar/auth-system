@@ -4,113 +4,86 @@ document.addEventListener("DOMContentLoaded", () => {
     const $ = (id) => document.getElementById(id); 
     const topButtons = $("top-buttons");
     const welcome = $("welcome");
-    const header = $("landing-container");
     const formLoader = $("form-loader");
-
-
-//Navigation Buttons and Forms//
-const UI = {
-    buttons: {
-    signUp: $("sign-up-btn"),
-    login: $("login-btn"), 
-    forgot: $("recover-password"),
-    existingAccount: $("login-link")
-},
-
-forms : {
-    signUp: $("user-info"), 
-    login: $("login-user"), 
-    forgot: $("forgot-password"), 
+    const titlePage = $("title-page");
     
-} 
-};
-
-//Loading Animation//
-const showLoader = () => {
-    formLoader.classList.remove("hidden");
-};
-
-const hideLoader = () => {
-    formLoader.classList.add("hidden");
-};
 
 
-//Navigation//
-//Helper Function For Navigation Modal//
+    //Navigation Buttons and Forms//
+    const UI = {
+        buttons: {
+            signUp: $("sign-up-btn"),
+            login: $("login-btn"), 
+            forgot: $("recover-password"),
+            existingAccount: $("login-link")
+        },
+        forms: {
+            signUp: $("user-info"), 
+            login: $("login-user"), 
+            forgot: $("forgot-password"), 
+        } 
+    };
 
-const showForm = (activeForm) =>{
-    if(!activeForm) return; 
+    //Loading Animation//
+    const showLoader = () => {
+        formLoader?.classList.remove("hidden");
+    };
 
-    showLoader();
+    const hideLoader = () => {
+        formLoader?.classList.add("hidden");
+    };
 
+    //Helper Function For Navigation//
 
+    const landingContainer = $("landing-container");
 
-    Object.values(UI.forms).forEach(form =>{
+    const showForm = (activeForm) =>{
+        if(!activeForm) return; 
 
-        if (!form) return;
+        showLoader();
 
-        form.classList.remove("show");
+        Object.values(UI.forms).forEach(form =>{
+            if (!form) return;
+            form.classList.remove("show");
+        });
+
+        setTimeout(() => {
+            activeForm.classList.add("show");
+            landingContainer?.classList.add("hidden");
+            hideLoader();
+        }, 500);
+    };
+
+    //Event Listeners//
+    UI.buttons.signUp?.addEventListener("click", () => {
+        showForm(UI.forms.signUp);
     });
 
-setTimeout(() => {
-    
-    activeForm.classList.add("show"); 
-    topButtons.classList.add("hidden");
-    welcome.classList.add("hidden");
-    header.classList.add("hidden");
+    UI.buttons.login?.addEventListener("click", () =>{
+        showForm(UI.forms.login); 
+    });
 
-    hideLoader();
+    UI.buttons.forgot?.addEventListener("click", () => {
+        showForm(UI.forms.forgot);
+    });
 
-}, 500);
+    UI.buttons.existingAccount?.addEventListener("click", () => {
+        showForm(UI.forms.login);
+    });
 
+    //Modals//
+    const modals = {
+        success: $("account-new"), 
+        failed: $("account-failed"), 
+        changedPassword: $("changed-pass"), 
+        matchedError: $("matched-error-msg"), 
+        emptyError: $("insufficient-length-msg"), 
+        shortError: $("lessThanSix-msg"), 
+        emptyInputsMsg: $("empty-input-msg"),
+        lessThanSix: $("lessThanSixChar-msg"), 
+        mismatched: $("mismatched-msg")
+    };
 
-
-};
-//Call the helper//
-//show sign up//
-UI.buttons.signUp?.addEventListener("click", () => {
-    showForm(UI.forms.signUp);
-    
-});
-
-//Show login//
-UI.buttons.login?.addEventListener("click", () =>{
-    showForm(UI.forms.login); 
-    
-});
-
-//show forgot//
-UI.buttons.forgot?.addEventListener("click", () => {
-    showForm(UI.forms.forgot);
-    
-});
-
-UI.buttons.existingAccount?.addEventListener("click", () => {
-    showForm(UI.forms.login);
-});
-
-
-//ACCOUNT CREATION//
-
-//Button Groups modals and buttons//
-const modals = {
-    success: $("account-new"), 
-    failed: $("account-failed"), 
-    changedPassword: $("changed-pass"), 
-    matchedError: $("matched-error-msg"), 
-    emptyError: $("insufficient-length-msg"), 
-    shortError: $("lessThanSix-msg"), 
-    emptyInputsMsg: $("empty-input-msg"),
-    lessThanSix: $("lessThanSixChar-msg"), 
-    mismatched: $("mismatched-msg")
-
-
-};
-
-//VERIFICATION AND APPROVAL//
-
-
-//helper function to show modal ANTI DRY // 
     const showModal = (modal, duration = 3000) => {
         if (!modal) return;
         modal.showModal();
@@ -123,94 +96,80 @@ const modals = {
             clearTimeout(timeOutId);
         }, {once: true});
     };
-//Forgot Password Conditions and Approval//
 
-const confirmPassBtn = $("confirm-new-password");
+    //Forgot Password//
+    const confirmPassBtn = $("confirm-new-password");
 
-if(confirmPassBtn) {
-confirmPassBtn.addEventListener("click", (event) => {
-const oldPassword = $("user-password")?.value;
-const newPassword = $("new-password")?.value;
+    if(confirmPassBtn) {
+        confirmPassBtn.addEventListener("click", (event) => {
+            event.preventDefault(); // FIXED
 
+            const oldPassword = $("user-password")?.value;
+            const newPassword = $("new-password")?.value;
 
- //conditions//
-
-     //empty errors//
-    if(newPassword === "" && oldPassword === ""){
-        showModal(modals.emptyError); 
-    } 
-    //match error//
-    else if(oldPassword === newPassword){
-    showModal(modals.matchedError);
+            if(newPassword === "" && oldPassword === ""){
+                showModal(modals.emptyError); 
+            } 
+            else if(oldPassword === newPassword){
+                showModal(modals.matchedError);
+            }
+            else if(newPassword.length < 6){
+                showModal(modals.shortError);
+            }
+            else{
+                showModal(modals.changedPassword);
+            }
+        });
     }
 
-    //short//
-else if(newPassword.length < 6){
-        showModal(modals.shortError);
-    }
-
-    else{
-        showModal(modals.changedPassword);
-        event.preventDefault();
-    }
-
-});
-}
-
-//ACCOUNT CREATION//
+    //ACCOUNT CREATION//
     const createAccountBtn = $("account-created");
-    
 
-if(createAccountBtn) {
-    createAccountBtn.addEventListener("click", (event) => {
-    const actualForm = event.target.closest("form"); 
-        event.preventDefault();
+    if(createAccountBtn) {
+        createAccountBtn.addEventListener("click", (event) => {
+            event.preventDefault();
 
-    if(!actualForm) return;
+            const actualForm = event.target.closest("form"); 
+            if(!actualForm) return;
 
-    const inputs = actualForm.querySelectorAll("input");
-    
-    const hasEmpty = Array.from(inputs).some(input => input.value.trim() === ""); 
-    //empty inputs//
-    if(hasEmpty){
-        showModal(modals.emptyInputsMsg);
-        return; 
+            const inputs = actualForm.querySelectorAll("input");
+            const hasEmpty = Array.from(inputs).some(input => input.value.trim() === ""); 
+
+            if(hasEmpty){
+                showModal(modals.emptyInputsMsg);
+                return; 
+            }
+
+            const initialPass = $("password").value;
+            const confirmedPass = $("confirm-password").value; 
+
+            if(initialPass !== confirmedPass){
+                showModal(modals.mismatched);
+                return;
+            }
+
+            if(initialPass.length < 6){
+                showModal(modals.lessThanSix); 
+                return; 
+            }
+
+            showModal(modals.success);
+
+            setTimeout (() => {
+                window.location.reload();
+            }, 3000);
+        });
     }
 
+    //eye toggle//
+    const passwordInputs = {
+        signup: $("password"), 
+        current: $("user-password"),
+        new: $("new-password"),
+        confirm: $("confirm-password")
+    };
 
-    const initialPass = $("password").value;
-    const confirmedPass = $("confirm-password").value; 
-    
-    if(initialPass !== confirmedPass){
-        showModal(modals.mismatched);
-        return;
-    }
-
-    else if(initialPass.length < 6 || confirmedPass.length < 6){
-        showModal(modals.lessThanSix); 
-        return; 
-    }
-
-//Page refreshes after 3 secs//
-    showModal(modals.success);
-    setTimeout (() => {
-        window.location.reload();
-    }, 3000);
-    
-    });
-    
-    }
-
-//eye icon toggle//
-
-const passwordInputs = {
-    signup: $("password"), 
-    current: $("user-password"),
-    new: $("new-password"),
-    confirm: $("confirm-password")
-};
-
-const toggleButton = document.querySelectorAll(".togglePassword");
+    const toggleButton = document.querySelectorAll(".togglePassword");
 
     toggleButton.forEach(icon => {
         icon.addEventListener("click", () => {
@@ -220,25 +179,24 @@ const toggleButton = document.querySelectorAll(".togglePassword");
             if(!input) return;
 
             const isHidden = input.type === "password"; 
-
             input.type = isHidden ? "text" : "password"; 
 
-            icon.src = isHidden ? "imgResources/close-eye.png" : "imgResources/view.png";
+            icon.src = isHidden 
+                ? "imgResources/close-eye.png" 
+                : "imgResources/view.png";
         });
     });
-});
 
-//close icon button//
+    //close icon button (FIXED LOCATION)//
+    const closeIcons = document.querySelectorAll(".close-icon"); 
 
-const closeIcons = document.querySelectorAll(".close-icon"); 
+    closeIcons.forEach(icon => {
+        icon.addEventListener("click", ()=> {
+            const modalId = icon.dataset.modal; 
+            const modal = document.getElementById(modalId);
 
-closeIcons.forEach(icon => {
-    icon.addEventListener("click", ()=> {
-        const modalId = icon.dataset.modal; 
-        const modal = document.getElementById(modalId);
-
-        if(modal) modal.close();
+            if(modal) modal.close();
+        });
     });
 
-    
 });
