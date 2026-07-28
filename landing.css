@@ -63,6 +63,11 @@ input {
   border-radius: 5px;
 }
 
+input:hover {
+  transform: translateY(-2%);
+  background-color: azure;
+}
+
 input::placeholder {
   font-family: roboto;
 }

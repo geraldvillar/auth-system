@@ -24,7 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } 
     };
 
-    //Loading Animation//
+    //Loading Animation Helper Functions//
     const showLoader = () => {
         formLoader?.classList.remove("hidden");
     };
