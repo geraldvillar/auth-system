@@ -3,12 +3,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //Helper Function - Get the ID of Element//
     const $ = (id) => document.getElementById(id); 
     const topButtons = $("top-buttons");
-    const welcome = $("welcome");
     const formLoader = $("form-loader");
-    const titlePage = $("title-page");
     
-
-
     //Navigation Buttons and Forms//
     const UI = {
         buttons: {
@@ -81,7 +77,8 @@ document.addEventListener("DOMContentLoaded", () => {
         shortError: $("lessThanSix-msg"), 
         emptyInputsMsg: $("empty-input-msg"),
         lessThanSix: $("lessThanSixChar-msg"), 
-        mismatched: $("mismatched-msg")
+        mismatched: $("mismatched-msg"), 
+        loggedIn: $("successLogInMsg")
     };
 
     const showModal = (modal, duration = 3000) => {
@@ -118,6 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
             }
             else{
                 showModal(modals.changedPassword);
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 3000);
             }
         });
     }
@@ -197,6 +198,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(modal) modal.close();
         });
+    });
+
+
+    const loginBtn = $("submit-data"); 
+
+    loginBtn.addEventListener("click", (event) => {
+
+        event.preventDefault();
+
+        showModal(modals?.loggedIn);
+
+        setTimeout(() => {
+                    window.location.reload();
+                }, 5000);
     });
 
 });
