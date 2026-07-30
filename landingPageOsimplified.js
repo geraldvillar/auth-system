@@ -51,21 +51,20 @@ const showForm = (activeForm) =>{
 
         form.classList.remove("show");
     });
-
-setTimeout(() => {
     
-    activeForm.classList.add("show"); 
     topButtons.classList.add("hidden");
     welcome.classList.add("hidden");
     header.classList.add("hidden");
 
+setTimeout(() => {
+    activeForm.classList.add("show"); 
     hideLoader();
 
 }, 500);
 
-
-
 };
+
+
 //Call the helper//
 //show sign up//
 UI.buttons.signUp?.addEventListener("click", () => {
