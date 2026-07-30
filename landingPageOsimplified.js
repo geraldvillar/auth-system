@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const $ = (id) => document.getElementById(id); 
     const topButtons = $("top-buttons");
     const formLoader = $("form-loader");
+    const landingContainer = $("landing-container");
     
     //Navigation Buttons and Forms//
     const UI = {
@@ -29,14 +30,15 @@ document.addEventListener("DOMContentLoaded", () => {
         formLoader?.classList.add("hidden");
     };
 
-    //Helper Function For Navigation//
 
-    const landingContainer = $("landing-container");
+    //Helper Function For Navigation//
 
     const showForm = (activeForm) =>{
         if(!activeForm) return; 
 
         showLoader();
+        
+        //Extract value from object source //
 
         Object.values(UI.forms).forEach(form =>{
             if (!form) return;
@@ -81,10 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
         loggedIn: $("successLogInMsg")
     };
 
+    // HELPER FUNCTION FOR MODALS//
     const showModal = (modal, duration = 3000) => {
         if (!modal) return;
         modal.showModal();
-
+        //auto close modals//
         const timeOutId = setTimeout(() => {
             modal.close();
         }, duration );
@@ -117,13 +120,13 @@ document.addEventListener("DOMContentLoaded", () => {
                 showModal(modals.changedPassword);
 
                 setTimeout(() => {
-                    window.location.reload();
+                    window.location.href = "landing.html";
                 }, 3000);
             }
         });
     }
 
-    //ACCOUNT CREATION//
+    //ACCOUNT CREATION MESSAGES//
     const createAccountBtn = $("account-created");
 
     if(createAccountBtn) {
@@ -157,18 +160,19 @@ document.addEventListener("DOMContentLoaded", () => {
             showModal(modals.success);
 
             setTimeout (() => {
-                window.location.reload();
+                window.location.href = "landing.html";
             }, 3000);
         });
     }
 
-    //eye toggle//
+    //Eye toggle Reveal and Hide Password //
     const passwordInputs = {
         signup: $("password"), 
         current: $("user-password"),
         new: $("new-password"),
         confirm: $("confirm-password")
     };
+
 
     const toggleButton = document.querySelectorAll(".togglePassword");
 
@@ -183,8 +187,8 @@ document.addEventListener("DOMContentLoaded", () => {
             input.type = isHidden ? "text" : "password"; 
 
             icon.src = isHidden 
-                ? "imgResources/close-eye.png" 
-                : "imgResources/view.png";
+                ? "imgResources/view.png" 
+                : "imgResources/close-eye.png";
         });
     });
 
@@ -200,7 +204,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-
+    //AFTER LOGGING IN LOGIC//
     const loginBtn = $("submit-data"); 
 
     loginBtn.addEventListener("click", (event) => {
@@ -210,7 +214,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showModal(modals?.loggedIn);
 
         setTimeout(() => {
-                    window.location.reload();
+                    window.location.href = "landing.html"; //conditions and bugs here!!//
                 }, 5000);
     });
 
