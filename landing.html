@@ -14,28 +14,30 @@
     <div class="main-wrapper">
 
     <!--LANDING PAGE-->
-    <div id="landing-container" class="hidden">
+    <div id="landing-container">
 
+    <div id="title-page">
     <h1 class="logo">Auth System</h1>
     <p class="tagline">Secure your account. Simple. Fast.</p>
-        
     </div>
-    <div id="top-buttons" class="top-buttons">
+
+    <h2 id="welcome">Welcome!</h2>
+
+        <div id="top-buttons" class="top-buttons">
             <button id="sign-up-btn">Sign Up</button>
             <button id="login-btn">Login </button>
             
-    <h2 id="welcome">Welcome!</h2>
-</div>
+        </div>
+        
+    </div>
     
-
-
     <!---SIGN UP PAGE-->
 
-
+    
     <div id="user-info" class="form-container">
+        
         <form action="#" id="sign-form">
             <h2>Sign Up</h2>
-
             <fieldset>
                 <legend>Personal Information</legend>
 
@@ -83,7 +85,7 @@
 
                     <div class="input-wrapper">
                     <input type="password" id="password" name="password" placeholder="Enter password" required />
-                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="login">
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="signup">
                     </div>
 
                 </div>
@@ -235,9 +237,28 @@
         </dialog>
     </div>
 
+    <div id="successLogIn">
+        <dialog id="successLogInMsg">
+            <p>Successfully logged in.</p>
+            <img src="imgResources/close.png" class="close-icon" data-modal="mismatched-msg">
+        </dialog>
+    </div>
+
     <div id="icon-loading">
         <img src="imgResources/loading.gif" id="form-loader" class="form-loader hidden">
     </div>
+
+
+    <div id="incorrectEmailPass">
+        <dialog id="incorrectEmailPassMsg">
+    <p>Incorrect Email or Password.</p>
+    <img src="imgResources/close.png" 
+        class="close-icon" 
+        
+        data-modal="incorrectEmailPassMsg">
+</dialog>
+    </div>
+    
 
     <footer>
 
