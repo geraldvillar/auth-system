@@ -81,7 +81,8 @@ document.addEventListener("DOMContentLoaded", () => {
         lessThanSix: $("lessThanSixChar-msg"), 
         mismatched: $("mismatched-msg"), 
         loggedIn: $("successLogInMsg"),
-        incorrectCredential: $("incorrectEmailPassMsg")
+        incorrectCredential: $("incorrectEmailPassMsg"), 
+        unrecognizedAccount: $("unrecognized-account-msg")
     };
 
     // HELPER FUNCTION FOR MODALS//
@@ -159,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
         
-
+            //Save User(Sign up) local storage//
             const name = $("name")?.value; 
             const email = $("email")?.value;
             const username = $("username")?.value; 
@@ -230,6 +231,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     //AFTER LOGGING IN LOGIC//
+    //Login Authentication using local storage//
+
     const loginBtn = $("submit-data"); 
 
     if (loginBtn) {
@@ -244,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const users  = JSON.parse(localStorage.getItem("users")) || []; 
 
         if(emailLogin === "" || passwordLogin === ""){
-            showModal(modals.incorrectCredential);
+            showModal(modals.unrecognizedAccount);
             return;
         }
 
@@ -259,7 +262,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = "landing.html";
             }, 3000);
         } else {
-            showModal(modals.incorrectCredential);
+            showModal(modals.unrecognizedAccount);
         }
         
     });
