@@ -145,19 +145,43 @@ document.addEventListener("DOMContentLoaded", () => {
                 return; 
             }
 
-            const initialPass = $("password").value;
-            const confirmedPass = $("confirm-password").value; 
+            const initialPass = $("password")?.value;
+            const confirmedPass = $("confirm-password")?.value; 
 
             if(initialPass !== confirmedPass){
                 showModal(modals.mismatched);
                 return;
             }
 
-            if(initialPass.length < 6){
+            if(initialPass.length < 6 || confirmedPass.length < 6 ){
                 showModal(modals.lessThanSix); 
                 return; 
             }
 
+        
+
+            const name = $("name")?.value; 
+            const email = $("email")?.value;
+            const username = $("username")?.value; 
+            const password = $("password")?.value; 
+
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+
+            const emailExists = users.some(user => user.email === email);
+
+            if(emailExists){
+                showModal(modals.failed); 
+                return; 
+            }
+
+            users.push({
+                name, 
+                email,
+                username, 
+                password
+            });
+
+            localStorage.setItem("users", JSON.stringify(users));
             showModal(modals.success);
 
             setTimeout (() => {
@@ -215,21 +239,28 @@ document.addEventListener("DOMContentLoaded", () => {
         const emailLogin = $("login-email")?.value;
         const passwordLogin = $("user-password")?.value;
 
-        if(!event) return; 
+        event.preventDefault(); 
 
-        event.preventDefault();
-
+        const users  = JSON.parse(localStorage.getItem("users")) || []; 
 
         if(emailLogin === "" || passwordLogin === ""){
             showModal(modals.incorrectCredential);
-            
-        } else {
-            showModal(modals.loggedIn);
-            setTimeout(() => {
-                    window.location.href = "landing.html"; //conditions and bugs here!!//
-                }, 5000);
+            return;
         }
 
+        const validUser = users.find(user => user.email === emailLogin && user.password === passwordLogin);
+
+        if(validUser){
+            showModal(modals.loggedIn);
+
+            localStorage.setItem("currentUser", JSON.stringify(validUser));
+
+            setTimeout(() => {
+                window.location.href = "landing.html";
+            }, 3000);
+        } else {
+            showModal(modals.incorrectCredential);
+        }
         
     });
 
