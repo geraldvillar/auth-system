@@ -39,6 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showLoader();
         
         //Extract value from object source //
+        //Forms are hidden by default//
 
         Object.values(UI.forms).forEach(form =>{
             if (!form) return;
@@ -53,6 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     //Event Listeners//
+    
     UI.buttons.signUp?.addEventListener("click", () => {
         showForm(UI.forms.signUp);
     });

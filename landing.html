@@ -37,12 +37,12 @@
     <div id="user-info" class="form-container">
         
         <form action="#" id="sign-form">
-            <h2>Sign Up</h2>
+            <h2>Sign Up Form</h2>
             <fieldset>
                 <legend>Personal Information</legend>
 
                 <div class="input-group">
-                    <label for="user">Name:</label>
+                    <label for="user">Full name:</label>
 
                     <div class="input-wrapper">
                     <input type="text" id="name" name="name" placeholder="Enter your full name" required />
@@ -52,7 +52,7 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="email">Email:</label>
+                    <label for="email">Email Address:</label>
                     <div class="input-wrapper">
                     <input type="email" id="email" name="email" placeholder="example@email.com" required
                         autocorrect="on" />
@@ -74,7 +74,7 @@
                     <label for="username">Username:</label>
 
                     <div class="input-wrapper">
-                    <input type="text" id="username" name="username" placeholder="Choose username" required />
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required />
                     <img src="imgResources/id-cardii.png" class="input-icon">
                     </div>
 
@@ -84,7 +84,7 @@
                     <label for="password">Password:</label>
 
                     <div class="input-wrapper">
-                    <input type="password" id="password" name="password" placeholder="Enter password" required />
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="signup">
                     </div>
 
@@ -102,7 +102,7 @@
                 </div>
             </fieldset>
             <button type="submit" id="account-created">Create Account</button>
-            <p id="login-link">Already have an account?</p>
+            <p id="login-link">Already have an account? Log in here.</p>
         </form>
     </div>
 
@@ -116,14 +116,14 @@
                 <legend>Login</legend>
                 <div class="input-group">
 
-                <label for="login-email">Email:</label>
-                    <input type="email" id="login-email" name="login-email" placeholder="Enter your email" />
+                <label for="login-email">Enter your email:</label>
+                    <input type="email" id="login-email" name="login-email" placeholder="Enter your email address" />
                     <img src="imgResources/email.png" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <label for="user-password">Password:</label>  
+                    <label for="user-password">Enter password:</label>  
                     <div class="input-wrapper">
-                    <input type="password" id="user-password" name="user-password" placeholder="Enter Password" />
+                    <input type="password" id="user-password" name="user-password" placeholder="Enter your Password" />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="current">
                     </div>
 
@@ -137,16 +137,16 @@
 
     <div id="forgot-password" class="form-container">
         <form action="">
-            <h2>Change Password</h2>
+            <h2>Reset Password</h2>
             <fieldset>
                 <div class="input-group">
                     <label for="new-password">New Password:</label>
-                    <input type="password" id="new-password" name="new-password" placeholder="Enter new password" />
+                    <input type="password" id="new-password" name="new-password" placeholder="Enter a new password" />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
                     </div>
 
             
-                <button id="confirm-new-password" type="button">Confirm Password</button>
+                <button id="confirm-new-password" type="button">Confirm New Password</button>
             </fieldset>
         </form>
     </div>
@@ -158,13 +158,13 @@
         
         <dialog id="account-new">
             <img src="imgResources/close.png" class="close-icon" data-modal="account-new">
-            <p>Successfully Created</p>
+            <p>Account created successfully.</p>
             
         </dialog>
         
         <dialog id="account-failed">
             <img src="imgResources/close.png" class="close-icon" data-modal="account-failed">
-            <p>Account Creation Failed, Please Check Your Info</p>
+            <p>Account creation failed. Please check your information and try again.</p>
             
         </dialog>
 
@@ -174,7 +174,7 @@
     <div id="change-pass-msg">
         <dialog id="changed-pass">
             <img src="imgResources/close.png" class="close-icon" data-modal="changed-pass">
-            <p>Password Changed.</p>
+            <p>Your password has been successfully updated.</p>
             
         </dialog>
     </div>
@@ -184,7 +184,7 @@
     <div id="matched-error">
         <dialog id="matched-error-msg">
             <img src="imgResources/close.png" class="close-icon" data-modal="matched-error-msg">
-            <p>The new password must be different from old password. </p>
+            <p>The new password must be different from your current password.</p>
             
         </dialog>
     </div>
@@ -192,7 +192,7 @@
     <div id="insufficient-length">
         <dialog id="insufficient-length-msg">
             <img src="imgResources/close.png" class="close-icon" data-modal="insufficient-length-msg">
-            <p>Password cannot be empty</p>
+            <p>Password cannot be empty.</p>
             
         </dialog>
     </div>
@@ -200,7 +200,7 @@
     <div id="lessThanSix">
         <dialog id="lessThanSix-msg">
             <img src="imgResources/close.png" class="close-icon" data-modal="lessThanSix-msg">
-            <p>The password must be at least 6</p>
+            <p>Password must be at least 6 characters long.</p>
             
         </dialog>
     </div>
@@ -209,7 +209,7 @@
     <div class="empty-input" id="empty-input">
         <dialog id="empty-input-msg">
             <img src="imgResources/close.png" class="close-icon" data-modal="empty-input-msg">
-            <p>Please fill the form properly.</p>
+            <p>Please complete all required fields.</p>
     
         </dialog>
     </div>
@@ -217,7 +217,7 @@
     <div id="initial-password">
         <dialog id="initial-password-msg">
             <img src="imgResources/close.png" class="close-icon" data-modal="initial-password-msg">
-            <p>The password does not match.</p>
+            <p>Passwords do not match.</p>
         </dialog>
     </div>
 
@@ -232,14 +232,14 @@
     <div id="mismatched">
         <dialog id="mismatched-msg">
             <img src="imgResources/close.png" class="close-icon" data-modal="mismatched-msg">
-            <p>Password mismatched.</p>
+            <p>Incorrect email or password.</p>
             
         </dialog>
     </div>
 
     <div id="successLogIn">
         <dialog id="successLogInMsg">
-            <p>Successfully logged in.</p>
+            <p>You have successfully logged in.</p>
             <img src="imgResources/close.png" class="close-icon" data-modal="mismatched-msg">
         </dialog>
     </div>
@@ -251,7 +251,7 @@
 
     <div id="incorrectEmailPass">
         <dialog id="incorrectEmailPassMsg">
-    <p>Incorrect Email or Password.</p>
+    <p>Incorrect email or password..</p>
     <img src="imgResources/close.png" 
         class="close-icon" 
         
@@ -262,7 +262,7 @@
 
     <div id="unrecognized-account">
         <dialog id="unrecognized-account-msg">
-            <p>Email or Password cannot be found found.</p>
+            <p>Account not found. Please check your email and password.</p>
             <img src="imgResources/close.png" class="close-icon" data-modal="unrecognized-account-msg">
         </dialog>
     </div>
