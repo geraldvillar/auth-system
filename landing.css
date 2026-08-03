@@ -246,7 +246,7 @@ input:invalid {
   position: absolute;
   right: 10px;
   top: 50%;
-  transform: translate(-50%);
+  transform: translateY(-50%);
 }
 
 
@@ -280,4 +280,22 @@ input:invalid {
 .show {
   display: block;
   opacity: 1;
+}
+
+.input-wrapper {
+  position: relative;
+}
+
+[data-strength] {
+  margin-top: 5px; 
+  font-size: 0.85rem;
+}
+
+.input-wrapper img {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%); 
+    width: 20px;
+    cursor: pointer;
 }

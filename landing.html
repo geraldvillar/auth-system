@@ -87,7 +87,7 @@
                     <input type="password" id="password" name="password" placeholder="Enter your password" required />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="signup">
                     </div>
-
+                    <p data-strength="signup"></p>
                 </div>
 
                 <div class="input-group">
@@ -98,7 +98,7 @@
                         required />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="confirm">
                     </div>
-
+                    <p data-strength="confirm"></p>
                 </div>
             </fieldset>
             <button type="submit" id="account-created">Create Account</button>
@@ -121,12 +121,12 @@
                     <img src="imgResources/email.png" class="input-icon">
                 </div>
                 <div class="input-group">
-                    <label for="user-password">Enter password:</label>  
+                    <label for="user-password">Enter your password:</label>  
                     <div class="input-wrapper">
-                    <input type="password" id="user-password" name="user-password" placeholder="Enter your Password" />
+                    <input type="password" id="user-password" name="user-password" placeholder="Enter your password" />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="current">
                     </div>
-
+                    <p data-strength="current"></p>
                 </div>
                 <button id="submit-data" type="submit">Login</button>
                 <button id="recover-password" type="button">Forgot Password?</button>
@@ -144,7 +144,7 @@
                     <input type="password" id="new-password" name="new-password" placeholder="Enter a new password" />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
                     </div>
-
+                    <p data-strength="new"></p>
             
                 <button id="confirm-new-password" type="button">Confirm New Password</button>
             </fieldset>
@@ -251,7 +251,7 @@
 
     <div id="incorrectEmailPass">
         <dialog id="incorrectEmailPassMsg">
-    <p>Incorrect email or password..</p>
+    <p>Incorrect email or password.</p>
     <img src="imgResources/close.png" 
         class="close-icon" 
         
@@ -273,4 +273,4 @@
     </div>
 </body>
 
-</html>>
+</html>
