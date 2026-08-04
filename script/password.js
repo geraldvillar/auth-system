@@ -1,3 +1,5 @@
+//SCRIPT FOR PASSWORD MODULE//
+
 export const checkPasswordStrength = (password) => {
         let score = 0; 
         if (password.length >= 6) score++; 

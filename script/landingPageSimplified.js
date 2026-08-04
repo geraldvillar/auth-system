@@ -1,3 +1,5 @@
+//LOGIC MAIN SOURCE FOR MODULES//
+
 document.addEventListener("DOMContentLoaded", () => {
 
     //Helper Function - Get the ID of Element//
@@ -210,6 +212,13 @@ document.addEventListener("DOMContentLoaded", () => {
             const input = passwordInputs[target]; 
             
             if(!input) return;
+
+            //INITIAL SYNC
+            if(input.type === "password"){
+                icon.src="imgResources/close-eye.png"; 
+            } else {
+                icon.src="imgResources/view.png"
+            }
 
             const isHidden = input.type === "password"; 
             input.type = isHidden ? "text" : "password"; 
