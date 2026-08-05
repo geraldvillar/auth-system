@@ -31,6 +31,8 @@
         
     </div>
     
+
+
     <!---SIGN UP PAGE-->
 
     
@@ -106,7 +108,7 @@
         </form>
     </div>
 
-    <!---Login Page-->
+    <!---LOGIN PAGE-->
 
     <div id="login-user" class="form-container">
 
@@ -134,18 +136,20 @@
             </fieldset>
         </form>
     </div>
-
+<!---FORGOT PASSWORD PAGE-->
     <div id="forgot-password" class="form-container">
         <form action="">
             <h2>Reset Password</h2>
             <fieldset>
                 <div class="input-group">
                     <label for="new-password">New Password:</label>
+                    <div class="input-wrapper">
                     <input type="password" id="new-password" name="new-password" placeholder="Enter a new password" />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
                     </div>
+                    
                     <p data-strength="new"></p>
-            
+            </div>
                 <button id="confirm-new-password" type="button">Confirm New Password</button>
             </fieldset>
         </form>
@@ -165,12 +169,11 @@
         <dialog id="account-failed">
             <img src="imgResources/close.png" class="close-icon" data-modal="account-failed">
             <p>Account creation failed. Please check your information and try again.</p>
-            
         </dialog>
 
     </div>
 
-    <!---Password Change Message-->
+    <!---UPDATED PASSWORD MESSAGE-->
     <div id="change-pass-msg">
         <dialog id="changed-pass">
             <img src="imgResources/close.png" class="close-icon" data-modal="changed-pass">
@@ -179,7 +182,7 @@
         </dialog>
     </div>
 
-    <!---Password error messages-->
+    <!---PASSWORD UPDATE FAILED MESSAGE-->
 
     <div id="matched-error">
         <dialog id="matched-error-msg">
@@ -205,7 +208,7 @@
         </dialog>
     </div>
 
-    <!---Modal For Sign Up Messages-->
+    <!---MODAL FOR SIGN UP MESSAGES-->
     <div class="empty-input" id="empty-input">
         <dialog id="empty-input-msg">
             <img src="imgResources/close.png" class="close-icon" data-modal="empty-input-msg">

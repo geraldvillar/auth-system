@@ -1,14 +1,14 @@
-//LOGIC MAIN SOURCE FOR MODULES//
+//LOGIC MAIN SOURCE FOR MODULES
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    //Helper Function - Get the ID of Element//
+    //HELPER FUNCTION - SYNC THE ID OF ELEMENTS
     const $ = (id) => document.getElementById(id); 
     const topButtons = $("top-buttons");
     const formLoader = $("form-loader");
     const landingContainer = $("landing-container");
     
-    //Navigation Buttons and Forms//
+    //NAVIGATION BUTTONS AND FORMS
     const UI = {
         buttons: {
             signUp: $("sign-up-btn"),
@@ -23,7 +23,8 @@ document.addEventListener("DOMContentLoaded", () => {
         } 
     };
 
-    //Loading Animation Helper Functions//
+    //LOADING ANIMATION HELPER FUNCTIONS 
+
     const showLoader = () => {
         formLoader?.classList.remove("hidden");
     };
@@ -33,15 +34,15 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    //Helper Function For Navigation//
+    //HELPER FUNCTION FOR NAVIGATIONS 
 
     const showForm = (activeForm) =>{
         if(!activeForm) return; 
 
         showLoader();
         
-        //Extract value from object source //
-        //Forms are hidden by default//
+        //EXTRACT VALUE FROM OBJECT SOURCE
+        //FORMS ARE HIDDEN BY DEFAULT
 
         Object.values(UI.forms).forEach(form =>{
             if (!form) return;
@@ -55,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     };
 
-    //Event Listeners//
+    //EVENT LISTENERS FOR NAVIGATIONS 
     
     UI.buttons.signUp?.addEventListener("click", () => {
         showForm(UI.forms.signUp);
@@ -73,7 +74,8 @@ document.addEventListener("DOMContentLoaded", () => {
         showForm(UI.forms.login);
     });
 
-    //Modals//
+    //MODAL IDS 
+
     const modals = {
         success: $("account-new"), 
         failed: $("account-failed"), 
@@ -103,7 +105,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, {once: true});
     };
 
-    //Forgot Password//
+    //FORGOT PASSWORD LOGIC
     const confirmPassBtn = $("confirm-new-password");
 
     if(confirmPassBtn) {
@@ -132,7 +134,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    //ACCOUNT CREATION MESSAGES//
+    //ACCOUNT CREATION MESSAGE TO USERS
     const createAccountBtn = $("account-created");
 
     if(createAccountBtn) {
@@ -164,7 +166,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
         
-            //Save User(Sign up) local storage//
+            //SAVE USERS(SIGN UP) - LOCAL STORAGE
             const name = $("name")?.value; 
             const email = $("email")?.value;
             const username = $("username")?.value; 
@@ -195,7 +197,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    //Eye toggle Reveal and Hide Password //
+    //EYE TOGGLE FOR REVEALING AND HIDING PASSWORD
     const passwordInputs = {
         signup: $("password"), 
         current: $("user-password"),
@@ -229,7 +231,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    //close icon button (FIXED LOCATION)//
+    //CLOSE ICON BUTTON (FIXED LOCATION)
     const closeIcons = document.querySelectorAll(".close-icon"); 
 
     closeIcons.forEach(icon => {
@@ -241,7 +243,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
-    //PASSWORD STRENGTH FUNCTION//
+    //PASSWORD STRENGTH FUNCTION
     const checkPasswordStrength = (password) => {
         let score = 0; 
         if (password.length >= 6) score++; 
@@ -264,7 +266,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } 
 
         else if(score === 5) {
-            return{message: "Strong password ✌", color: "blue"};
+            return{message: "Strong password 💪", color: "blue"};
         }
 
         else {
@@ -272,7 +274,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    //PASSWORD STRENGTH TEST//
+    //PASSWORD STRENGTH TEST
 
     Object.entries(passwordInputs).forEach(([key, input]) => {
         if(!input) return;
@@ -281,7 +283,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const strength = checkPasswordStrength(input.value);
 
-            //target message container per input//
+            //Target message container per input
             const msg = document.querySelector(`[data-strength="${key}"]`);
 
             if(!msg) return;
@@ -292,8 +294,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
 
-    //AFTER LOGGING IN LOGIC//
-    //Login Authentication using local storage//
+    //LOG IN LOGIC
+    //Login Authentication using local storage
 
     const loginBtn = $("submit-data"); 
 
