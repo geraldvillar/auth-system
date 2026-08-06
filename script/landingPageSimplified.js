@@ -57,21 +57,18 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     //EVENT LISTENERS FOR NAVIGATIONS 
-    
-    UI.buttons.signUp?.addEventListener("click", () => {
-        showForm(UI.forms.signUp);
-    });
+    //DRY 
+    const buttonFormMap = {
+        signUp: UI.forms.signUp, 
+        login: UI.forms.login, 
+        forgot: UI.forms.forgot, 
+        existingAccount: UI.forms.login
+    };
 
-    UI.buttons.login?.addEventListener("click", () =>{
-        showForm(UI.forms.login); 
-    });
-
-    UI.buttons.forgot?.addEventListener("click", () => {
-        showForm(UI.forms.forgot);
-    });
-
-    UI.buttons.existingAccount?.addEventListener("click", () => {
-        showForm(UI.forms.login);
+    Object.entries(UI.buttons).forEach(([key, button]) => {
+        button?.addEventListener("click", () =>{
+            showForm(buttonFormMap[key]);
+        });
     });
 
     //MODAL IDS 
