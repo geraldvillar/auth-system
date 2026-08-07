@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Auth Page</title>
+    <link rel="stylesheet" href="landing.css">
+    <script type="module" src="./script/landingMain.js"></script>
+    <link rel="icon" type="image/icon" href="imgResources/tracking.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+</head>
+
+<body>
+
+    <div class="main-wrapper">
+
+    <!--LANDING PAGE-->
+    <div id="landing-container">
+
+    <div id="title-page">
+    <h1 class="logo">Auth System</h1>
+    <p class="tagline">Secure your account. Simple. Fast.</p>
+    </div>
+
+    <h2 id="welcome">Welcome!</h2>
+
+        <div id="top-buttons" class="top-buttons">
+            <button id="sign-up-btn">Sign Up</button>
+            <button id="login-btn">Login </button>
+            
+        </div>
+        
+    </div>
+    
+    <!---SIGN UP PAGE-->
+
+    
+    <div id="user-info" class="form-container">
+        
+        <form action="#" id="sign-form">
+            <h2>Sign Up Form</h2>
+            <fieldset>
+                <legend>Personal Information</legend>
+
+                <div class="input-group">
+                    <label for="user">Full name:</label>
+
+                    <div class="input-wrapper">
+                    <input type="text" id="name" name="name" placeholder="Enter your full name" required />
+                    <img src="imgResources/user.png" class="input-icon">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email Address:</label>
+                    <div class="input-wrapper">
+                    <input type="email" id="email" name="email" placeholder="example@email.com" required
+                        autocorrect="on" />
+                    <img src="imgResources/email.png" class="input-icon">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="age">Age:</label>
+                    <div class="input-wrapper">
+                    <input type="number" id="age" name="age" min="18" max="70" placeholder="18-70" required />
+                    <img src="imgResources/age.png" class="input-icon">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="username">Username:</label>
+
+                    <div class="input-wrapper">
+                    <input type="text" id="username" name="username" placeholder="Choose a username" required />
+                    <img src="imgResources/id-cardii.png" class="input-icon">
+                    </div>
+
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Password:</label>
+
+                    <div class="input-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="signup">
+                    </div>
+                    <p data-strength="signup"></p>
+                </div>
+
+                <div class="input-group">
+                    <label for="confirmation">Confirm Password:</label>
+                    
+                    <div class="input-wrapper">
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm password"
+                        required />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="confirm">
+                    </div>
+                    <p data-strength="confirm"></p>
+                </div>
+            </fieldset>
+            <button type="submit" id="account-created">Create Account</button>
+            <p id="login-link">Already have an account? Log in here.</p>
+        </form>
+    </div>
+
+    <!---Login Page-->
+
+    <div id="login-user" class="form-container">
+
+        <form action="#">
+            <h2>Login Page</h2>
+            <fieldset>
+                <legend>Login</legend>
+                <div class="input-group">
+
+                <label for="login-email">Enter your email:</label>
+                    <input type="email" id="login-email" name="login-email" placeholder="Enter your email address" />
+                    <img src="imgResources/email.png" class="input-icon">
+                </div>
+                <div class="input-group">
+                    <label for="user-password">Enter your password:</label>  
+                    <div class="input-wrapper">
+                    <input type="password" id="user-password" name="user-password" placeholder="Enter your password" />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="current">
+                    </div>
+                    <p data-strength="current"></p>
+                </div>
+                <button id="submit-data" type="submit">Login</button>
+                <button id="recover-password" type="button">Forgot Password?</button>
+
+            </fieldset>
+        </form>
+    </div>
+
+    <div id="forgot-password" class="form-container">
+        <form action="">
+            <h2>Reset Password</h2>
+            <fieldset>
+                <div class="input-group">
+                    <label for="new-password">New Password:</label>
+                    <input type="password" id="new-password" name="new-password" placeholder="Enter a new password" />
+                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
+                    </div>
+                    <p data-strength="new"></p>
+            
+                <button id="confirm-new-password" type="button">Confirm New Password</button>
+            </fieldset>
+        </form>
+    </div>
+
+
+    <!--MODAL SECTION-->
+    <!---Account Creation Message Modals-->
+    <div id="user-to-users">
+        
+        <dialog id="account-new">
+            <img src="imgResources/close.png" class="close-icon" data-modal="account-new">
+            <p>Account created successfully.</p>
+            
+        </dialog>
+        
+        <dialog id="account-failed">
+            <img src="imgResources/close.png" class="close-icon" data-modal="account-failed">
+            <p>Account creation failed. Please check your information and try again.</p>
+            
+        </dialog>
+
+    </div>
+
+    <!---Password Change Message-->
+    <div id="change-pass-msg">
+        <dialog id="changed-pass">
+            <img src="imgResources/close.png" class="close-icon" data-modal="changed-pass">
+            <p>Your password has been successfully updated.</p>
+            
+        </dialog>
+    </div>
+
+    <!---Password error messages-->
+
+    <div id="matched-error">
+        <dialog id="matched-error-msg">
+            <img src="imgResources/close.png" class="close-icon" data-modal="matched-error-msg">
+            <p>The new password must be different from your current password.</p>
+            
+        </dialog>
+    </div>
+
+    <div id="insufficient-length">
+        <dialog id="insufficient-length-msg">
+            <img src="imgResources/close.png" class="close-icon" data-modal="insufficient-length-msg">
+            <p>Password cannot be empty.</p>
+            
+        </dialog>
+    </div>
+
+    <div id="lessThanSix">
+        <dialog id="lessThanSix-msg">
+            <img src="imgResources/close.png" class="close-icon" data-modal="lessThanSix-msg">
+            <p>Password must be at least 6 characters long.</p>
+            
+        </dialog>
+    </div>
+
+    <!---Modal For Sign Up Messages-->
+    <div class="empty-input" id="empty-input">
+        <dialog id="empty-input-msg">
+            <img src="imgResources/close.png" class="close-icon" data-modal="empty-input-msg">
+            <p>Please complete all required fields.</p>
+    
+        </dialog>
+    </div>
+
+    <div id="initial-password">
+        <dialog id="initial-password-msg">
+            <img src="imgResources/close.png" class="close-icon" data-modal="initial-password-msg">
+            <p>Passwords do not match.</p>
+        </dialog>
+    </div>
+
+    <div id="lessThanSixChar">
+        <dialog id="lessThanSixChar-msg">
+            <img src="imgResources/close.png" class="close-icon" data-modal="lessThanSixChar-msg">
+            <p>Password must be at least 6 characters long.</p>
+            
+        </dialog>
+    </div>
+
+    <div id="mismatched">
+        <dialog id="mismatched-msg">
+            <img src="imgResources/close.png" class="close-icon" data-modal="mismatched-msg">
+            <p>Incorrect email or password.</p>
+            
+        </dialog>
+    </div>
+
+    <div id="successLogIn">
+        <dialog id="successLogInMsg">
+            <p>You have successfully logged in.</p>
+            <img src="imgResources/close.png" class="close-icon" data-modal="mismatched-msg">
+        </dialog>
+    </div>
+
+    <div id="icon-loading">
+        <img src="imgResources/loading.gif" id="form-loader" class="form-loader hidden">
+    </div>
+
+
+    <div id="incorrectEmailPass">
+        <dialog id="incorrectEmailPassMsg">
+    <p>Incorrect email or password.</p>
+    <img src="imgResources/close.png" 
+        class="close-icon" 
+        
+        data-modal="incorrectEmailPassMsg">
+</dialog>
+    </div>
+    
+
+    <div id="unrecognized-account">
+        <dialog id="unrecognized-account-msg">
+            <p>Account not found. Please check your email and password.</p>
+            <img src="imgResources/close.png" class="close-icon" data-modal="unrecognized-account-msg">
+        </dialog>
+    </div>
+
+    <footer>
+
+    </footer>
+    </div>
+</body>
+
+</html>
