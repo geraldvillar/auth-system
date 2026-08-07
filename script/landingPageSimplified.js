@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    //HELPER FUNCTION FOR NAVIGATIONS 
+    //HELPER FUNCTION FOR NAVIGATION
 
     const showForm = (activeForm) =>{
         if(!activeForm) return; 
@@ -56,22 +56,20 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     };
 
-    //EVENT LISTENERS FOR NAVIGATIONS 
-    
-    UI.buttons.signUp?.addEventListener("click", () => {
-        showForm(UI.forms.signUp);
-    });
+    //EVENT LISTENERS FOR NAVIGATION
+    //DRY PRINCIPLE 
+    const buttonFormMap = {
+        signUp: UI.forms.signUp, 
+        login: UI.forms.login, 
+        forgot: UI.forms.forgot, 
+        existingAccount: UI.forms.login
+    };
 
-    UI.buttons.login?.addEventListener("click", () =>{
-        showForm(UI.forms.login); 
-    });
-
-    UI.buttons.forgot?.addEventListener("click", () => {
-        showForm(UI.forms.forgot);
-    });
-
-    UI.buttons.existingAccount?.addEventListener("click", () => {
-        showForm(UI.forms.login);
+    //LOOP THROUGH PAIRS
+    Object.entries(UI.buttons).forEach(([key, button]) => {
+        button?.addEventListener("click", () => {
+            showForm(buttonFormMap[key]);
+        });
     });
 
     //MODAL IDS 
