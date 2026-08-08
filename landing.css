@@ -166,9 +166,9 @@ dialog::backdrop {
 
 .input-icon {
   position: absolute;
-  right: 10px;
+  right: 35px;
   top: 50%;
-  transform: translate(-50%);
+  transform: translateY(-50%);
   width: 20px;
   height: 20px;
   pointer-events: none;
@@ -197,10 +197,9 @@ input:invalid {
 }
 
 
-
-/*icon*/
-.togglePassword {
-    cursor: pointer;
+.eye-icon {
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 #landing-container {
@@ -244,14 +243,20 @@ input:invalid {
   transform: scale(1.05);
 }
 
+/*icon*/
 .togglePassword {
-
+  pointer-events: auto;
+    cursor: pointer;
+}
+.togglePassword {
+  
   width: 20px;
   height: 20px;
   position: absolute;
   right: 10px;
   top: 50%;
   transform: translateY(-50%);
+  z-index: 2;
 }
 
 
@@ -296,11 +301,3 @@ input:invalid {
   font-size: 0.85rem;
 }
 
-.input-wrapper img {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%); 
-    width: 20px;
-    cursor: pointer;
-}

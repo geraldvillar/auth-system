@@ -116,11 +116,14 @@
             <h2>Login Page</h2>
             <fieldset>
                 <legend>Login</legend>
-                <div class="input-group">
 
+                <div class="input-group">
                 <label for="login-email">Enter your email:</label>
+                    
+                <div class="input-wrapper">
                     <input type="email" id="login-email" name="login-email" placeholder="Enter your email address" />
                     <img src="imgResources/email.png" class="input-icon">
+                </div>
                 </div>
                 <div class="input-group">
                     <label for="user-password">Enter your password:</label>  
@@ -145,10 +148,10 @@
                     <label for="new-password">New Password:</label>
                     <div class="input-wrapper">
                     <input type="password" id="new-password" name="new-password" placeholder="Enter a new password" />
-                    <img src="imgResources/close-eye.png" class="togglePassword" data-target="new">
+                    <img src="imgResources/close-eye.png" class="togglePassword eye-icon" data-target="new">
                     </div>
-                    
                     <p data-strength="new"></p>
+            
             </div>
                 <button id="confirm-new-password" type="button">Confirm New Password</button>
             </fieldset>
