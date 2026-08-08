@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
         existingAccount: UI.forms.login
     };
 
-    //LOOP THROUGH PAIRS
+    //LOOP THROUGH PAIRS AND EVENT ATTACHMENT 
     Object.entries(UI.buttons).forEach(([key, button]) => {
         button?.addEventListener("click", () => {
             showForm(buttonFormMap[key]);
