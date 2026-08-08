@@ -115,6 +115,7 @@ document.addEventListener("DOMContentLoaded", () => {
             if(newPassword === "" && oldPassword === ""){
                 showModal(modals.emptyError); 
             } 
+
             else if(oldPassword === newPassword){
                 showModal(modals.matchedError);
             }
@@ -164,13 +165,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
         
             //SAVE USERS(SIGN UP) - LOCAL STORAGE
+            //CHECK AND GET THE INPUTS VALUES
             const name = $("name")?.value; 
             const email = $("email")?.value;
             const username = $("username")?.value; 
             const password = $("password")?.value; 
 
             const users = JSON.parse(localStorage.getItem("users")) || [];
-
+            
+            //CHECKS IF AN EMAIL ALREADY EXISTS
             const emailExists = users.some(user => user.email === email);
 
             if(emailExists){
