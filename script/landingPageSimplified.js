@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showLoader();
         
         //EXTRACT VALUE FROM OBJECT SOURCE
-        //FORMS ARE HIDDEN BY DEFAULT
+        //FORMS ARE SET HIDDEN BY DEFAULT
 
         Object.values(UI.forms).forEach(form =>{
             if (!form) return;
@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //MODAL IDS 
 
     const modals = {
+
         success: $("account-new"), 
         failed: $("account-failed"), 
         changedPassword: $("changed-pass"), 
@@ -91,8 +92,11 @@ document.addEventListener("DOMContentLoaded", () => {
     // HELPER FUNCTION FOR MODALS//
     const showModal = (modal, duration = 3000) => {
         if (!modal) return;
+        
         modal.showModal();
-        //auto close modals//
+
+        //AUTO CLOSE MODALS//
+
         const timeOutId = setTimeout(() => {
             modal.close();
         }, duration );
