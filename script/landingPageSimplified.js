@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    //HELPER FUNCTION FOR NAVIGATION
+    //HELPER FUNCTION FOR NAVIGATIONS 
 
     const showForm = (activeForm) =>{
         if(!activeForm) return; 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     };
 
-    //EVENT LISTENERS FOR NAVIGATION
+    //EVENT LISTENERS FOR NAVIGATIONS 
     //DRY 
     const buttonFormMap = {
         signUp: UI.forms.signUp, 
@@ -170,29 +170,26 @@ document.addEventListener("DOMContentLoaded", () => {
             const email = $("email")?.value;
             const username = $("username")?.value; 
             const password = $("password")?.value; 
-
-            //GET DATA FROM VALUE FROM BROWSER LOCAL STORAGE
-            const users = JSON.parse(localStorage.getItem("users")) || [];
             
-            //CHECKS IF AN EMAIL ALREADY EXISTS
+            const users = JSON.parse(localStorage.getItem("users")) || [];
+            //GET AND CHECKS THE VALUES IN THE BROWSER IF NOTHING YET IT TURNS INTO EMPTY ARRAY INSTEAD OF ERRORS
+
+            //CHECKS IF AN EMAIL ALREADY EXISTS 
             const emailExists = users.some(user => user.email === email);
 
-            //CHECK IF EMAIL ALREADY EXISTS 
             if(emailExists){
+                //IF THE EMAIL EXISTS THE EXECUTION EXITS 
                 showModal(modals.failed); 
-                return; //IF THE USER EMAIL ALREADY EXIST IT FINISH THE EXECUTION EARLY
+                return; 
             }
-            
 
-            
             users.push({
                 name, 
                 email,
                 username, 
                 password
             });
-
-            //STORE VALUE AS STRING
+            //RETURN THE VALUE TO STRING THEN SAVES IT
             localStorage.setItem("users", JSON.stringify(users));
             showModal(modals.success);
 
@@ -214,8 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const toggleButton = document.querySelectorAll(".togglePassword");
 
     toggleButton.forEach(icon => {
-        if(!icon) return;
-        
         icon.addEventListener("click", () => {
             const target = icon.dataset.target; 
             const input = passwordInputs[target]; 
@@ -302,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     //LOG IN LOGIC
-    //LOGIN AUTHENTICATION USING LOCAL STORAGE 
+    //Login Authentication using local storage
 
     const loginBtn = $("submit-data"); 
 
