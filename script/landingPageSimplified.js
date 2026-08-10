@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
             signUp: $("sign-up-btn"),
             login: $("login-btn"), 
             forgot: $("recover-password"),
-            existingAccount: $("login-link")
+            existingAccount: $("login-link") //REDIRECTED TO LOGIN PAGE 
         },
         forms: {
             signUp: $("user-info"), 
@@ -34,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
 
-    //HELPER FUNCTION FOR NAVIGATIONS 
+    //HELPER FUNCTION FOR NAVIGATION 
 
     const showForm = (activeForm) =>{
         if(!activeForm) return; 
@@ -56,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 500);
     };
 
-    //EVENT LISTENERS FOR NAVIGATIONS 
+    //EVENT LISTENERS FOR NAVIGATION
     //DRY 
     const buttonFormMap = {
         signUp: UI.forms.signUp, 
@@ -71,6 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 
+    
     //MODAL IDS 
 
     const modals = {
@@ -89,7 +90,7 @@ document.addEventListener("DOMContentLoaded", () => {
         unrecognizedAccount: $("unrecognized-account-msg")
     };
 
-    // HELPER FUNCTION FOR MODALS//
+    // HELPER FUNCTION TO SHOW MODALS//
     const showModal = (modal, duration = 3000) => {
         if (!modal) return;
         
@@ -111,7 +112,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if(confirmPassBtn) {
         confirmPassBtn.addEventListener("click", (event) => {
-            event.preventDefault(); // FIXED
+            event.preventDefault(); // PREVENT BROWSER FROM REFRESHING AFTER SUBMITTING 
 
             const oldPassword = $("user-password")?.value;
             const newPassword = $("new-password")?.value;
@@ -176,14 +177,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const password = $("password")?.value; 
             
             const users = JSON.parse(localStorage.getItem("users")) || [];
-            //GET AND CHECKS THE VALUES IN THE BROWSER IF NOTHING YET IT TURNS INTO EMPTY ARRAY INSTEAD OF ERRORS
+            //GET AND CHECKS THE VALUES IN THE BROWSER IF NOTHING YET, IT TURNS INTO EMPTY ARRAY INSTEAD OF ERRORS
 
             //CHECKS IF AN EMAIL ALREADY EXISTS 
             const emailExists = users.some(user => user.email === email);
 
             if(emailExists){
                 //IF THE EMAIL EXISTS THE EXECUTION EXITS 
-                showModal(modals.failed); 
+                showModal(modals.failed); //TO BE ADDED: MODAL FOR USERS THAT ALREADY EXISTS
                 return; 
             }
 
