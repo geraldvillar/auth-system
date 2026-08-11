@@ -220,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const target = icon.dataset.target; 
             const input = passwordInputs[target]; 
             
-            if(!input) return;
+            if(!input) return; //STOPS EXECUTION WHEN FOUND NO INPUT
 
             //INITIAL SYNC
             if(input.type === "password"){
