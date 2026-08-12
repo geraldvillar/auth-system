@@ -87,7 +87,8 @@ document.addEventListener("DOMContentLoaded", () => {
         mismatched: $("mismatched-msg"), 
         loggedIn: $("successLogInMsg"),
         incorrectCredential: $("incorrectEmailPassMsg"), 
-        unrecognizedAccount: $("unrecognized-account-msg")
+        unrecognizedAccount: $("unrecognized-account-msg"), 
+        alreadyExistAccount: $("alreadyExistAccount-msg")
     };
 
     // HELPER FUNCTION TO SHOW MODALS//
@@ -131,7 +132,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 showModal(modals.changedPassword);
 
                 setTimeout(() => {
-                    window.location.href = "landing.html";
+                    window.location.href = "index.html";
                 }, 3000);
             }
         });
@@ -184,7 +185,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(emailExists){
                 //IF THE EMAIL EXISTS THE EXECUTION EXITS 
-                showModal(modals.failed); //TO BE ADDED: MODAL FOR USERS THAT ALREADY EXISTS
+                showModal(modals.alreadyExistAccount); //TO BE ADDED: MODAL FOR USERS THAT ALREADY EXISTS
                 return; 
             }
 
@@ -199,7 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showModal(modals.success);
 
             setTimeout (() => {
-                window.location.href = "landing.html";
+                window.location.href = "index.html";
             }, 3000);
         });
     }
@@ -330,7 +331,8 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem("currentUser", JSON.stringify(validUser));
 
             setTimeout(() => {
-                window.location.href = "landing.html";
+                console.log("REDIRECTING TO INDEX");
+                window.location.href = "index.html";
             }, 3000);
         } else {
             showModal(modals.unrecognizedAccount);
