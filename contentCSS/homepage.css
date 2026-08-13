@@ -1,0 +1,32 @@
+
+body{
+    margin: 0; 
+    font-family: roboto;
+    background-color: #0f172a;
+    color: whitesmoke;
+}
+
+ul a {
+    text-decoration: none;
+    color: whitesmoke; 
+
+}
+
+ul li {
+    padding: 20px;
+}
+
+ul {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0;
+    list-style: none;
+}
+
+#welcome {
+    text-transform: capitalize;
+    padding: 20px;
+    color:aliceblue;
+    margin-left: 15px;
+}

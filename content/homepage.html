@@ -2,24 +2,32 @@
 <html lang="en-US">
     <head>
         <title>Homepage</title>
-        <link rel="stylesheet" href="">
-        <script type="module" src=""></script>
+        <link rel="stylesheet" href="../contentCSS/homepage.css">
+        <link rel="icon" type="image/icon" href="/imgResources/tracking.png">
+        <script type="module" src="/contentScript/homepage.js"></script>
         <link rel="icon" type="image/icon" href="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
     </head>
 
     <body>
-        <div id="user-greeting">
-            
-            <!--Welcome, [username]!-->
-            <!--Nav Bar-->
-            <!--View Profile-->
-            <!--Logout-->
-            <!--About Us-->
-            <!--How To Reach Us-->
+        <nav id="nav-bar">
+            <ul>
+                <li><a href="#homepage">Homepage</a></li>
+                <li><a href="#profile"> Profile</a></li>
+                <li><a href="#about-us">About</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+        
+        <section id="homepage"></section>
+        <section id="profile"></section>
+        <section id="about-us"></section>
+        <section id="contact"></section>
+        
 
-
-        </div>
+        <section id="homepage-greeting">
+            <h1 id="welcome">Welcome</h1>
+        </section>
     </body>
 </html>

@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             setTimeout(() => {
                 console.log("REDIRECTING TO INDEX");
-                window.location.href = "index.html";
+                window.location.href = "/content/homepage.html";
             }, 3000);
         } else {
             showModal(modals.unrecognizedAccount);

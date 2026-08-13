@@ -1,3 +1,5 @@
+//AUTH SCRIPT
+
 export const getUsers = () => {
     return JSON.parse(localStorage.getItem("users")) || []; 
     
@@ -9,4 +11,8 @@ export const saveUsers = (users) => {
 
 export const setCurrentUser = (user) => {
     localStorage.setItem("currentUser", JSON.stringify(user));
+};
+
+export const getCurrentUser = () => {
+    return JSON.parse(localStorage.getItem("currentUser"));
 };
