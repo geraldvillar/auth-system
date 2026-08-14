@@ -17,4 +17,5 @@ function typeText(){
         welcome.textContent = "Welcome";
     }
 }
-setInterval(typeText, 200);
+setInterval(typeText, 300);
+setTimeout(typeText, 1000);

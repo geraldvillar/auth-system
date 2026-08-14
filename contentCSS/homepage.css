@@ -29,4 +29,12 @@ ul {
     padding: 20px;
     color:aliceblue;
     margin-left: 15px;
+    text-shadow: 0cap;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    text-align: center;
+}
+
+#userProfile p:not(#email) {
+    font-size: 16px;
+    text-transform: capitalize;
 }

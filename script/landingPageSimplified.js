@@ -175,6 +175,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const name = $("name")?.value; 
             const email = $("email")?.value;
             const username = $("username")?.value; 
+            const age = $("age")?.value;
             const password = $("password")?.value; 
             
             const users = JSON.parse(localStorage.getItem("users")) || [];
@@ -193,6 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 name, 
                 email,
                 username, 
+                age,
                 password
             });
             //RETURN THE VALUE TO STRING THEN SAVES IT

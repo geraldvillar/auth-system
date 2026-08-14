@@ -5,6 +5,7 @@
         <link rel="stylesheet" href="../contentCSS/homepage.css">
         <link rel="icon" type="image/icon" href="/imgResources/tracking.png">
         <script type="module" src="/contentScript/homepage.js"></script>
+        <script type="module" src="/contentScript/getUserInput.js"></script>
         <link rel="icon" type="image/icon" href="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
@@ -20,14 +21,24 @@
             </ul>
         </nav>
         
-        <section id="homepage"></section>
-        <section id="profile"></section>
+        <section id="homepage">
+            <div id="homepage-greeting">
+            <h1 id="welcome">Welcome</h1>
+            </div>
+        </section>
+        
+        <section id="userProfile">
+            <p id="fullname">Name: </p>
+            <p id="username">Username: </p>
+            <p id="age">Age: </p>
+            <p id="email">Email Address: </p>
+        </section>
+
         <section id="about-us"></section>
+
         <section id="contact"></section>
         
 
-        <section id="homepage-greeting">
-            <h1 id="welcome">Welcome</h1>
-        </section>
+        
     </body>
 </html>
