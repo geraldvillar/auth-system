@@ -13,8 +13,19 @@ ul a {
 }
 
 ul li {
-    padding: 20px;
+    padding: 10px 20px;
+    transition: 0.2s;
+    
 }
+
+li:hover {
+    border: 1px whitesmoke solid;
+    border-radius: 5px;
+    padding: 10px;
+    transform: translate(-3px);
+}
+
+
 
 ul {
     display: flex;
@@ -22,7 +33,10 @@ ul {
     align-items: center;
     padding: 0;
     list-style: none;
+    
 }
+
+
 
 #welcome {
     text-transform: capitalize;
@@ -37,4 +51,37 @@ ul {
 #userProfile p:not(#email) {
     font-size: 16px;
     text-transform: capitalize;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+}
+
+#userProfile {
+    padding: 12px;
+    margin: 12px;
+}
+
+#userProfile p {
+    
+    border: whitesmoke solid 2px;
+    padding: 10px; 
+    width: 50%;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+section {
+    min-height: 100vh;
+
+}
+
+#homepage, #userProfile, #about-us, #contact {
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+#nav-bar {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
