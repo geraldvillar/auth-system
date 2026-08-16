@@ -6,36 +6,35 @@ body{
     color: whitesmoke;
 }
 
-ul a {
-    text-decoration: none;
-    color: whitesmoke; 
-
-}
-
-ul li {
-    padding: 10px 20px;
-    transition: 0.2s;
-    
-}
-
-li:hover {
-    border: 1px whitesmoke solid;
-    border-radius: 5px;
-    padding: 10px;
-    transform: translate(-3px);
-}
-
-
-
 ul {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     padding: 0;
     list-style: none;
+    gap: 10px; 
+    list-style: none;
     
 }
 
+ul a {
+    text-decoration: none;
+    color: whitesmoke; 
+    display: block;
+    transition: 0.2s;
+    border-radius: 5px;
+    transition: 0.2s ease;
+
+}
+
+ul a:hover {
+    background-color: #1e293b;
+    transform: translateY(-2px);
+}
+
+ul li {
+    list-style: none;
+}
 
 
 #welcome {
@@ -55,23 +54,35 @@ ul {
 }
 
 #userProfile {
-    padding: 12px;
-    margin: 12px;
+    min-height: 100vh;
+    padding: 80px 10%;
+    box-sizing: border-box;
 }
 
 #userProfile p {
     
-    border: whitesmoke solid 2px;
-    padding: 10px; 
-    width: 50%;
+    border:  solid 2px  #475569;
+    padding: 15px; 
+    width: 100%;
+    max-width: 500px;
+    box-sizing: border-box;
+    background-color: #111c31;
+    transition: 0.2s ease;
+}
+
+#userProfile p:hover {
+    border-color: #64748b;
+
 }
 
 html {
     scroll-behavior: smooth;
+    transform: translateX(5px);
 }
 
 section {
     min-height: 100vh;
+    box-sizing: border-box;
 
 }
 
@@ -84,4 +95,7 @@ section {
     position: sticky;
     top: 0;
     z-index: 1000;
+    background-color: #0f172a;
+    border-bottom: 1px solid #334155;
+    padding: 5px 30px;
 }
