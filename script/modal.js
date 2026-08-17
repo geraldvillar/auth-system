@@ -13,3 +13,14 @@ export const showModal = (modal, duration = 3000) => {
             clearTimeout(timeOutId);
         }, {once: true});
     };
+
+    export const closeIcons = document.querySelectorAll(".close-icon"); 
+
+    closeIcons.forEach(icon => {
+        icon.addEventListener("click", ()=> {
+            const modalId = icon.dataset.modal; 
+            const modal = document.getElementById(modalId);
+
+            if(modal) modal.close();
+        });
+    });

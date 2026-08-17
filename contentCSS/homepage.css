@@ -60,7 +60,6 @@ ul li {
 }
 
 #userProfile p {
-    
     border:  solid 2px  #475569;
     padding: 15px; 
     width: 100%;
@@ -98,4 +97,52 @@ section {
     background-color: #0f172a;
     border-bottom: 1px solid #334155;
     padding: 5px 30px;
+}
+
+footer {
+    text-align: center;
+}
+
+
+#logout-btn {
+    background: transparent;
+    color: whitesmoke;
+    border: 1px solid #475569;
+    padding: 7px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+#logout-btn:hover {
+    background-color: #ef4444;
+    border-color: #ef4444;
+    transform: translateY(-2px);
+}
+
+.close-icon {
+    position: absolute; 
+    top: 10px; 
+    right: 15px; 
+    width: 20px; 
+    height: 20px; 
+    cursor: pointer;
+}
+
+#logout-msg {
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+}
+
+.form-loader {
+    position: fixed;
+    top: 50%; 
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    z-index: 999;
 }
