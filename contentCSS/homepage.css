@@ -47,21 +47,62 @@ ul li {
     text-align: center;
 }
 
-#userProfile p:not(#email) {
-    font-size: 16px;
-    text-transform: capitalize;
-    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif
+
+
+#userProfile p {
+    border: 1px solid #334155;
+    padding: 16px;
+    width: 100%;
+    max-width: none;
+    box-sizing: border-box;
+    background: #0f172a;
+    border-radius: 8px;
+    margin: 12px 0;
+    color: #cbd5e1;
+    transition: 0.2s ease;
 }
 
-#userProfile {
-    min-height: 100vh;
-    padding: 80px 10%;
-    box-sizing: border-box;
+#userProfile p:hover {
+    border-color: #64748b;
+    transform: translateX(4px);
+}
+
+.profile-container {
+    width: 100%; 
+    max-width: 850px;
+}
+
+.profile-heading {
+    margin-bottom: 30px; 
+
+}
+
+.profile-label {
+    color: #64748b;
+    font-size: 13px;
+    letter-spacing: 2px;
+    font-weight: bold;
+}
+
+.profile-heading h2 {
+    color: #94a3b8;
+}
+
+.profile-card {
+
+    background: #111c31;
+    border: 1px solid #334155;
+    border-radius: 12px;
+    padding: 30px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
 }
 
 #userProfile p {
     border:  solid 2px  #475569;
-    padding: 15px; 
+    padding: 80px 10%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     max-width: 500px;
     box-sizing: border-box;
@@ -85,9 +126,35 @@ section {
 
 }
 
-#homepage, #userProfile, #about-us, #contact {
+#homepage{
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+#homepage-greeting {
+    max-width: 800px;
+}
+
+#welcome {
+    margin: 0;
+    font-family: 'Franklin Gothic Medium', Arial, sans-serif;
+    font-size: clamp(40px, 6vw, 72px);
+    color: #f8fafc;
+    letter-spacing: -2px;
+}
+#userProfile, #about-us, #contact {
     min-height: 100vh;
     box-sizing: border-box;
+}
+
+.hero-subtitle {
+    color: #94a3b8;
+    font-size: 18px;
+    margin-top: 15px;
 }
 
 #nav-bar {

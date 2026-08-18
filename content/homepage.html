@@ -4,8 +4,8 @@
         <title>Homepage</title>
         <link rel="stylesheet" href="../contentCSS/homepage.css">
         <link rel="icon" type="image/icon" href="/imgResources/tracking.png">
-        <script type="module" src="/contentScript/homepage.js"></script>
-        <script type="module" src="/contentScript/getUserInput.js"></script>
+        <script defer type="module" src="/contentScript/homepage.js"></script>
+        <script defer type="module" src="/contentScript/getUserInput.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
     </head>
@@ -14,8 +14,8 @@
         <nav id="nav-bar">
             <ul>
                 <li><a href="#homepage">Homepage</a></li>
-                <li><a href="#userProfile"> Profile</a></li>
-                <li><a href="#about-us">About</a></li>
+                <li><a href="#userProfile">Profile</a></li>
+                <li><a href="#about-us">About Us</a></li>
                 <li><a href="#contact">Contact</a></li>
                 <li><button id="logout-btn">Logout</button></li>
             </ul>
@@ -24,17 +24,40 @@
         <section id="homepage">
             <div id="homepage-greeting">
             <h1 id="welcome">Welcome</h1>
+
+            <p class="hero-subtitle"> Your Personal dashboard</p>
             </div>
         </section>
         
         <section id="userProfile">
+
+    <div class="profile-container">
+
+        <div class="profile-heading">
+            <span class="profile-label">ACCOUNT PROFILE</span>
+
+            <h2>Your Information</h2>
+
+            <p>Details associated with your account.</p>
+        </div>
+
+        <div class="profile-card">
+
             <p id="fullname">Name: </p>
             <p id="username">Username: </p>
             <p id="age">Age: </p>
             <p id="email">Email Address: </p>
-        </section>
 
-        <section id="about-us"></section>
+        </div>
+
+    </div>
+
+</section>
+
+        <section id="about-us">
+            <h2>Why I built this?</h2>
+            <p>I built this to simulate and to apply my learning throughout my Web Development Fundamentals using HTML, CSS and JavaScript.</p>
+        </section>
 
         <section id="contact"></section>
 

@@ -328,13 +328,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const validUser = users.find(user => user.email === emailLogin && user.password === passwordLogin);
 
         if(validUser){
-            showModal(modals.loggedIn);
+
+            showLoader();
+
+
+            setTimeout(() => {
+                hideLoader();
+
+                showModal(modals.loggedIn);
+            }, 2000);
+            
 
             localStorage.setItem("currentUser", JSON.stringify(validUser));
 
             setTimeout(() => {
+                
                 console.log("REDIRECTING TO INDEX");
                 window.location.href = "/content/homepage.html";
+                
             }, 3000);
         } else {
             showModal(modals.unrecognizedAccount);
