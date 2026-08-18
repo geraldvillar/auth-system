@@ -1,3 +1,5 @@
+
+
 import { getCurrentUser } from "../script/auth.js";
 import { showLoader } from "../script/utils.js";
 import { hideLoader } from "../script/utils.js";
@@ -16,27 +18,46 @@ function typeText(){
     if(index < message.length) {
         welcome.textContent += message[index];
         index++; 
+
+        setTimeout(typeText, 300);
+
     } else {
+        setTimeout(() => {
         index = 0; 
         welcome.textContent = "Welcome";
+
+        setTimeout(typeText, 300);
+        }, 200);
     }
 }
-setInterval(typeText, 300);
-setTimeout(typeText, 1000);
+typeText();
 
-const logOutBtn = document.querySelector("#logout-btn"); 
+
+const logOutBtn = document.querySelector("#logout-btn");
 const logoutModal = document.getElementById("logout-msg");
+const loader = document.getElementById("form-loader");
 
 logOutBtn.addEventListener("click", () => {
-    showLoader();
+
+    showLoader(loader);
+
+    setTimeout(() => {
+        hideLoader(loader);
     
     showModal(logoutModal);
 
+    }, 2000);
     
-
     setTimeout(() => {
+
+    
         localStorage.removeItem("currentUser");
-        window.location.href = "../index.html";
+
         
+        window.location.href = "../index.html";
+
     }, 3000);
+
 });
+
+

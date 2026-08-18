@@ -76,7 +76,7 @@ ul li {
 
 html {
     scroll-behavior: smooth;
-    transform: translateX(5px);
+    
 }
 
 section {
@@ -137,7 +137,7 @@ footer {
     position: relative;
 }
 
-.form-loader {
+#form-loader {
     position: fixed;
     top: 50%; 
     left: 50%;
@@ -146,3 +146,9 @@ footer {
     height: 60px;
     z-index: 999;
 }
+
+.hidden {
+    display: none;
+}
+
+

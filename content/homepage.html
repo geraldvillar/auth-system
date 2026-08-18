@@ -6,7 +6,6 @@
         <link rel="icon" type="image/icon" href="/imgResources/tracking.png">
         <script type="module" src="/contentScript/homepage.js"></script>
         <script type="module" src="/contentScript/getUserInput.js"></script>
-        <link rel="icon" type="image/icon" href="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
     </head>
@@ -43,15 +42,17 @@
         
 
         
-    <div id="logout">
-        <dialog id="logout-msg">
-            <p>Successfully Logout.</p>
-            <img src="/imgResources/close.png" class="close-icon" data-modal="logout-msg">
-        </dialog>
-    </div>
+    <div id="icon-loading">
+    <img src="/imgResources/loading.gif" id="form-loader" class="hidden">
+</div>
 
-<div id="icon-loading">
-        <img src="/imgResources/loading.gif" id="form-loader" class="form-loader hidden">
+<div id="logout">
+    <dialog id="logout-msg">
+        <p>Successfully Logout.</p>
+        <img src="/imgResources/close.png"
+            class="close-icon"
+            data-modal="logout-msg">
+    </dialog>
 </div>
         <footer>
             <p>All Rights Reserve 2026.</p>
