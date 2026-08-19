@@ -9,6 +9,7 @@ import { closeIcons } from "../script/modal.js";
 
 const currentUser = getCurrentUser(); 
 
+
 const welcome = document.getElementById("welcome");
 
 let index = 0; 
@@ -61,3 +62,23 @@ logOutBtn.addEventListener("click", () => {
 });
 
 
+const messageQuest = document.getElementById("question");
+
+let mesIndex = 0;
+
+const actualMsg =
+    "I built this project from the ground up to challenge myself and apply the core principles I’ve mastered in Web Development Fundamentals. Every line of code, from the structure to the styling, was written from scratch to solidify my technical foundation and demonstrate my ability to translate concepts into functional, modern web interfaces.";
+
+function typingMessage() {
+
+    if (mesIndex < actualMsg.length) {
+
+        messageQuest.textContent += actualMsg[mesIndex];
+        mesIndex++;
+
+        setTimeout(typingMessage, 40);
+
+    }
+}
+
+typingMessage();

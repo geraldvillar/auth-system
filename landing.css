@@ -5,7 +5,6 @@ body {
   color: whitesmoke;
 }
 
-
 .main-wrapper {
   align-items: center;
   height: 100vh;
@@ -301,14 +300,5 @@ input:invalid {
   font-size: 0.85rem;
 }
 
-#email {
-  text-transform: uppercase;
-}
 
-#name {
-  text-transform: uppercase;
-}
 
-#username {
-  text-transform: uppercase;
-}
