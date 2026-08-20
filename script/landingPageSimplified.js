@@ -115,26 +115,41 @@ document.addEventListener("DOMContentLoaded", () => {
         confirmPassBtn.addEventListener("click", (event) => {
             event.preventDefault(); // PREVENT BROWSER FROM REFRESHING AFTER SUBMITTING 
 
-            const oldPassword = $("user-password")?.value;
+            const emailInput = $("reset-email")?.value.trim();
             const newPassword = $("new-password")?.value;
 
-            if(newPassword === "" && oldPassword === ""){
+            if(emailInput === "" && newPassword === ""){
                 showModal(modals.emptyError); 
+                return;
             } 
 
-            else if(oldPassword === newPassword){
-                showModal(modals.matchedError);
-            }
             else if(newPassword.length < 6){
                 showModal(modals.shortError);
+                return;
             }
-            else{
+            
+            let users = JSON.parse(localStorage.getItem("users")) || [];
+            const userIndex = users.findIndex(user => user.email === emailInput);
+            
+                if(userIndex === -1) {
+                    showModal(modals.unrecognizedAccount);
+                    return;
+                }
+
+                if(users[userIndex].password === newPassword) {
+                    showModal(modals.matchedError);
+                    return;
+                }
+
+                users[userIndex].password = newPassword; 
+
+                localStorage.setItem("users", JSON.stringify(users));
+
                 showModal(modals.changedPassword);
 
                 setTimeout(() => {
                     window.location.href = "index.html";
                 }, 3000);
-            }
         });
     }
 
@@ -354,6 +369,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     };
+
+    
+
+    
 
 
 });

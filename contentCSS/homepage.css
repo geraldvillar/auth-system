@@ -249,3 +249,35 @@ section {
 #fullname, #username{
   text-transform: capitalize !important;
 }
+
+
+footer{
+  text-align: center;
+}
+
+.profile-icon  {
+  position: absolute;
+  right: 35px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.profile-card p {
+    border: 1px solid #475569;
+    padding: 16px 45px 16px 20px; 
+    box-sizing: border-box;
+    background-color: #0f172a;
+    border-radius: 8px;
+    color: #e2e8f0;
+    margin: 0;
+    position: relative; 
+    transition: all 0.2s ease;
+}
+
+#contact-me  {
+  
+  text-align: center;
+}

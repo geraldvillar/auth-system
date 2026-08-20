@@ -28,7 +28,7 @@ function typeText(){
         welcome.textContent = "Welcome";
 
         setTimeout(typeText, 300);
-        }, 200);
+        }, 5000);
     }
 }
 typeText();
@@ -67,18 +67,26 @@ const messageQuest = document.getElementById("question");
 let mesIndex = 0;
 
 const actualMsg =
-    "I built this project from the ground up to challenge myself and apply the core principles I’ve mastered in Web Development Fundamentals. Every line of code, from the structure to the styling, was written from scratch to solidify my technical foundation and demonstrate my ability to translate concepts into functional, modern web interfaces.";
+    "I built this project from the ground up to challenge myself and apply the core principles I have mastered in Web Development Fundamentals. Every line of code, from the structure to the styling, was written from scratch to solidify my technical foundation and demonstrate my ability to translate concepts into functional, modern web interfaces.";
 
 function typingMessage() {
-
+let mesIndex = 0;
+messageQuest.textContent = "";
+function type(){
     if (mesIndex < actualMsg.length) {
 
         messageQuest.textContent += actualMsg[mesIndex];
         mesIndex++;
-
-        setTimeout(typingMessage, 40);
-
+        
+        setTimeout(type, 40);
+    } else{
+        setTimeout(() =>{
+            typingMessage();
+        }, 60000);
     }
 }
+type();
+}
+
 
 typingMessage();
