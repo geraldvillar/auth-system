@@ -1,3 +1,8 @@
+* {
+  box-sizing: border-box;
+}
+
+
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
@@ -252,6 +257,7 @@ section {
 
 
 footer{
+  border-top: #94a3b8 solid 2px bold;
   text-align: center;
 }
 
@@ -266,18 +272,51 @@ footer{
 }
 
 .profile-card p {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
     border: 1px solid #475569;
-    padding: 16px 45px 16px 20px; 
+    padding: 16px 50px 16px 20px; 
     box-sizing: border-box;
     background-color: #0f172a;
     border-radius: 8px;
     color: #e2e8f0;
-    margin: 0;
-    position: relative; 
+    margin: 0; 
     transition: all 0.2s ease;
 }
 
-#contact-me  {
-  
+.profile-card p {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-icon {
+    position: static;
+    transform: none;
+}
+
+#contact  {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  padding: 80px 20px;
+
+
+}
+
+#contact-me {
+  max-width: 650px;
+  padding: 50px 80px;
+  background: #111c31;
+  border-radius: 16px;
+  border: 1px solid #0031758e;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+}
+
+#contact-me a {
+  color: whitesmoke;
 }

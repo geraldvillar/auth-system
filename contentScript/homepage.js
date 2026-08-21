@@ -1,14 +1,36 @@
 
 
 import { getCurrentUser } from "../script/auth.js";
-import { showLoader } from "../script/utils.js";
-import { hideLoader } from "../script/utils.js";
+import { showLoader, hideLoader } from "../script/utils.js";
 import { showModal } from "../script/modal.js";
-import { closeIcons } from "../script/modal.js";
+import { $ } from "../script/utils.js";
 
 
+document.addEventListener("DOMContentLoaded", () => {
 const currentUser = getCurrentUser(); 
 
+    if(!currentUser){
+        window.location.href="index.html";
+        return;
+    }
+
+    const fullnameEl = $("fullname");
+    const usernameEl = $("username");
+    const ageEl = $("age");
+    const emailEl = $("email");
+
+    if(fullnameEl){
+        fullnameEl.innerHTML = `Name: ${currentUser.name || 'N/A'} <img src="/imgResources/id-cardii.png" class="profile-icon">`;
+    } 
+    if (usernameEl) {
+        usernameEl.innerHTML = `Username: ${currentUser.username || 'N/A'} <img src="/imgResources/user.png" class="profile-icon">`;
+    }
+    if (ageEl) {
+        ageEl.innerHTML = `Age: ${currentUser.age || 'N/A'} <img src="/imgResources/age.png" class="profile-icon">`;
+    }
+    if (emailEl) {
+        emailEl.innerHTML = `Email Address: ${currentUser.email || 'N/A'} <img src="/imgResources/email.png" class="profile-icon">`;
+    }
 
 const welcome = document.getElementById("welcome");
 
@@ -90,3 +112,4 @@ type();
 
 
 typingMessage();
+});
