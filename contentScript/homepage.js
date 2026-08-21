@@ -42,7 +42,7 @@ function typeText(){
         welcome.textContent += message[index];
         index++; 
 
-        setTimeout(typeText, 300);
+        setTimeout(typeText, 150);
 
     } else {
         setTimeout(() => {

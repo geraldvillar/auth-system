@@ -2,6 +2,9 @@
   box-sizing: border-box;
 }
 
+html{
+  scroll-behavior: smooth;
+}
 
 body {
   margin: 0;
@@ -272,30 +275,29 @@ footer{
 }
 
 .profile-card p {
-    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     border: 1px solid #475569;
-    padding: 16px 50px 16px 20px; 
-    box-sizing: border-box;
+    padding: 16px 20px;
     background-color: #0f172a;
     border-radius: 8px;
     color: #e2e8f0;
-    margin: 0; 
+    margin: 0;
     transition: all 0.2s ease;
 }
-
-.profile-card p {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.profile-card p:hover {
+    border-color: #38bdf8;
+    background-color: #162238;
+    transform: translateX(4px);
 }
 
 .profile-icon {
-    position: static;
-    transform: none;
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    opacity: 0.8;
 }
 
 #contact  {
