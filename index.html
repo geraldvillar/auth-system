@@ -34,7 +34,11 @@
     
     <!---SIGN UP PAGE-->
 
-    
+    <!-- 
+    BACK-END NOTE: 
+    - Endpoint: POST /api/v1/auth/register
+    - Expected Payload (JSON): { name, email, age, username, password, confirm-password }
+    -->
     <div id="user-info" class="form-container">
         
         <form action="#" id="sign-form">
@@ -108,6 +112,13 @@
     </div>
 
     <!---LOGIN PAGE-->
+
+    <!-- 
+    BACK-END NOTE: 
+    - Endpoint: POST /api/v1/auth/login
+    - Expected Payload: { login-email, user-password }
+    - Returns: JWT Token / Session Cookie
+    -->
 
     <div id="login-user" class="form-container">
 

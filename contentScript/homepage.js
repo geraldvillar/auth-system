@@ -7,6 +7,7 @@ import { $ } from "../script/utils.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
+    // Check authentication (BACK-END NOTE: Replace with server session check / JWT verification)
 const currentUser = getCurrentUser(); 
 
     if(!currentUser){
@@ -14,6 +15,7 @@ const currentUser = getCurrentUser();
         return;
     }
 
+    // Populate profile UI elements
     const fullnameEl = $("fullname");
     const usernameEl = $("username");
     const ageEl = $("age");
@@ -32,6 +34,8 @@ const currentUser = getCurrentUser();
         emailEl.innerHTML = `Email Address: ${currentUser.email || 'N/A'} <img src="/imgResources/email.png" class="profile-icon">`;
     }
 
+
+// Typing effect for welcome greeting
 const welcome = document.getElementById("welcome");
 
 let index = 0; 
@@ -55,7 +59,7 @@ function typeText(){
 }
 typeText();
 
-
+// Logout logic (BACK-END NOTE: Replace localStorage removal with POST /api/v1/auth/logout endpoint)
 const logOutBtn = document.querySelector("#logout-btn");
 const logoutModal = document.getElementById("logout-msg");
 const loader = document.getElementById("form-loader");
@@ -83,7 +87,7 @@ logOutBtn.addEventListener("click", () => {
 
 });
 
-
+// Typing effect for bio/question container
 const messageQuest = document.getElementById("question");
 
 let mesIndex = 0;

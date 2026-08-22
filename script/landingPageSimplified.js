@@ -109,6 +109,12 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     //FORGOT PASSWORD LOGIC
+
+    // ==========================================
+    // FORGOT PASSWORD LOGIC
+    // BACK-END NOTE: CHANGE THE LOCALSTORAGE logic WITH:
+    // POST /api/v1/auth/forgot-password o /reset-password
+    // ==========================================
     const confirmPassBtn = $("confirm-new-password");
 
     if(confirmPassBtn) {
@@ -153,7 +159,16 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+
     //ACCOUNT CREATION MESSAGE TO USERS
+
+    // ==========================================
+    // ACCOUNT CREATION (SIGN UP) LOGIC
+    // BACK-END NOTE: CONNECT HERE API endpoint:
+    // POST /api/v1/auth/register
+    // Expected Payload: { name, email, username, age, password }
+    // ==========================================
+
     const createAccountBtn = $("account-created");
 
     if(createAccountBtn) {
@@ -187,14 +202,16 @@ document.addEventListener("DOMContentLoaded", () => {
         
             //SAVE USERS(SIGN UP) - LOCAL STORAGE
             //CHECK AND GET THE INPUTS VALUES
+            //GET THE INPUT VALUES AND PASS IT TO API
             const name = $("name")?.value; 
             const email = $("email")?.value;
             const username = $("username")?.value; 
             const age = $("age")?.value;
             const password = $("password")?.value; 
-            
+
+            // BACK-END MOCKUP: Local Storage (Palitan ng fetch() POST request)
             const users = JSON.parse(localStorage.getItem("users")) || [];
-            //GET AND CHECKS THE VALUES IN THE BROWSER IF NOTHING YET, IT TURNS INTO EMPTY ARRAY INSTEAD OF ERRORS
+            
 
             //CHECKS IF AN EMAIL ALREADY EXISTS 
             const emailExists = users.some(user => user.email === email);
@@ -321,6 +338,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //LOG IN LOGIC
     //Login Authentication using local storage
+    // ==========================================
+    // LOG IN LOGIC
+    // BACK-END NOTE: Once integrated with the API, use the token provided by the server
+    // POST /api/v1/auth/login
+    // Expected Payload: { email: emailLogin, password: passwordLogin }
+    // Expected Response: JWT Token o Session Cookie + User Details
+    // ==========================================
 
     const loginBtn = $("submit-data"); 
 

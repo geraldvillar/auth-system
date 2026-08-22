@@ -1,5 +1,6 @@
 //SCRIPT FOR PASSWORD MODULE//
 
+// Calculate password strength score and return status message with color
 export const checkPasswordStrength = (password) => {
         let score = 0; 
         if (password.length >= 6) score++; 
