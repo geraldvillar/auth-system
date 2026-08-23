@@ -150,12 +150,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 users[userIndex].password = newPassword; 
 
                 localStorage.setItem("users", JSON.stringify(users));
-
-                showModal(modals.changedPassword);
+                showLoader();
 
                 setTimeout(() => {
-                    window.location.href = "index.html";
+                    hideLoader();                  
+                showModal(modals.changedPassword); 
+    
+                setTimeout(() => {
+                window.location.href = 'index.html'; 
                 }, 3000);
+
+                }, 3000);
+                
         });
     }
 
@@ -393,10 +399,5 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     };
-
-    
-
-    
-
 
 });
