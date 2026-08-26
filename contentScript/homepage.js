@@ -117,3 +117,23 @@ type();
 
 typingMessage();
 });
+
+const copyBtn = document.getElementById("copy-btn");
+const emailText = document.getElementById("email-text").innerText;
+const tooltipText = document.getElementById("tooltip-text");
+
+copyBtn.addEventListener("click", () => {
+    
+    navigator.clipboard.writeText(emailText).then(() => {
+        tooltipText.innerText = "Copied!";
+        copyBtn.classList.add("copied");
+
+        
+        setTimeout(() => {
+            copyBtn.classList.remove("copied");
+            tooltipText.innerText = "Copy";
+        }, 1500);
+    }).catch(err => {
+        console.error("Clipboard copy failed: ", err);
+    });
+});

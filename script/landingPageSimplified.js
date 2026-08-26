@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const emailInput = $("reset-email")?.value.trim();
             const newPassword = $("new-password")?.value;
 
-            if(emailInput === "" && newPassword === ""){
+            if(emailInput === "" || newPassword === ""){
                 showModal(modals.emptyError); 
                 return;
             } 
@@ -193,6 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             const initialPass = $("password")?.value;
+
             const confirmedPass = $("confirm-password")?.value; 
 
             if(initialPass !== confirmedPass){
@@ -215,7 +216,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const age = $("age")?.value;
             const password = $("password")?.value; 
 
-            // BACK-END MOCKUP: Local Storage (Palitan ng fetch() POST request)
+            // BACK-END MOCKUP: Local Storage (replace it by fetch() POST request)
             const users = JSON.parse(localStorage.getItem("users")) || [];
             
 
@@ -224,7 +225,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(emailExists){
                 //IF THE EMAIL EXISTS THE EXECUTION EXITS 
-                showModal(modals.alreadyExistAccount); //TO BE ADDED: MODAL FOR USERS THAT ALREADY EXISTS
+                showModal(modals.alreadyExistAccount);
                 return; 
             }
 
