@@ -374,3 +374,47 @@ footer {
 .copy-button.copied .tooltip::after {
     border-color: #10b981 transparent transparent transparent;
 }
+
+
+.profile-input {
+    background-color: #0f172a;
+    border: 1px solid #38bdf8;
+    color: #ffffff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    font-size: 14px;
+    outline: none;
+    width: 50%;
+}
+
+.profile-card p input,
+.profile-input {
+    border: 1px solid #475569 !important;
+    outline: none !important;
+    box-shadow: none !important;
+    background-color: #0f172a !important;
+    color: #e2e8f0 !important;
+}
+
+.profile-card p input:focus,
+.profile-input:focus {
+    border-color: #38bdf8 !important;
+    background-color: #162238 !important;
+    box-shadow: none !important;
+}
+
+.profile-card p {
+    justify-content: flex-start;
+    gap: 15px;
+}
+
+.profile-card p span,
+.profile-card p .profile-value {
+    flex: 1;
+    text-align: left;
+    display: inline-block;
+}
+
+.profile-icon {
+    margin: auto;
+}

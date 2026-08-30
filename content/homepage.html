@@ -29,36 +29,45 @@
         </section>
         
         <section id="userProfile">
-
     <div class="profile-container">
-
         <div class="profile-heading">
             <span class="profile-label">ACCOUNT PROFILE</span>
-
             <h2>Your Information</h2>
-
             <p>Details associated with your account.</p>
         </div>
 
         <div class="profile-card">
-
-            <p id="fullname"><span>Name:</span> 
+            <p>
+                <span>Name:</span> 
+                <span id="fullname-val" class="profile-value">N/A</span>
+                <input type="text" id="editableName" class="profile-input hidden" placeholder="Edit Your Name">
                 <img src="/imgResources/id-cardii.png" class="profile-icon">
             </p>
-            <p id="username"><span>Username:</span> 
+            <p>
+                <span>Username:</span> 
+                <span id="username-val" class="profile-value">N/A</span>
+                <input type="text" id="editableUsername" class="profile-input hidden" placeholder="Edit Your Username">
                 <img src="/imgResources/user.png" class="profile-icon">
             </p>
-            <p id="age"><span>Age:</span> 
+            <p>
+                <span>Age:</span> 
+                <span id="age-val" class="profile-value">N/A</span>
+                <input type="number" id="editableAge" class="profile-input hidden" placeholder="Edit Your Age">
                 <img src="/imgResources/age.png" class="profile-icon">
             </p>
-            <p id="email"> <span>Email Address:</span> 
+            <p>
+                <span>Email Address:</span> 
+                <span id="email-val" class="profile-value">N/A</span>
+                <input type="email" id="editableEmail" class="profile-input hidden" placeholder="Edit Your Email">
                 <img src="/imgResources/email.png" class="profile-icon">
             </p>
-
         </div>
 
+        <div class="profile-actions" style="display: flex; gap: 10px; margin-top: 15px;">
+            <button id="editButton" style="padding: 10px 20px; background: #38bdf8; color: #0f172a; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Update Profile</button>
+            <button id="saveButton" class="hidden" style="padding: 10px 20px; background: #10b981; color: #ffffff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Save Changes</button>
+        </div>
     </div>
-
 </section>
 
         <section id="about-us">
