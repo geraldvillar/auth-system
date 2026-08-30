@@ -121,6 +121,7 @@ typingMessage();
 
 
 //FOR PROFILE UPDATING INFO AND SAVE
+    const updateMsg = $("profileUp-msg");
     let activeUser = currentUser;
 
     const fullnameValEl = $("fullname-val");
@@ -197,7 +198,9 @@ typingMessage();
                 saveButton.classList.add("hidden");
                 editButton.classList.remove("hidden");
 
-            }, 1000);
+                showModal(updateMsg);
+
+            }, 2000);
         });
     }
 });

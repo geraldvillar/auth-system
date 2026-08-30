@@ -418,3 +418,20 @@ footer {
 .profile-icon {
     margin: auto;
 }
+
+#profileUp-msg {
+    border: none;
+        border-radius: 12px;
+        padding: 30px 40px;
+        text-align: left;
+        background-color: whitesmoke;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        max-width: 400px;
+        width: 90%;
+}
+
+#profileUp-msg::backdrop {
+    background-color: rgba(2, 6, 23, 0.75);
+        backdrop-filter: blur(4px);
+}
