@@ -1,5 +1,3 @@
-
-
 import { getCurrentUser } from "../script/auth.js";
 import { showLoader, hideLoader } from "../script/utils.js";
 import { showModal } from "../script/modal.js";
@@ -199,6 +197,7 @@ typingMessage();
                 editButton.classList.remove("hidden");
 
                 showModal(profileUpdate);
+
             }, 2000);
         });
     }

@@ -1,4 +1,3 @@
-
 html {
     scroll-behavior: smooth;
 }
@@ -123,32 +122,12 @@ section {
     gap: 14px;
 }
 
-
-.profile-card p {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    border: 1px solid #475569;
-    padding: 16px 20px;
-    background-color: #0f172a;
-    border-radius: 8px;
-    color: #e2e8f0;
-    margin: 0;
-    transition: all 0.2s ease;
-}
-
-.profile-card p:hover {
-    border-color: #38bdf8;
-    background-color: #162238;
-    transform: translateX(4px);
-}
-
-
 .profile-icon {
     width: 20px;
     height: 20px;
     object-fit: contain;
+    justify-self: end; 
+    opacity: 0.8;
 }
 
 #fullname, #username {
@@ -390,23 +369,16 @@ footer {
     transition: all 0.2s ease;
 }
 
+.profile-card p:hover {
+    border-color: #38bdf8;
+    background-color: #162238;
+    transform: translateX(4px);
+}
+
 .profile-card p span:first-child {
     font-weight: 600;
     color: #94a3b8;
     text-align: left;
-}
-
-.profile-card .profile-value {
-    text-align: left;
-}
-
-
-.profile-icon {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    justify-self: end; 
-    opacity: 0.8;
 }
 
 .profile-card .profile-value {
@@ -438,7 +410,6 @@ footer {
 
 #profileUp-msg {
     border: none;
-    text-align: center;
     border-radius: 12px;
     padding: 30px 40px;
     background-color: whitesmoke; 
