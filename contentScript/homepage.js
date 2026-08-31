@@ -16,11 +16,11 @@ const currentUser = getCurrentUser();
     }
 
     // Populate profile UI elements
-    const fullnameEl = $("fullname");
-    const usernameEl = $("username");
-    const ageEl = $("age");
-    const emailEl = $("email");
-
+    const fullnameEl = $("fullname-val");
+    const usernameEl = $("username-val");
+    const ageEl = $("age-val");
+    const emailEl = $("email-val");
+    
     if(fullnameEl){
         fullnameEl.innerHTML = `Name: ${currentUser.name || 'N/A'} <img src="/imgResources/id-cardii.png" class="profile-icon">`;
     } 
@@ -110,7 +110,7 @@ function type(){
         setTimeout(() =>{
             typingMessage();
         }, 60000);
-        
+
     }
 }
 type();
@@ -121,6 +121,7 @@ typingMessage();
 
 
 //FOR PROFILE UPDATING INFO AND SAVE
+    const profileUpdate = $("profileUp-msg");
     let activeUser = currentUser;
 
     const fullnameValEl = $("fullname-val");
@@ -197,7 +198,8 @@ typingMessage();
                 saveButton.classList.add("hidden");
                 editButton.classList.remove("hidden");
 
-            }, 1000);
+                showModal(profileUpdate);
+            }, 2000);
         });
     }
 });

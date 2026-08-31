@@ -375,46 +375,82 @@ footer {
     border-color: #10b981 transparent transparent transparent;
 }
 
-
-.profile-input {
-    background-color: #0f172a;
-    border: 1px solid #38bdf8;
-    color: #ffffff;
-    padding: 6px 10px;
-    border-radius: 4px;
-    font-size: 14px;
-    outline: none;
-    width: 50%;
-}
-
-.profile-card p input,
-.profile-input {
-    border: 1px solid #475569 !important;
-    outline: none !important;
-    box-shadow: none !important;
-    background-color: #0f172a !important;
-    color: #e2e8f0 !important;
-}
-
-.profile-card p input:focus,
-.profile-input:focus {
-    border-color: #38bdf8 !important;
-    background-color: #162238 !important;
-    box-shadow: none !important;
-}
-
 .profile-card p {
-    justify-content: flex-start;
-    gap: 15px;
+    display: grid;
+    grid-template-columns: 130px 1fr auto; 
+    align-items: center;
+    width: 100%;
+    border: 1px solid #475569;
+    padding: 14px 20px;
+    background-color: #0f172a;
+    border-radius: 8px;
+    color: #e2e8f0;
+    margin: 0;
+    gap: 15px; 
+    transition: all 0.2s ease;
 }
 
-.profile-card p span,
-.profile-card p .profile-value {
-    flex: 1;
+.profile-card p span:first-child {
+    font-weight: 600;
+    color: #94a3b8;
     text-align: left;
-    display: inline-block;
 }
+
+.profile-card .profile-value {
+    text-align: left;
+}
+
 
 .profile-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    justify-self: end; 
+    opacity: 0.8;
+}
+
+.profile-card .profile-value {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 500;
+    background-color: transparent !important;
+}
+
+.profile-input {
+    background-color: #0b132b;
+    color: #f1f5f9;
+    padding: 8px 14px;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.profile-input:focus {
+    border-color: #38bdf8;
+    background-color: #111e38;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+#profileUp-msg {
+    border: none;
+    text-align: center;
+    border-radius: 12px;
+    padding: 30px 40px;
+    background-color: whitesmoke; 
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
     margin: auto;
+}
+
+#profileUp-msg::backdrop {
+    background-color: rgba(2, 6, 23, 0.75);
+    backdrop-filter: blur(4px);
 }
