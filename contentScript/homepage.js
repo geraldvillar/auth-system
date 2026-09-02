@@ -118,7 +118,14 @@ type();
 typingMessage();
 
 
-//FOR PROFILE UPDATING INFO AND SAVE
+    //FOR PROFILE UPDATING INFO AND SAVE
+
+    // BACKEND NOTE: PROFILE UPDATING & SAVING SYSTEM
+
+    // API Endpoint Reference (Future Backend Integration):
+    // - GET /api/users/:id -> Fetch user profile data
+    // - PUT /api/users/:id -> Update user profile data in database
+
     const profileUpdate = $("profileUp-msg");
     let activeUser = currentUser;
 
@@ -138,6 +145,9 @@ typingMessage();
     const displayElements = [fullnameValEl, usernameValEl, ageValEl, emailValEl];
     const editInputs = [editFullName, editUsername, editAge, editEmail];
 
+    // BACKEND NOTE: Function to load and render user data.
+    // In a full-stack app, this data will come from a GET request response 
+    // instead of relying solely on local session state.
     function loadProfileData(user) {
         if (fullnameValEl) fullnameValEl.textContent = user.name || 'N/A';
         if (usernameValEl) usernameValEl.textContent = user.username || 'N/A';
@@ -155,6 +165,16 @@ typingMessage();
     if (editButton && saveButton) {
         editButton.addEventListener("click", () => {
             showLoader(loader);
+
+            // BACKEND NOTE: Network Request Simulation.
+            // Replace this setTimeout block with an async/await fetch() or Axios PUT/PATCH request.
+            // Example:
+            // const response = await fetch(`/api/users/${activeUser.id}`, {
+            //     method: 'PUT',
+            //     headers: { 'Content-Type': 'application/json' },
+            //     body: JSON.stringify(updatedUser)
+            // });
+            // const result = await response.json();
 
             setTimeout(() => {
                 hideLoader(loader);
@@ -180,6 +200,9 @@ typingMessage();
                     age: editAge.value,
                     email: editEmail.value
                 };
+
+                // BACKEND NOTE: Temporary Local Persistence (Client-Side).
+                // This simulates updating the current session storage/database.
 
                 localStorage.setItem("currentUser", JSON.stringify(updatedUser));
 
