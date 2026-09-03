@@ -15,7 +15,7 @@ A frontend authentication system built with modern JavaScript, featuring real-ti
 ##  Tech Stack
 
 * **HTML5** for structure and markup
-* **CSS3** (with modern styling / Tailwind / custom CSS) for layout and design
+* **CSS3** (with modern styling / custom CSS) for layout and design
 * **JavaScript (ES6+)** for DOM manipulation, event handling, and form validation logic
 
 
@@ -25,4 +25,4 @@ To run this project locally on your machine, follow these simple steps:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/your-username/auth-system.git](https://github.com/your-username/auth-system.git)
+   git clone [https://github.com/geraldvillar/auth-system](https://github.com/geraldvillar/auth-system)
