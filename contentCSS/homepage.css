@@ -532,3 +532,15 @@ body.light-mode .profile-heading h2 {
 body.light-mode #welcome {
     color: #0b132b;
 }
+
+body.light-mode .profile-input {
+    background-color: #ffffff;
+    color: #0b132b;
+    border-color: #cbd5e1;
+}
+
+body.light-mode .profile-input:focus {
+    background-color: #ffffff;
+    border-color: #0284c7;
+    box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
