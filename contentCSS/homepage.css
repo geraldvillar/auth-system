@@ -425,3 +425,110 @@ footer {
     background-color: rgba(2, 6, 23, 0.75);
     backdrop-filter: blur(4px);
 }
+
+.theme-toggle-container {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.icon {
+    width: 24px;
+    height: 24px;
+}
+
+.icon.hidden {
+    display: none;
+}
+
+.icon.active {
+    display: block;
+}
+
+/* --- LIGHT MODE STYLES OVERRIDES --- */
+
+body.light-mode {
+    background-color: whitesmoke;
+    color: #0b132b;    
+    transition: background-color 0.3s, color 0.5s;
+}
+
+
+body.light-mode h1, 
+body.light-mode h2, 
+body.light-mode p, 
+body.light-mode a, 
+body.light-mode li, 
+body.light-mode span {
+    color: #0b132b;            
+}
+
+
+body.light-mode .profile-card,
+body.light-mode #ab-content,
+body.light-mode #contact-me {
+    background-color: #ffffff;
+    border-color: #cbd5e1;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+body.light-mode .profile-card p {
+    background-color: #f8fafc;
+    border-color: #e2e8f0;
+    color: #0b132b;
+}
+
+body.light-mode .profile-card p span:first-child {
+    color: #64748b;
+}
+
+body.light-mode .profile-card .profile-value {
+    color: #0b132b;
+}
+
+
+body.light-mode #nav-bar {
+    background-color: rgba(245, 245, 245, 0.85);
+    border-bottom: 1px solid #cbd5e1;
+}
+
+body.light-mode ul a {
+    color: #334155;
+}
+
+body.light-mode ul a:hover {
+    background-color: #e2e8f0;
+    color: #0f172a;
+}
+
+body.light-mode #logout-btn {
+    color: #0b132b;
+    border-color: #94a3b8;
+}
+
+body.light-mode #logout-btn:hover {
+    color: #ffffff;
+}
+
+body.light-mode #contact-me a {
+    color: #0284c7; 
+}
+
+body.light-mode .hero-subtitle {
+    color: #475569; 
+}
+
+body.light-mode footer p {
+    color: #475569;
+}
+
+body.light-mode .profile-heading p,
+body.light-mode .profile-heading h2 {
+    color: #0b132b;
+}
+
+body.light-mode #welcome {
+    color: #0b132b;
+}

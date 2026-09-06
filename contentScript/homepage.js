@@ -224,6 +224,22 @@ typingMessage();
             }, 2000);
         });
     }
+
+    const themeToggleBtn = $("themeToggleBtn");
+    const lightIcon = $("lightIcon");
+    const darkIcon = $("darkIcon");
+
+    themeToggleBtn.addEventListener("click", () => {
+        document.body.classList.toggle("light-mode");
+
+        
+        lightIcon.classList.toggle("active");
+        lightIcon.classList.toggle("hidden");
+
+        
+        darkIcon.classList.toggle("active");  
+        darkIcon.classList.toggle("hidden"); 
+    });
 });
 
 
