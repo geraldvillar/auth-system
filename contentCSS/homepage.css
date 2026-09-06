@@ -460,13 +460,14 @@ body.light-mode h2,
 body.light-mode p, 
 body.light-mode a, 
 body.light-mode li, 
-body.light-mode span {
+body.light-mode span, 
+body.light-mode  {
     color: #0b132b;            
 }
 
 
 body.light-mode .profile-card,
-body.light-mode #ab-content,
+body.light-mode #ab-content, 
 body.light-mode #contact-me {
     background-color: #ffffff;
     border-color: #cbd5e1;
@@ -543,4 +544,12 @@ body.light-mode .profile-input:focus {
     background-color: #ffffff;
     border-color: #0284c7;
     box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
+}
+
+body.light-mode #ab-content h2 {
+    color: #0b132b;
+}
+
+body.light-mode #ab-content p {
+    color: #475569;
 }
