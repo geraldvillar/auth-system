@@ -67,7 +67,7 @@ ul a {
     display: block;
     padding: 8px 14px;
     border-radius: 6px;
-    font-size: 14px;
+    font-size: 14px; 
     font-weight: 500;
     transition: all 0.2s ease;
 }
@@ -76,6 +76,13 @@ ul a:hover {
     background-color: #1e293b;
     color: #ffffff;
     transform: translateY(-1px);
+}
+
+ul a.active {
+    background-color: #27292b8e;
+    color: whitesmoke; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 12px rgba(13, 56, 100, 0.3);
 }
 
 /*SECTIONS (HOMEPAGE, ABOUT, CONTACT)*/
@@ -622,6 +629,10 @@ body.light-mode #ab-content h2 {
 
 body.light-mode #ab-content p {
     color: #475569;
+}
+
+body.light-mode #tooltip-text {
+    color: whitesmoke
 }
 
 /* FOOTER & MEDIA QUERIES */

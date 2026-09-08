@@ -13,6 +13,20 @@ const currentUser = getCurrentUser();
         return;
     }
 
+    
+    //ACTIVE STATE FOR LINKS 
+
+    const navLinks = document.querySelectorAll("ul a"); 
+
+    navLinks.forEach(link => {
+        link.addEventListener("click", function() {
+        
+            navLinks.forEach(nav => nav.classList.remove("active")); 
+            
+            this.classList.add("active");
+        });
+    });
+
     // Populate profile UI elements
     const fullnameEl = $("fullname-val");
     const usernameEl = $("username-val");
@@ -263,7 +277,12 @@ typingMessage();
         }
 
         requestAnimationFrame(animation);
+
+
+
     }
+
+    
 
     const themeToggleBtn = $("themeToggleBtn");
     const lightIcon = $("lightIcon");
