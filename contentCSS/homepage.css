@@ -1,3 +1,4 @@
+/*GLOBAL STYLES & RESETS*/
 html {
     scroll-behavior: smooth;
 }
@@ -11,9 +12,34 @@ body {
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     background-color: #0f172a;
     color: #f8fafc;
+    animation: fadeInPage 0.6s ease-out forwards; 
 }
 
-/* Navbar */
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0f172a;
+}
+::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #38bdf8;
+}
+/* NAVBAR & NAVIGATION*/
 #nav-bar {
     position: sticky;
     top: 0;
@@ -52,7 +78,7 @@ ul a:hover {
     transform: translateY(-1px);
 }
 
-/* Sections */
+/*SECTIONS (HOMEPAGE, ABOUT, CONTACT)*/
 section {
     min-height: 100vh;
 }
@@ -79,67 +105,7 @@ section {
     margin-top: 15px;
 }
 
-/* Profile Section */
-#userProfile {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding: 80px 20px;
-}
-
-.profile-container {
-    width: 100%;
-    max-width: 600px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    gap: 24px;
-}
-
-.profile-label {
-    color: #38bdf8; 
-    font-size: 12px;
-    letter-spacing: 2px;
-    font-weight: 700;
-    text-transform: uppercase;
-}
-
-.profile-heading h2 {
-    color: #ffffff;
-    margin: 8px 0;
-    font-size: 28px;
-}
-
-.profile-card {
-    background: #111c31;
-    border: 1px solid #334155;
-    border-radius: 14px;
-    padding: 32px;
-    box-shadow: 0 20px 25px -5px rgba(45, 64, 75, 0.3);
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-}
-
-.profile-icon {
-    width: 20px;
-    height: 20px;
-    object-fit: contain;
-    justify-self: end; 
-    opacity: 0.8;
-}
-
-#fullname-val, 
-#editableName,
-#username-val, 
-#editableUsername, 
-#email-val, 
-#editableEmail {
-    text-transform: capitalize !important;
-}
-
-/* About Us Section */
+/* ABOUT US SECTION */
 #about-us {
     min-height: 100vh;
     display: flex;
@@ -170,9 +136,9 @@ section {
     line-height: 1.5;
 }
 
-/* Contact Section */
+/*CONTACT SECTION*/
 #contact {
-  min-height: 100vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -193,7 +159,142 @@ section {
     color: whitesmoke;
 }
 
-/* Buttons & Misc */
+/* USER PROFILE SECTION & CARDS*/
+#userProfile {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.profile-container {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.profile-label {
+    color: #38bdf8; 
+    font-size: 12px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.profile-heading {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.profile-heading h2 {
+    color: #ffffff;
+    margin: 8px 0;
+    font-size: 28px;
+}
+
+.profile-card {
+    background: #111c31;
+    border: 1px solid #334155;
+    border-radius: 14px;
+    padding: 32px;
+    box-shadow: 0 20px 25px -5px rgba(45, 64, 75, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.profile-icon {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    justify-self: end; 
+    opacity: 0.8;
+}
+
+.profile-card p {
+    display: grid;
+    grid-template-columns: 130px 1fr auto; 
+    align-items: center;
+    width: 100%;
+    border: 1px solid #475569;
+    padding: 14px 20px;
+    background-color: #0f172a;
+    border-radius: 8px;
+    color: #e2e8f0;
+    margin: 0;
+    gap: 15px; 
+    transition: all 0.2s ease;
+}
+
+.profile-card p:hover {
+    border-color: #38bdf8;
+    background-color: #162238;
+    transform: translateX(-2px);
+}
+
+.profile-card p span:first-child {
+    font-weight: 600;
+    color: #94a3b8;
+    text-align: left;
+}
+
+.profile-card .profile-value {
+    text-align: center;
+    color: #ffffff;
+    font-weight: 500;
+    background-color: transparent !important;
+}
+
+#fullname-val, 
+#editableName,
+#username-val, 
+#editableUsername, 
+#email-val, 
+#editableEmail, 
+#editableAge {
+    text-transform: uppercase !important;
+    text-align: center;
+}
+
+/* PROFILE INPUTS, BUTTONS & WIDGETS */
+.profile-input {
+    background-color: #0b132b;
+    color: #f1f5f9;
+    padding: 8px 14px;
+    border: 1px solid #475569;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    text-align: left;
+    width: 100%;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.profile-input:focus {
+    border-color: #38bdf8;
+    background-color: #111e38;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+}
+
+#saveButton, #editButton {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#saveButton:hover, #editButton:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
+} 
+
+#saveButton:active, #editButton:active {
+    transform: translateY(1px); 
+}
+
 #logout-btn {
     background: transparent;
     color: #f8fafc;
@@ -209,8 +310,104 @@ section {
     background-color: #ef4444;
     border-color: #ef4444;
     transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(204, 130, 111, 0.25);
 }
 
+/* DATE WIDGET ELEMENTS */
+#dateIcon {
+    width: 24px;
+    height: 24px;
+}
+
+#accountCreated {
+    margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.toggleDate {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    display: block;
+    transition: transform 0.2s ease;
+}
+
+.toggleDate:hover {
+    transform: scale(1.1);
+}
+
+/* TOOLTIPS & COPY TO CLIPBOARD */
+.email-copy-wrapper {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.copy-button {
+    position: relative;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 2px 4px;
+    color: #4b5563;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+    transition: background-color 0.2s, color 0.2s;
+}
+
+.copy-button:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    color: #111827;
+}
+
+.tooltip {
+    position: absolute;
+    bottom: 140%;
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background-color: #1f2937;
+    color: #ffffff;
+    padding: 4px 8px;
+    font-size: 11px;
+    border-radius: 4px;
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+    font-family: sans-serif;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 4px;
+    border-style: solid;
+    border-color: #1f2937 transparent transparent transparent;
+}
+
+.copy-button:hover .tooltip {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+.copy-button.copied .tooltip {
+    opacity: 1;
+    background-color: #10b981; 
+    transform: translateX(-50%) translateY(-3px); 
+}
+
+.copy-button.copied .tooltip::after {
+    border-color: #10b981 transparent transparent transparent;
+}
+
+/* MODALS, LOADERS & UTILITIES*/
 #form-loader {
     position: fixed;
     top: 50%;
@@ -223,7 +420,6 @@ section {
 
 #icon-loading:has(#form-loader:not(.hidden)) {
     position: fixed;
-    z-index: 1000;
     top: 0;
     left: 0;
     width: 100vw;
@@ -268,151 +464,6 @@ section {
     backdrop-filter: blur(4px);
 }
 
-.hidden {
-    display: none;
-}
-
-footer {
-    border-top: 2px solid #94a3b8;
-    text-align: center;
-    padding: 20px 0;
-    color: #94a3b8;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-    ul { gap: 6px; }
-    .profile-container { max-width: 90%; }
-}
-
-
-.email-copy-wrapper {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-}
-
-.copy-button {
-    position: relative;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 2px 4px;
-    color: #4b5563;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 4px;
-    transition: background-color 0.2s, color 0.2s;
-}
-
-.copy-button:hover {
-    background-color: rgba(0, 0, 0, 0.06);
-    color: #111827;
-}
-
-
-.tooltip {
-    position: absolute;
-    bottom: 140%;
-    left: 50%;
-    transform: translateX(-50%) translateY(4px);
-    background-color: #1f2937;
-    color: #ffffff;
-    padding: 4px 8px;
-    font-size: 11px;
-    border-radius: 4px;
-    white-space: nowrap;
-    pointer-events: none;
-    opacity: 0;
-    transition: opacity 0.15s ease, transform 0.15s ease;
-    font-family: sans-serif;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-
-.tooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 4px;
-    border-style: solid;
-    border-color: #1f2937 transparent transparent transparent;
-}
-
-
-.copy-button:hover .tooltip {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
-}
-
-
-.copy-button.copied .tooltip {
-    opacity: 1;
-    background-color: #10b981; 
-    transform: translateX(-50%) translateY(-3px); 
-}
-
-.copy-button.copied .tooltip::after {
-    border-color: #10b981 transparent transparent transparent;
-}
-
-.profile-card p {
-    display: grid;
-    grid-template-columns: 130px 1fr auto; 
-    align-items: center;
-    width: 100%;
-    border: 1px solid #475569;
-    padding: 14px 20px;
-    background-color: #0f172a;
-    border-radius: 8px;
-    color: #e2e8f0;
-    margin: 0;
-    gap: 15px; 
-    transition: all 0.2s ease;
-}
-
-.profile-card p:hover {
-    border-color: #38bdf8;
-    background-color: #162238;
-    transform: translateX(4px);
-}
-
-.profile-card p span:first-child {
-    font-weight: 600;
-    color: #94a3b8;
-    text-align: left;
-}
-
-.profile-card .profile-value {
-    text-align: center;
-    color: #ffffff;
-    font-weight: 500;
-    background-color: transparent !important;
-}
-
-.profile-input {
-    background-color: #0b132b;
-    color: #f1f5f9;
-    padding: 8px 14px;
-    border: 1px solid #475569;
-    border-radius: 6px;
-    font-size: 14px;
-    font-family: inherit;
-    text-align: left;
-    width: 100%;
-    outline: none;
-    transition: all 0.2s ease;
-}
-
-.profile-input:focus {
-    border-color: #38bdf8;
-    background-color: #111e38;
-    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
-}
-
 #profileUp-msg {
     border: none;
     border-radius: 12px;
@@ -431,11 +482,31 @@ footer {
     backdrop-filter: blur(4px);
 }
 
+
+.hidden {
+    display: none;
+}
+
+title {
+    background-color: #e4e9f0;
+    border-radius: 4px;
+}
+
+/* THEME TOGGLE (DARK / LIGHT MODE) */
 .theme-toggle-container {
     cursor: pointer;
     display: flex;
     align-items: center;
     margin-right: auto;
+}
+
+.theme-toggle-container {
+    transition: transform 0.5s ease, box-shadow 0.3s ease;
+}
+
+.theme-toggle-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 11px rgba(55, 189, 248, 0.30);
 }
 
 .icon {
@@ -451,25 +522,21 @@ footer {
     display: block;
 }
 
-/* --- LIGHT MODE STYLES OVERRIDES --- */
-
+/* LIGHT MODE OVERRIDES */
 body.light-mode {
     background-color: whitesmoke;
     color: #0b132b;    
     transition: background-color 0.3s, color 0.5s;
 }
 
-
 body.light-mode h1, 
 body.light-mode h2, 
 body.light-mode p, 
 body.light-mode a, 
 body.light-mode li, 
-body.light-mode span, 
-body.light-mode  {
+body.light-mode span {
     color: #0b132b;            
 }
-
 
 body.light-mode .profile-card,
 body.light-mode #ab-content, 
@@ -478,7 +545,6 @@ body.light-mode #contact-me {
     border-color: #cbd5e1;
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
 }
-
 
 body.light-mode .profile-card p {
     background-color: #f8fafc;
@@ -493,7 +559,6 @@ body.light-mode .profile-card p span:first-child {
 body.light-mode .profile-card .profile-value {
     color: #0b132b;
 }
-
 
 body.light-mode #nav-bar {
     background-color: rgba(245, 245, 245, 0.85);
@@ -559,33 +624,16 @@ body.light-mode #ab-content p {
     color: #475569;
 }
 
-
-
-#dateIcon {
-    width: 24px;
-    height: 24px;
+/* FOOTER & MEDIA QUERIES */
+footer {
+    border-top: 2px solid #94a3b8;
+    text-align: center;
+    padding: 20px 0;
+    color: #94a3b8;
 }
 
-.profile-heading {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+@media (max-width: 768px) {
+    ul { gap: 6px; }
+    .profile-container { max-width: 90%; }
 }
 
-#accountCreated {
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
-}
-
-.toggleDate {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    display: block;
-    transition: transform 0.2s ease;
-}
-
-.toggleDate:hover {
-    transform: scale(1.1);
-}

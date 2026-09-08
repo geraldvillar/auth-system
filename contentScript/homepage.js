@@ -243,6 +243,26 @@ typingMessage();
             accountInfoDetails.classList.toggle("hidden");
         });
 
+
+        //ANIMATION FOR DATE
+        let startTime = null; 
+        const duration = 1500; 
+
+        const animation = (timestamp) => {
+            if(!timestamp) startTime = timestamp;
+            const elapsed = timestamp - startTime;
+
+            const progress = (elapsed % duration) / duration; 
+            const scale = 1 + Math.sin(progress * Math.PI * 2) * 0.12;
+
+            const rotation = Math.sin(progress * Math.PI * 4) * 5; 
+
+            dateIcon.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+
+            requestAnimationFrame(animation);
+        }
+
+        requestAnimationFrame(animation);
     }
 
     const themeToggleBtn = $("themeToggleBtn");
@@ -260,6 +280,8 @@ typingMessage();
         darkIcon.classList.toggle("active");  
         darkIcon.classList.toggle("hidden"); 
     });
+
+
 });
 
 
