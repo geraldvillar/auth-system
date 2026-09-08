@@ -223,6 +223,26 @@ typingMessage();
 
             }, 2000);
         });
+
+
+        //DATE INFO: DATE OF ACCOUNT CREATION
+        const dateIcon = document.querySelector("#dateIcon"); 
+        const accountInfoDetails = document.querySelector("#accountInfoDetails");
+        const creationDateText = document.querySelector("#creationDateText");
+
+        const now = new Date();
+        const formattedDate = now.toLocaleDateString('en-US', {
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric'
+        });
+
+        creationDateText.textContent = formattedDate;
+
+        dateIcon.addEventListener("click", () => {
+            accountInfoDetails.classList.toggle("hidden");
+        });
+
     }
 
     const themeToggleBtn = $("themeToggleBtn");

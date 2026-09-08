@@ -13,10 +13,12 @@
     <body>
         <nav id="nav-bar">
             <ul>
+                
                 <div id="themeToggleBtn" class="theme-toggle-container">
                     <img id="lightIcon" class="icon active" src="/imgResources/light-mode.png">
                     <img id="darkIcon" class="icon hidden" src="/imgResources/dark-mode.png" >
                 </div>
+
                 <li><a href="#homepage">Homepage</a></li>
                 <li><a href="#userProfile">Profile</a></li>
                 <li><a href="#about-us">About Us</a></li>
@@ -30,7 +32,7 @@
             <h1 id="welcome">Welcome</h1>
             <p class="hero-subtitle"> Your Personal dashboard</p>
             </div>
-        </section>
+        </section>  
         
         <section id="userProfile">
     <div class="profile-container">
@@ -38,6 +40,13 @@
             <span class="profile-label">ACCOUNT PROFILE</span>
             <h2>Your Information</h2>
             <p>Details associated with your account.</p>
+            <div id="accountCreated">
+                <img id="dateIcon" class="toggleDate" src="/imgResources/calendar.png">
+            </div>
+            
+            <div id="accountInfoDetails" class="hidden">
+                <p>Date Created: <span id="creationDateText"></span></p>
+            </div>
         </div>
 
         <div class="profile-card">
