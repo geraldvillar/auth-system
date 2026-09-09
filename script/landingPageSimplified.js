@@ -182,13 +182,20 @@ document.addEventListener("DOMContentLoaded", () => {
             event.preventDefault();
 
             const actualForm = event.target.closest("form"); 
-            if(!actualForm) return;
+            if(!actualForm) return; //STOP INSTEAD OF ERROR
 
             const inputs = actualForm.querySelectorAll("input");
             const hasEmpty = Array.from(inputs).some(input => input.value.trim() === ""); 
 
             if(hasEmpty){
-                showModal(modals.emptyInputsMsg);
+
+                showLoader(); 
+
+                setTimeout(() => {
+                    hideLoader();
+                    showModal(modals.emptyInputsMsg);
+                });
+                
                 return; 
             }
 
@@ -197,12 +204,25 @@ document.addEventListener("DOMContentLoaded", () => {
             const confirmedPass = $("confirm-password")?.value; 
 
             if(initialPass !== confirmedPass){
-                showModal(modals.mismatched);
+
+                showLoader(); 
+                setTimeout(() => {
+                    hideLoader();
+                    showModal(modals.mismatched);
+                });
+                
                 return;
             }
 
             if(initialPass.length < 6 || confirmedPass.length < 6 ){
-                showModal(modals.lessThanSix); 
+
+                showLoader(); 
+
+                setTimeout(() => {
+                    hideLoader();
+                    showModal(modals.lessThanSix); 
+                });
+            
                 return; 
             }
 
@@ -225,7 +245,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(emailExists){
                 //IF THE EMAIL EXISTS THE EXECUTION EXITS 
-                showModal(modals.alreadyExistAccount);
+                showLoader();
+
+                setTimeout(() => {
+                    hideLoader();
+                    showModal(modals.alreadyExistAccount);
+                
+                }, 3000);
+
                 return; 
             }
 
@@ -238,11 +265,17 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             //RETURN THE VALUE TO STRING THEN SAVES IT
             localStorage.setItem("users", JSON.stringify(users));
-            showModal(modals.success);
+            showLoader(); 
 
-            setTimeout (() => {
-                window.location.href = "index.html";
-            }, 3000);
+            setTimeout(() => {
+                hideLoader(); 
+
+                showModal(modals.success);
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 3000);
+            }, 2000);
         });
     }
 
