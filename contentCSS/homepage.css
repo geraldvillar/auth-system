@@ -344,11 +344,46 @@ section {
     transform: scale(1.1);
 }
 
+/* ACCOUNT DELETE ELEMENT */
+    #delete-account {
+        color: #ef4444; 
+        cursor: pointer;
+        margin-top: 8px;
+    }
+
+    #confirm-delete {
+        margin-top: 5px;
+    }
+
+    #delete-confirmation {
+        font-size: 0.85rem;
+        margin-bottom: 5px;
+    }
+
+    #yes {
+        background: #ef4444;
+        color: white;
+        border: none;
+        padding: 4px 10px;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    #no {
+        background: #64748b; 
+        color: white; 
+        border: none; 
+        padding: 4px 10px; 
+        border-radius: 4px; 
+        cursor: pointer;
+    }
+
 /* TOOLTIPS & COPY TO CLIPBOARD */
 .email-copy-wrapper {
     display: inline-flex;
     align-items: center;
     gap: 6px;
+    font-weight: bold;
 }
 
 .copy-button {

@@ -1,149 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en-US">
-    <head>
-        <title>Homepage</title>
-        <link rel="stylesheet" href="../contentCSS/homepage.css">
-        <link rel="icon" type="image/icon" href="/imgResources/tracking.png">
-        <script defer type="module" src="/contentScript/homepage.js"></script>
-        <script defer type="module" src="/contentScript/getUserInput.js"></script>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta charset="UTF-8">
-    </head>
+  <head>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="../contentCSS/homepage.css" />
+    <link rel="icon" type="image/icon" href="/imgResources/tracking.png" />
+    <script defer type="module" src="/contentScript/homepage.js"></script>
+    <script defer type="module" src="/contentScript/getUserInput.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8" />
+  </head>
 
-    <body>
-        <nav id="nav-bar">
-            <ul>
-                
-                <div id="themeToggleBtn" class="theme-toggle-container">
-                    <img id="lightIcon" class="icon active" src="/imgResources/light-mode.png">
-                    <img id="darkIcon" class="icon hidden" src="/imgResources/dark-mode.png" >
-                </div>
+  <body>
+    <nav id="nav-bar">
+      <ul>
+        <div id="themeToggleBtn" class="theme-toggle-container">
+          <img
+            id="lightIcon"
+            class="icon active"
+            src="/imgResources/light-mode.png"
+          />
+          <img
+            id="darkIcon"
+            class="icon hidden"
+            src="/imgResources/dark-mode.png"
+          />
+        </div>
 
-                <li><a href="#homepage">Homepage</a></li>
-                <li><a href="#userProfile">Profile</a></li>
-                <li><a href="#about-us">About Us</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><button id="logout-btn">Logout</button></li>
-            </ul>
-        </nav>
-        
-        <section id="homepage">
-            <div id="homepage-greeting">
-            <h1 id="welcome">Welcome</h1>
-            <p class="hero-subtitle"> Your Personal dashboard</p>
-            </div>
-        </section>  
-        
-        <section id="userProfile">
-    <div class="profile-container">
+        <li><a href="#homepage">Homepage</a></li>
+        <li><a href="#userProfile">Profile</a></li>
+        <li><a href="#about-us">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><button id="logout-btn">Logout</button></li>
+      </ul>
+    </nav>
+
+    <section id="homepage">
+      <div id="homepage-greeting">
+        <h1 id="welcome">Welcome</h1>
+        <p class="hero-subtitle">Your Personal dashboard</p>
+      </div>
+    </section>
+
+    <section id="userProfile">
+      <div class="profile-container">
         <div class="profile-heading">
-            <span class="profile-label">ACCOUNT PROFILE</span>
-            <h2>Your Information</h2>
-            <p>Details associated with your account.</p>
+          <span class="profile-label">ACCOUNT PROFILE</span>
+          <h2>Your Information</h2>
+          <p>Details associated with your account.</p>
+
+          <div id="accountSettingContainer">
             <div id="accountCreated">
-                <img id="dateIcon" class="toggleDate" src="/imgResources/calendar.png" title="Show date of creation.">
+              <img
+                id="dateIcon"
+                class="toggleDate"
+                src="/imgResources/calendar.png"
+                title="Show date of creation."
+              />
             </div>
-            
-            <div id="accountInfoDetails" class="hidden">
+
+            <div id="settingsDropdown" class="hidden">
+              <div id="accountInfoDetails">
                 <p>Date Created: <span id="creationDateText"></span></p>
+              </div>
+
+              <div id="delete-account">Delete Account</div>
+
+              <div id="confirm-delete" class="hidden">
+                <p id="delete-confirmation">
+                  Are you sure you want to delete your account?
+                </p>
+                <button id="yes">Yes</button>
+                <button id="no">No</button>
+              </div>
             </div>
+          </div>
         </div>
 
         <div class="profile-card">
-            <p>
-                <span>Name:</span> 
-                <span id="fullname-val" class="profile-value">N/A</span>
-                <input type="text" id="editableName" class="profile-input hidden" placeholder="Edit Your Name">
-                <img src="/imgResources/id-cardii.png" class="profile-icon">
-            </p>
-            <p>
-                <span>Username:</span> 
-                <span id="username-val" class="profile-value">N/A</span>
-                <input type="text" id="editableUsername" class="profile-input hidden" placeholder="Edit Your Username">
-                <img src="/imgResources/user.png" class="profile-icon">
-            </p>
-            <p>
-                <span>Age:</span> 
-                <span id="age-val" class="profile-value">N/A</span>
-                <input type="number" id="editableAge" class="profile-input hidden" placeholder="Edit Your Age">
-                <img src="/imgResources/age.png" class="profile-icon">
-            </p>
-            <p>
-                <span>Email Address:</span> 
-                <span id="email-val" class="profile-value">N/A</span>
-                <input type="email" id="editableEmail" class="profile-input hidden" placeholder="Edit Your Email">
-                <img src="/imgResources/email.png" class="profile-icon">
-            </p>
+          <p>
+            <span>Name:</span>
+            <span id="fullname-val" class="profile-value">N/A</span>
+            <input
+              type="text"
+              id="editableName"
+              class="profile-input hidden"
+              placeholder="Edit Your Name"
+            />
+            <img src="/imgResources/id-cardii.png" class="profile-icon" />
+          </p>
+          <p>
+            <span>Username:</span>
+            <span id="username-val" class="profile-value">N/A</span>
+            <input
+              type="text"
+              id="editableUsername"
+              class="profile-input hidden"
+              placeholder="Edit Your Username"
+            />
+            <img src="/imgResources/user.png" class="profile-icon" />
+          </p>
+          <p>
+            <span>Age:</span>
+            <span id="age-val" class="profile-value">N/A</span>
+            <input
+              type="number"
+              id="editableAge"
+              class="profile-input hidden"
+              placeholder="Edit Your Age"
+            />
+            <img src="/imgResources/age.png" class="profile-icon" />
+          </p>
+          <p>
+            <span>Email Address:</span>
+            <span id="email-val" class="profile-value">N/A</span>
+            <input
+              type="email"
+              id="editableEmail"
+              class="profile-input hidden"
+              placeholder="Edit Your Email"
+            />
+            <img src="/imgResources/email.png" class="profile-icon" />
+          </p>
         </div>
 
-        <div class="profile-actions" style="display: flex; gap: 10px; margin-top: 15px;">
-            <button id="editButton" style="padding: 10px 20px; background: #38bdf8; color: #0f172a; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Update Profile</button>
-            <button id="saveButton" class="hidden" style="padding: 10px 20px; background: #10b981; color: #ffffff; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;">Save Changes</button>
+        <div
+          class="profile-actions"
+          style="display: flex; gap: 10px; margin-top: 15px"
+        >
+          <button
+            id="editButton"
+            style="
+              padding: 10px 20px;
+              background: #38bdf8;
+              color: #0f172a;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              font-weight: bold;
+            "
+          >
+            Update Profile
+          </button>
+          <button
+            id="saveButton"
+            class="hidden"
+            style="
+              padding: 10px 20px;
+              background: #10b981;
+              color: #ffffff;
+              border: none;
+              border-radius: 6px;
+              cursor: pointer;
+              font-weight: bold;
+            "
+          >
+            Save Changes
+          </button>
         </div>
-    </div>
-</section>
+      </div>
+    </section>
 
-        <section id="about-us">
-            <div id="ab-content">
-                <h2>Why I built this?</h2>
-            <p id="question"></p>
-            </div>
-        </section>
+    <section id="about-us">
+      <div id="ab-content">
+        <h2>Why I built this?</h2>
+        <p id="question"></p>
+      </div>
+    </section>
 
-        <section id="contact">
-    <div id="contact-me">
+    <section id="contact">
+      <div id="contact-me">
         <h2>How to reach me</h2>
         <p>Developer: Gerald Villar</p>
         <p>You can reach me through:</p>
-        <p>Github: <a href="https://github.com/geraldvillar" target="_blank">https://github.com/geraldvillar</a></p>
-        <p>My email: 
-            <span class="email-copy-wrapper">
-                <span id="email-text">geraldvillarp@gmail.com</span>
-                <button id="copy-btn" class="copy-button" aria-label="Copy email address">
-                    <svg xmlns="http://w3.org" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
-                        <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
-                        <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
-                    </svg>
-                    <span class="tooltip" id="tooltip-text">Copy</span>
-                </button>
-            </span>
+        <p>
+          Github:
+          <a href="https://github.com/geraldvillar" target="_blank"
+            >https://github.com/geraldvillar</a
+          >
         </p>
-        <p>LinkedIn: <a href="https://www.linkedin.com/in/gerald-villar/" target="_blank">https://www.linkedin.com/in/gerald-villar/</a></p>
-    </div>
-</section>
+        <p>
+          My email:
+          <span class="email-copy-wrapper">
+            <span id="email-text">geraldvillarp@gmail.com</span>
+            <button
+              id="copy-btn"
+              class="copy-button"
+              aria-label="Copy email address"
+            >
+              <svg
+                xmlns="http://w3.org"
+                width="14"
+                height="14"
+                fill="currentColor"
+                viewBox="0 0 16 16"
+              >
+                <path
+                  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
+                />
+                <path
+                  d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
+                />
+              </svg>
+              <span class="tooltip" id="tooltip-text">Copy</span>
+            </button>
+          </span>
+        </p>
+        <p>
+          LinkedIn:
+          <a href="https://www.linkedin.com/in/gerald-villar/" target="_blank"
+            >https://www.linkedin.com/in/gerald-villar/</a
+          >
+        </p>
+      </div>
+    </section>
 
-        
     <div id="icon-loading">
-    <img src="/imgResources/loading.gif" id="form-loader" class="hidden">
-</div>
+      <img src="/imgResources/loading.gif" id="form-loader" class="hidden" />
+    </div>
 
-<div id="logout">
-    <dialog id="logout-msg">
+    <div id="logout">
+      <dialog id="logout-msg">
         <p>You have been logged out successfully.</p>
-        <img src="/imgResources/close.png"
-            class="close-icon"
-            data-modal="logout-msg">
-    </dialog>
-</div>
+        <img
+          src="/imgResources/close.png"
+          class="close-icon"
+          data-modal="logout-msg"
+        />
+      </dialog>
+    </div>
 
-<div id="profile-update">
-    <dialog id="profileUp-msg">
+    <div id="profile-update">
+      <dialog id="profileUp-msg">
         <p>Your profile has been successfully updated.</p>
-        <img src="/imgResources/close.png" class="close-icon" data-modal="profileUp-msg">
-    </dialog>
-</div>
-        
+        <img
+          src="/imgResources/close.png"
+          class="close-icon"
+          data-modal="profileUp-msg"
+        />
+      </dialog>
+    </div>
 
-<div id="profileUp">
-    <dialog id="profileUp-msg">
+    <div id="profileUp">
+      <dialog id="profileUp-msg">
         <p>Profile updated successfully!</p>
-        <img src="/imgResources/close.png"
-            class="close-icon"
-            data-modal="profileUp-msg">
-    </dialog>
-</div>
-    </body>
-    <footer>
-            <p>All Rights Reserved © 2026.</p>
-        </footer>
-    </html>>
+        <img
+          src="/imgResources/close.png"
+          class="close-icon"
+          data-modal="profileUp-msg"
+        />
+      </dialog>
+    </div>
+  </body>
+
+  <footer>
+    <p>All Rights Reserved © 2026.</p>
+  </footer>
+</html>

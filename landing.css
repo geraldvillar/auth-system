@@ -4,9 +4,21 @@
 
 body {
   margin: 0; 
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   background: #0f172a;
   color: whitesmoke;
+  animation: fadeInPage 0.6s ease-out forwards; 
+}
+
+@keyframes fadeInPage {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .main-wrapper {
@@ -22,76 +34,40 @@ body {
   text-align: center;
 }
 
-/*Top Buttons */
-
+/* Top Buttons */
 #welcome {
   text-align: center;
-  
 }
 
-.form-container {
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.form-container.show {
-  display: block;
-  opacity: 1;
-}
-
+.form-container,
 .change-pass {
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease;
 }
 
-.change-pass.show{
+.form-container.show,
+.change-pass.show {
   display: block;
   opacity: 1;
 }
 
-/* Form Style*/
+/* Form Style */
 form {
   background: #1e293b;
-  padding: 25px; 
+  padding: 30px;
   border-radius: 10px;
-  width: 320px;
+  width: 340px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-
+  gap: 16px; 
 }
 
-/*Input*/
-input {
-  padding: 10px; 
-  margin: 8px 0; 
-  border: none; 
-  border-radius: 5px;
-}
-
-input:hover {
-  transform: translateY(-2%);
-  background-color: azure;
-}
-
-input::placeholder {
-  font-family: roboto;
-}
-
-label{
-  display: block;
-  margin-top: 10px;
-}
-
-legend {
-  text-align: center;
-}
-
+/* Input Fields & States */
 input {
   width: 100%;
-  padding: 10px; 
+  padding: 12px 14px; 
+  padding-right: 45px; 
   margin-top: 5px;
   border: none;
   border-radius: 5px;
@@ -102,16 +78,49 @@ input[type="number"] {
   width: 100%; 
 }
 
+input:focus {
+  outline: none;
+  border: 2px solid #4CAF50; 
+}
+
+input:hover {
+  border-color: #888;
+  background-color: azure;
+}
+
+input:valid {
+  border-color: green;
+}
+
+input:invalid {
+  border-color: red;
+}
+
+input::placeholder {
+  font-family: roboto;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  color: #94a3b8; 
+  margin-top: 0;
+}
+
+legend, form h2 {
+  text-align: center;
+  width: 100%;
+  display: block;
+}
 
 fieldset {
   border: 1px solid rgba(28,110,164,0.25);
   border-radius: 5px;
   outline: 1px solid rgba(28,110,164,0.25);
-outline-offset: 0px;
-
+  outline-offset: 0px;
 }
 
-/*Button*/ 
+/* Button */ 
 form button {
   background: #22c55e;
   color: white;
@@ -119,12 +128,14 @@ form button {
   padding: 12px 20px; 
   border: none; 
   border-radius: 6px;
+  cursor: pointer;
 }
 
 form button:hover {
   background: #16a34a;
 }
 
+/* Dialog Modal */
 dialog {
     border: none;
     text-align: center;
@@ -135,7 +146,6 @@ dialog {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     max-width: 400px;
     width: 90%;
-    text-align: center;
     margin: auto;
 }
 
@@ -143,7 +153,6 @@ dialog::backdrop {
     background-color: rgba(2, 6, 23, 0.75);
     backdrop-filter: blur(4px);
 }
-
 
 .close-icon {
   position: absolute; 
@@ -162,52 +171,36 @@ dialog::backdrop {
   display: none;
 }
 
-.input-group {
+/* --- UNIFIED INPUT GROUP & WRAPPER SYSTEM --- */
+.input-group, 
+.input-wrapper {
     position: relative;
     width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
 }
 
-/* input */
-.input-group input {
-    width: 100%;
-    padding: 10px;
-    padding-right: 40px; 
-    box-sizing: border-box;
-}
-
-.input-icon {
+/* Icons Positioning (Email, Eye / Toggle Password) */
+.input-icon, 
+.togglePassword,
+.eye-icon {
   position: absolute;
-  right: 35px;
+  right: 15px;
   top: 50%;
   transform: translateY(-50%);
   width: 20px;
   height: 20px;
+  z-index: 2;
+}
+
+/* Static icons (like email) should not block clicks */
+.input-wrapper .input-icon {
   pointer-events: none;
 }
 
-.input-group input {
-  width: 100%;
-  padding-right: 40px;
-}
-
-input:focus {
-  outline: none;
-  border: 2px solid #4CAF50; 
-}
-
-input:hover {
-  border-color: #888;
-}
-
-input:valid {
-  border-color: green;
-}
-
-input:invalid {
-  border-color: red;
-}
-
-
+/* Interactive icons (like password toggle/eye) can be clicked */
+.togglePassword,
 .eye-icon {
   pointer-events: auto;
   cursor: pointer;
@@ -217,8 +210,7 @@ input:invalid {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;;
-
+  gap: 15px;
 }
 
 #landing-container.hidden {
@@ -246,36 +238,13 @@ input:invalid {
 }
 
 #sign-up-btn {
-  background:  #22c55e;
+  background: #22c55e;
   color: whitesmoke;
 }
 
 .top-buttons button:hover {
   transform: scale(1.05);
 }
-
-/*icon*/
-.togglePassword {
-  pointer-events: auto;
-    cursor: pointer;
-}
-.togglePassword {
-  
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 2;
-}
-
-
-.input-group {
-  width: 100%; 
-  position: relative;
-}
-
 
 #login-link {
   color: aliceblue;
@@ -287,7 +256,7 @@ input:invalid {
   color: #94a3b8;
 }
 
-/*Form Loader*/
+/* Form Loader */
 .form-loader {
   position: fixed;
   top: 50%; 
@@ -303,10 +272,6 @@ input:invalid {
   opacity: 1;
 }
 
-.input-wrapper {
-  position: relative;
-}
-
 [data-strength] {
   margin-top: 5px; 
   font-size: 0.85rem;
@@ -315,5 +280,3 @@ input:invalid {
 #name, #email, #username {
   text-transform: uppercase;
 }
-
-

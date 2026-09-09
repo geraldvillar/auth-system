@@ -101,11 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const timeOutId = setTimeout(() => {
             modal.close();
-        }, duration );
+        }, duration ); //AUTOMATIC CLOSE 
 
         modal.addEventListener("close", () => {
             clearTimeout(timeOutId);
-        }, {once: true});
+        }, {once: true}); //IF THE CLOSE IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE 
     };
 
     //FORGOT PASSWORD LOGIC
@@ -125,12 +125,26 @@ document.addEventListener("DOMContentLoaded", () => {
             const newPassword = $("new-password")?.value;
 
             if(emailInput === "" || newPassword === ""){
-                showModal(modals.emptyError); 
+
+                showLoader(); 
+
+                setTimeout(() => {
+                    hideLoader();
+                    showModal(modals.emptyError); 
+                }, 2000);
+            
                 return;
             } 
 
             else if(newPassword.length < 6){
-                showModal(modals.shortError);
+
+                showLoader();
+
+                setTimeout(() => {
+                    hideLoader();
+                    showModal(modals.shortError);
+                }, 2000);
+                
                 return;
             }
             
@@ -138,12 +152,24 @@ document.addEventListener("DOMContentLoaded", () => {
             const userIndex = users.findIndex(user => user.email === emailInput);
             
                 if(userIndex === -1) {
-                    showModal(modals.unrecognizedAccount);
+                    showLoader(); 
+
+                    setTimeout(() => {
+                        hideLoader();
+                        showModal(modals.unrecognizedAccount);
+                    }, 2000);
+                    
                     return;
                 }
 
                 if(users[userIndex].password === newPassword) {
-                    showModal(modals.matchedError);
+                    showLoader();
+
+                    setTimeout(() => {
+                        hideLoader();
+                        showModal(modals.matchedError);
+                    }, 2000)
+                    
                     return;
                 }
 
@@ -160,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 window.location.href = 'index.html'; 
                 }, 3000);
 
-                }, 3000);
+                }, 2000);
                 
         });
     }
@@ -194,7 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     hideLoader();
                     showModal(modals.emptyInputsMsg);
-                });
+                }, 2000);
                 
                 return; 
             }
@@ -209,7 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     hideLoader();
                     showModal(modals.mismatched);
-                });
+                }, 2000);
                 
                 return;
             }
@@ -221,7 +247,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 setTimeout(() => {
                     hideLoader();
                     showModal(modals.lessThanSix); 
-                });
+                }, 2000);
             
                 return; 
             }
@@ -251,7 +277,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     hideLoader();
                     showModal(modals.alreadyExistAccount);
                 
-                }, 3000);
+                }, 2000);
 
                 return; 
             }
@@ -400,7 +426,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const users  = JSON.parse(localStorage.getItem("users")) || []; 
 
         if(emailLogin === "" || passwordLogin === ""){
-            showModal(modals.unrecognizedAccount);
+
+            showLoader();
+
+            setTimeout(() => {
+                hideLoader();
+                showModal(modals.emptyInputsMsg);
+            }, 2000);
+            
             return;
         }
 
