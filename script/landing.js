@@ -1,3 +1,5 @@
+//THIS WAS MY INITIAL WRITTEN SCRIPT BEFORE APPLYING THE CLEVER WAY TO DO IT
+
 document.addEventListener("DOMContentLoaded", () => {
   // Navigation elements
   const signUpBtn = document.getElementById("sign-up-btn");

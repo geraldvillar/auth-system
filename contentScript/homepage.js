@@ -1,9 +1,12 @@
+//BEGINNING OF ORTHOGONAL TO INDEX PAGE, INDEX SCRIPT AND OTHER COMPONENTS
+
 import { getCurrentUser } from "../script/auth.js";
-import { showLoader, hideLoader } from "../script/utils.js";
+import { showLoader, hideLoader, $ } from "../script/utils.js";
 import { showModal } from "../script/modal.js";
-import { $ } from "../script/utils.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+  const iconLoading = document.getElementById("icon-loading");
+
   // Check authentication (BACK-END NOTE: Replace with server session check / JWT verification)
   const currentUser = getCurrentUser();
 
@@ -24,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // Populate profile UI elements
+  // POPULATE PROFILE UI ELEMENTSso
   const fullnameEl = $("fullname-val");
   const usernameEl = $("username-val");
   const ageEl = $("age-val");
@@ -43,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     emailEl.innerHTML = `Email Address: ${currentUser.email || "N/A"} <img src="/imgResources/email.png" class="profile-icon">`;
   }
 
-  // Typing effect for welcome greeting
+  // TYPING EFFECT FOR WELCOME GREETING
   const welcome = document.getElementById("welcome");
 
   let index = 0;
@@ -72,22 +75,26 @@ document.addEventListener("DOMContentLoaded", () => {
   const loader = $("form-loader");
 
   logOutBtn.addEventListener("click", () => {
+    const iconLoading = document.getElementById("icon-loading");
+    iconLoading.style.top = `${window.scrollY}px`;
     showLoader(loader);
 
     setTimeout(() => {
-      hideLoader(loader);
+      hideLoader();
 
-      showModal(logoutModal);
-    }, 2000);
+      if (logoutModal && typeof logoutModal.showModal === "function");
+      {
+        showModal(logoutModal);
+      }
 
-    setTimeout(() => {
-      localStorage.removeItem("currentUser");
-
-      window.location.href = "../index.html";
-    }, 3000);
+      setTimeout(() => {
+        localStorage.removeItem("currentUser");
+        window.location.href = "../index.html";
+      }, 1500);
+    }, 1500);
   });
 
-  // Typing effect for bio/question container
+  // TYPING EFFECT FOR BIO/QUESTION CONTAINER
   const messageQuest = $("question");
 
   let mesIndex = 0;
@@ -186,6 +193,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     saveButton.addEventListener("click", () => {
+      const iconLoading = document.getElementById("icon-loading");
+      iconLoading.style.top = `${window.scrollY}px`;
       showLoader(loader);
 
       setTimeout(() => {
@@ -224,46 +233,52 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     //DATE INFO: DATE OF ACCOUNT CREATION & DELETE ACCOUNT
-    const dateIcon = document.querySelector("#dateIcon");
-    const settingsDropdown = document.querySelector("#settingsDropdown");
-    const creationDateText = document.querySelector("#creationDateText");
+    const q = (id) => document.querySelector(id);
+    const elements = {
+      dateIcon: q("#dateIcon"),
+      settingsDropdown: q("#settingsDropdown"),
+      creationDateText: q("#creationDateText"),
+      deleteAccountTrigger: q("#delete-account"),
+      confirmDeleteDiv: q("#confirm-delete"),
+      yesBtn: q("#yes"),
+      noBtn: q("#no"),
+      iconLoading: q("#icon-loading"),
+    };
 
-    const deleteAccountTrigger = document.querySelector("#delete-account");
-    const confirmDeleteDiv = document.querySelector("#confirm-delete");
-    const yesBtn = document.querySelector("#yes");
-    const noBtn = document.querySelector("#no");
-
-    const now = new Date();
-    const formattedDate = now.toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
-
-    if (creationDateText) {
-      creationDateText.textContent = formattedDate;
-    }
-
-    if (dateIcon && settingsDropdown) {
-      dateIcon.addEventListener("click", () => {
-        settingsDropdown.classList.toggle("hidden");
+    if (elements.creationDateText) {
+      const now = new Date();
+      elements.creationDateText.textContent = now.toLocaleDateString("en-US", {
+        year: "numeric",
+        month: "long",
+        day: "numeric",
       });
     }
 
-    if (deleteAccountTrigger && confirmDeleteDiv) {
-      deleteAccountTrigger.addEventListener("click", () => {
-        confirmDeleteDiv.classList.toggle("hidden");
+    // 2. TOGGLE SETTINGS DROPDOWN
+    if (elements.dateIcon && elements.settingsDropdown) {
+      elements.dateIcon.addEventListener("click", () => {
+        elements.settingsDropdown.classList.toggle("hidden");
       });
     }
 
-    if (noBtn && confirmDeleteDiv) {
-      noBtn.addEventListener("click", () => {
-        confirmDeleteDiv.classList.add("hidden");
+    // 3. TOGGLE DELETE CONFIRMATION BOX
+    if (elements.deleteAccountTrigger && elements.confirmDeleteDiv) {
+      elements.deleteAccountTrigger.addEventListener("click", () => {
+        elements.confirmDeleteDiv.classList.toggle("hidden");
       });
     }
 
-    if (yesBtn) {
-      yesBtn.addEventListener("click", () => {
+    // 4. CANCEL DELETE (NO BUTTON)
+    if (elements.noBtn && elements.confirmDeleteDiv) {
+      elements.noBtn.addEventListener("click", () => {
+        elements.confirmDeleteDiv.classList.add("hidden");
+      });
+    }
+
+    // 5. CONFIRM DELETE (YES BUTTON)
+    if (elements.yesBtn) {
+      elements.yesBtn.addEventListener("click", () => {
+        
         showLoader(loader);
 
         setTimeout(() => {
@@ -271,14 +286,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
           localStorage.removeItem("currentUser");
 
-            // BACK-END NOTE: Once a database and backend server are integrated, replace this 
-            // with an API call (e.g., fetch('/api/users/' + activeUser.id, { method: 'DELETE' })) 
-            // to properly remove the user record from the server/database and destroy their session.
-            
+          // BACK-END NOTE: Once a database and backend server are integrated, replace this
+          // with an API call (e.g., fetch('/api/users/' + activeUser.id, { method: 'DELETE' }))
           let allUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-          allUsers = allUsers.filter((u) => u.email !== activeUser.email);
-          localStorage.setItem("users", JSON.stringify(allUsers));
+          if (typeof activeUser !== "undefined" && activeUser) {
+            allUsers = allUsers.filter((u) => u.email !== activeUser.email);
+            localStorage.setItem("users", JSON.stringify(allUsers));
+          }
 
           alert("Account successfully deleted.");
           window.location.href = "../index.html";

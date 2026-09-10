@@ -108,6 +108,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }, {once: true}); //IF THE CLOSE IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE 
     };
 
+    //MINI HELPER FUNCTION FOR LOADER AND MODAL TRIGGER 
+    const triggerWithLoader = (modal, duration = 3000) => {
+        showLoader(); 
+
+        setTimeout(() => {
+            hideLoader();
+            showModal(modal);
+        }, 2000);
+    };
+
+    //HELPER FUNCTION FOR INDEX REDIRECTION 
+     const indexRedirection = () => {
+        setTimeout(() => {
+            window.location.href = "index.html";
+        }, 3000);
+    };
+
+
     //FORGOT PASSWORD LOGIC
 
     // ==========================================
@@ -126,24 +144,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(emailInput === "" || newPassword === ""){
 
-                showLoader(); 
-
-                setTimeout(() => {
-                    hideLoader();
-                    showModal(modals.emptyError); 
-                }, 2000);
+               triggerWithLoader(modals.emptyError);
             
                 return;
             } 
 
             else if(newPassword.length < 6){
 
-                showLoader();
-
-                setTimeout(() => {
-                    hideLoader();
-                    showModal(modals.shortError);
-                }, 2000);
+                triggerWithLoader(modals.shortError);
                 
                 return;
             }
@@ -152,23 +160,15 @@ document.addEventListener("DOMContentLoaded", () => {
             const userIndex = users.findIndex(user => user.email === emailInput);
             
                 if(userIndex === -1) {
-                    showLoader(); 
-
-                    setTimeout(() => {
-                        hideLoader();
-                        showModal(modals.unrecognizedAccount);
-                    }, 2000);
+                    
+                    triggerWithLoader(modals.unrecognizedAccount);
                     
                     return;
                 }
 
                 if(users[userIndex].password === newPassword) {
-                    showLoader();
-
-                    setTimeout(() => {
-                        hideLoader();
-                        showModal(modals.matchedError);
-                    }, 2000)
+                    
+                    triggerWithLoader(modals.matchedError);
                     
                     return;
                 }
@@ -176,21 +176,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 users[userIndex].password = newPassword; 
 
                 localStorage.setItem("users", JSON.stringify(users));
-                showLoader();
-
-                setTimeout(() => {
-                    hideLoader();                  
-                showModal(modals.changedPassword); 
-    
-                setTimeout(() => {
-                window.location.href = 'index.html'; 
-                }, 3000);
-
-                }, 2000);
                 
+                triggerWithLoader(modals.changedPassword);
+    
+                indexRedirection();
+
         });
     }
 
+
+   
 
     //ACCOUNT CREATION MESSAGE TO USERS
 
@@ -207,47 +202,35 @@ document.addEventListener("DOMContentLoaded", () => {
         createAccountBtn.addEventListener("click", (event) => {
             event.preventDefault();
 
-            const actualForm = event.target.closest("form"); 
+            const actualForm = event.target.closest("form"); //IT BASICALLY TARGETS THE CLOSEST FORM WHICH IS THE PARENT ELEMENT, THE FORM 
             if(!actualForm) return; //STOP INSTEAD OF ERROR
 
             const inputs = actualForm.querySelectorAll("input");
-            const hasEmpty = Array.from(inputs).some(input => input.value.trim() === ""); 
+            const hasEmpty = Array.from(inputs).some(input => input.value.trim() === ""); //INPUTS IS NOT YET A PURE ARRAY IT ONLY GIVES US NODELIST WE NEED IT TO BECOME AN ARRAY IF WE WANNA PERFROM THE SOME() METHOD
 
             if(hasEmpty){
 
-                showLoader(); 
-
-                setTimeout(() => {
-                    hideLoader();
-                    showModal(modals.emptyInputsMsg);
-                }, 2000);
+                triggerWithLoader(modals.emptyInputsMsg);
                 
                 return; 
             }
 
+
+            //CHECK IF PASSWORDS MATCHED
             const initialPass = $("password")?.value;
 
             const confirmedPass = $("confirm-password")?.value; 
 
             if(initialPass !== confirmedPass){
 
-                showLoader(); 
-                setTimeout(() => {
-                    hideLoader();
-                    showModal(modals.mismatched);
-                }, 2000);
+                triggerWithLoader(modals.mismatched);
                 
                 return;
             }
 
             if(initialPass.length < 6 || confirmedPass.length < 6 ){
 
-                showLoader(); 
-
-                setTimeout(() => {
-                    hideLoader();
-                    showModal(modals.lessThanSix); 
-                }, 2000);
+                triggerWithLoader(modals.lessThanSix);
             
                 return; 
             }
@@ -271,13 +254,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(emailExists){
                 //IF THE EMAIL EXISTS THE EXECUTION EXITS 
-                showLoader();
-
-                setTimeout(() => {
-                    hideLoader();
-                    showModal(modals.alreadyExistAccount);
-                
-                }, 2000);
+                triggerWithLoader(modals.alreadyExistAccount);
 
                 return; 
             }
@@ -291,17 +268,11 @@ document.addEventListener("DOMContentLoaded", () => {
             });
             //RETURN THE VALUE TO STRING THEN SAVES IT
             localStorage.setItem("users", JSON.stringify(users));
-            showLoader(); 
 
-            setTimeout(() => {
-                hideLoader(); 
+            triggerWithLoader(modals.success);
 
-                showModal(modals.success);
-
-                setTimeout(() => {
-                    window.location.href = "index.html";
-                }, 3000);
-            }, 2000);
+                indexRedirection();
+            
         });
     }
 
@@ -427,40 +398,29 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(emailLogin === "" || passwordLogin === ""){
 
-            showLoader();
-
-            setTimeout(() => {
-                hideLoader();
-                showModal(modals.emptyInputsMsg);
-            }, 2000);
+           triggerWithLoader(modals.emptyInputsMsg);
             
             return;
         }
 
         const validUser = users.find(user => user.email === emailLogin && user.password === passwordLogin);
 
+
         if(validUser){
 
-            showLoader();
-
-
-            setTimeout(() => {
-                hideLoader();
-
-                showModal(modals.loggedIn);
-            }, 2000);
-            
+            triggerWithLoader(modals.loggedIn);
 
             localStorage.setItem("currentUser", JSON.stringify(validUser));
+             
 
             setTimeout(() => {
-                
+                hideLoader(); 
                 console.log("REDIRECTING TO INDEX");
                 window.location.href = "/content/homepage.html";
-                
             }, 3000);
+
         } else {
-            showModal(modals.unrecognizedAccount);
+            triggerWithLoader(modals.mismatched);
         }
         
     });
