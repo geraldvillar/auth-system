@@ -94,8 +94,14 @@ document.addEventListener("DOMContentLoaded", () => {
     // HELPER FUNCTION TO SHOW MODALS//
     const showModal = (modal, duration = 3000) => {
         if (!modal) return;
+        showLoader();
+
         
-        modal.showModal();
+
+    const loadTimer = setTimeout(() => {
+            hideLoader();
+            modal.showModal();
+        }, 2000);
 
         //AUTO CLOSE MODALS//
 
@@ -104,27 +110,34 @@ document.addEventListener("DOMContentLoaded", () => {
         }, duration ); //AUTOMATIC CLOSE 
 
         modal.addEventListener("close", () => {
+            clearTimeout(loadTimer);
             clearTimeout(timeOutId);
-        }, {once: true}); //IF THE CLOSE IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE 
-    };
-
-    //MINI HELPER FUNCTION FOR LOADER AND MODAL TRIGGER 
-    const triggerWithLoader = (modal, duration = 3000) => {
-        showLoader(); 
-
-        setTimeout(() => {
             hideLoader();
-            showModal(modal);
-        }, 2000);
+        }, {once: true}); //IF THE CLOSE BUTTON IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE 
     };
+    
+    //CLOSE ICON BUTTON (FIXED LOCATION) READER
+    const closeIcons = document.querySelectorAll(".close-icon"); 
+
+    closeIcons.forEach(icon => {
+        icon.addEventListener("click", () => {
+            
+            const modalId = icon.dataset.modal; 
+            const modal = document.getElementById(modalId);
+
+            if(modal) modal.close();
+        });
+    });
+
 
     //HELPER FUNCTION FOR INDEX REDIRECTION 
-     const indexRedirection = () => {
+    const indexRedirection = () => {
         setTimeout(() => {
             window.location.href = "index.html";
         }, 3000);
     };
 
+    
 
     //FORGOT PASSWORD LOGIC
 
@@ -144,14 +157,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(emailInput === "" || newPassword === ""){
 
-               triggerWithLoader(modals.emptyError);
+            showModal(modals.emptyError);
             
                 return;
             } 
 
             else if(newPassword.length < 6){
 
-                triggerWithLoader(modals.shortError);
+                showModal(modals.shortError);
                 
                 return;
             }
@@ -161,14 +174,14 @@ document.addEventListener("DOMContentLoaded", () => {
             
                 if(userIndex === -1) {
                     
-                    triggerWithLoader(modals.unrecognizedAccount);
+                    showModal(modals.unrecognizedAccount);
                     
                     return;
                 }
 
                 if(users[userIndex].password === newPassword) {
                     
-                    triggerWithLoader(modals.matchedError);
+                    showModal(modals.matchedError);
                     
                     return;
                 }
@@ -177,7 +190,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 localStorage.setItem("users", JSON.stringify(users));
                 
-                triggerWithLoader(modals.changedPassword);
+                showModal(modals.changedPassword);
     
                 indexRedirection();
 
@@ -185,7 +198,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
 
-   
+
 
     //ACCOUNT CREATION MESSAGE TO USERS
 
@@ -210,7 +223,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(hasEmpty){
 
-                triggerWithLoader(modals.emptyInputsMsg);
+                showModal(modals.emptyInputsMsg);
                 
                 return; 
             }
@@ -223,14 +236,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(initialPass !== confirmedPass){
 
-                triggerWithLoader(modals.mismatched);
+                showModal(modals.mismatched);
                 
                 return;
             }
 
             if(initialPass.length < 6 || confirmedPass.length < 6 ){
 
-                triggerWithLoader(modals.lessThanSix);
+                showModal(modals.lessThanSix);
             
                 return; 
             }
@@ -254,7 +267,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             if(emailExists){
                 //IF THE EMAIL EXISTS THE EXECUTION EXITS 
-                triggerWithLoader(modals.alreadyExistAccount);
+                showModal(modals.alreadyExistAccount);
 
                 return; 
             }
@@ -269,7 +282,7 @@ document.addEventListener("DOMContentLoaded", () => {
             //RETURN THE VALUE TO STRING THEN SAVES IT
             localStorage.setItem("users", JSON.stringify(users));
 
-            triggerWithLoader(modals.success);
+            showModal(modals.success);
 
                 indexRedirection();
             
@@ -286,6 +299,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
     const toggleButton = document.querySelectorAll(".togglePassword");
+
+    if(toggleButton){
 
     toggleButton.forEach(icon => {
         icon.addEventListener("click", () => {
@@ -304,23 +319,10 @@ document.addEventListener("DOMContentLoaded", () => {
             const isHidden = input.type === "password"; 
             input.type = isHidden ? "text" : "password"; 
 
-            icon.src = isHidden 
-                ? "imgResources/view.png" 
-                : "imgResources/close-eye.png";
+            icon.src = isHidden ? "imgResources/view.png"  : "imgResources/close-eye.png";
         });
     });
-
-    //CLOSE ICON BUTTON (FIXED LOCATION)
-    const closeIcons = document.querySelectorAll(".close-icon"); 
-
-    closeIcons.forEach(icon => {
-        icon.addEventListener("click", ()=> {
-            const modalId = icon.dataset.modal; 
-            const modal = document.getElementById(modalId);
-
-            if(modal) modal.close();
-        });
-    });
+    }
 
     //PASSWORD STRENGTH FUNCTION
     const checkPasswordStrength = (password) => {
@@ -356,6 +358,7 @@ document.addEventListener("DOMContentLoaded", () => {
     //PASSWORD STRENGTH TEST
 
     Object.entries(passwordInputs).forEach(([key, input]) => {
+        
         if(!input) return;
 
         input.addEventListener("input", () => {
@@ -398,7 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(emailLogin === "" || passwordLogin === ""){
 
-           triggerWithLoader(modals.emptyInputsMsg);
+        showModal(modals.emptyInputsMsg);
             
             return;
         }
@@ -408,10 +411,10 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if(validUser){
 
-            triggerWithLoader(modals.loggedIn);
+            showModal(modals.loggedIn);
 
             localStorage.setItem("currentUser", JSON.stringify(validUser));
-             
+            
 
             setTimeout(() => {
                 hideLoader(); 
@@ -420,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
             }, 3000);
 
         } else {
-            triggerWithLoader(modals.mismatched);
+            showModal(modals.mismatched);
         }
         
     });
