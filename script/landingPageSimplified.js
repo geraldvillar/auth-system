@@ -1,433 +1,395 @@
 //LOGIC MAIN SOURCE FOR MODULES
 
 document.addEventListener("DOMContentLoaded", () => {
+  //HELPER FUNCTION - SYNC THE ID OF ELEMENTS
+  const $ = (id) => document.getElementById(id);
+  const topButtons = $("top-buttons");
+  const formLoader = $("form-loader");
+  const landingContainer = $("landing-container");
 
-    //HELPER FUNCTION - SYNC THE ID OF ELEMENTS
-    const $ = (id) => document.getElementById(id); 
-    const topButtons = $("top-buttons");
-    const formLoader = $("form-loader");
-    const landingContainer = $("landing-container");
-    
-    //NAVIGATION BUTTONS AND FORMS
-    const UI = {
-        buttons: {
-            signUp: $("sign-up-btn"),
-            login: $("login-btn"), 
-            forgot: $("recover-password"),
-            existingAccount: $("login-link") //REDIRECTED TO LOGIN PAGE 
-        },
-        forms: {
-            signUp: $("user-info"), 
-            login: $("login-user"), 
-            forgot: $("forgot-password"), 
-        } 
-    };
+  //NAVIGATION BUTTONS AND FORMS
+  const UI = {
+    buttons: {
+      signUp: $("sign-up-btn"),
+      login: $("login-btn"),
+      forgot: $("recover-password"),
+      existingAccount: $("login-link"), //REDIRECTED TO LOGIN PAGE
+    },
+    forms: {
+      signUp: $("user-info"),
+      login: $("login-user"),
+      forgot: $("forgot-password"),
+    },
+  };
 
-    //LOADING ANIMATION HELPER FUNCTIONS 
+  //LOADING ANIMATION HELPER FUNCTIONS
 
-    const showLoader = () => {
-        formLoader?.classList.remove("hidden");
-    };
+  const showLoader = () => {
+    formLoader?.classList.remove("hidden");
+  };
 
-    const hideLoader = () => {
-        formLoader?.classList.add("hidden");
-    };
+  const hideLoader = () => {
+    formLoader?.classList.add("hidden");
+  };
 
+  //HELPER FUNCTION FOR NAVIGATION
 
-    //HELPER FUNCTION FOR NAVIGATION 
+  const showForm = (activeForm) => {
+    if (!activeForm) return;
 
-    const showForm = (activeForm) =>{
-        if(!activeForm) return; 
+    showLoader();
 
-        showLoader();
-        
-        //EXTRACT VALUE FROM OBJECT SOURCE
-        //FORMS ARE SET HIDDEN BY DEFAULT
+    //EXTRACT VALUE FROM OBJECT SOURCE
+    //FORMS ARE SET HIDDEN BY DEFAULT
 
-        Object.values(UI.forms).forEach(form =>{
-            if (!form) return;
-            form.classList.remove("show");
-        });
-
-        setTimeout(() => {
-            activeForm.classList.add("show");
-            landingContainer?.classList.add("hidden");
-            hideLoader();
-        }, 500);
-    };
-
-    //EVENT LISTENERS FOR NAVIGATION
-    //DRY 
-    const buttonFormMap = {
-        signUp: UI.forms.signUp, 
-        login: UI.forms.login, 
-        forgot: UI.forms.forgot, 
-        existingAccount: UI.forms.login
-    };
-
-    Object.entries(UI.buttons).forEach(([key, button]) => {
-        button?.addEventListener("click", () =>{
-            showForm(buttonFormMap[key]);
-        });
+    Object.values(UI.forms).forEach((form) => {
+      if (!form) return;
+      form.classList.remove("show");
     });
 
-    
-    //MODAL IDS 
+    setTimeout(() => {
+      activeForm.classList.add("show");
+      landingContainer?.classList.add("hidden");
+      hideLoader();
+    }, 500);
+  };
 
-    const modals = {
+  //EVENT LISTENERS FOR NAVIGATION
+  //DRY
+  const buttonFormMap = {
+    signUp: UI.forms.signUp,
+    login: UI.forms.login,
+    forgot: UI.forms.forgot,
+    existingAccount: UI.forms.login,
+  };
 
-        success: $("account-new"), 
-        failed: $("account-failed"), 
-        changedPassword: $("changed-pass"), 
-        matchedError: $("matched-error-msg"), 
-        emptyError: $("insufficient-length-msg"), 
-        shortError: $("lessThanSix-msg"), 
-        emptyInputsMsg: $("empty-input-msg"),
-        lessThanSix: $("lessThanSixChar-msg"), 
-        mismatched: $("mismatched-msg"), 
-        loggedIn: $("successLogInMsg"),
-        incorrectCredential: $("incorrectEmailPassMsg"), 
-        unrecognizedAccount: $("unrecognized-account-msg"), 
-        alreadyExistAccount: $("alreadyExistAccount-msg")
-    };
+  Object.entries(UI.buttons).forEach(([key, button]) => {
+    button?.addEventListener("click", () => {
+      showForm(buttonFormMap[key]);
+    });
+  });
 
-    // HELPER FUNCTION TO SHOW MODALS//
-    const showModal = (modal, duration = 3000) => {
-        if (!modal) return;
-        showLoader();
+  //MODAL IDS
 
-        
+  const modals = {
+    success: $("account-new"),
+    failed: $("account-failed"),
+    changedPassword: $("changed-pass"),
+    matchedError: $("matched-error-msg"),
+    emptyError: $("insufficient-length-msg"),
+    shortError: $("lessThanSix-msg"),
+    emptyInputsMsg: $("empty-input-msg"),
+    lessThanSix: $("lessThanSixChar-msg"),
+    mismatched: $("mismatched-msg"),
+    loggedIn: $("successLogInMsg"),
+    incorrectCredential: $("incorrectEmailPassMsg"),
+    unrecognizedAccount: $("unrecognized-account-msg"),
+    alreadyExistAccount: $("alreadyExistAccount-msg"),
+  };
+
+  // HELPER FUNCTION TO SHOW MODALS//
+  const showModal = (modal, duration = 3000) => {
+    if (!modal) return;
+    showLoader();
 
     const loadTimer = setTimeout(() => {
-            hideLoader();
-            modal.showModal();
-        }, 2000);
+      hideLoader();
+      modal.showModal();
+    }, 2000);
 
-        //AUTO CLOSE MODALS//
+    //AUTO CLOSE MODALS//
 
-        const timeOutId = setTimeout(() => {
-            modal.close();
-        }, duration ); //AUTOMATIC CLOSE 
+    const timeOutId = setTimeout(() => {
+      modal.close();
+    }, duration); //AUTOMATIC CLOSE
 
-        modal.addEventListener("close", () => {
-            clearTimeout(loadTimer);
-            clearTimeout(timeOutId);
-            hideLoader();
-        }, {once: true}); //IF THE CLOSE BUTTON IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE 
-    };
-    
-    //CLOSE ICON BUTTON (FIXED LOCATION) READER
-    const closeIcons = document.querySelectorAll(".close-icon"); 
+    modal.addEventListener(
+      "close",
+      () => {
+        clearTimeout(loadTimer);
+        clearTimeout(timeOutId);
+        hideLoader();
+      },
+      { once: true },
+    ); //IF THE CLOSE BUTTON IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE
+  };
 
-    closeIcons.forEach(icon => {
-        icon.addEventListener("click", () => {
-            
-            const modalId = icon.dataset.modal; 
-            const modal = document.getElementById(modalId);
+  //CLOSE ICON BUTTON (FIXED LOCATION) READER
+  const closeIcons = document.querySelectorAll(".close-icon");
 
-            if(modal) modal.close();
-        });
+  closeIcons.forEach((icon) => {
+    icon.addEventListener("click", () => {
+      const modalId = icon.dataset.modal;
+      const modal = document.getElementById(modalId);
+
+      if (modal) modal.close();
     });
+  });
 
+  //HELPER FUNCTION FOR INDEX REDIRECTION
+  const indexRedirection = () => {
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 3000);
+  };
 
-    //HELPER FUNCTION FOR INDEX REDIRECTION 
-    const indexRedirection = () => {
-        setTimeout(() => {
-            window.location.href = "index.html";
-        }, 3000);
-    };
+  //FORGOT PASSWORD LOGIC
 
-    
+  // ==========================================
+  // FORGOT PASSWORD LOGIC
+  // BACK-END NOTE: CHANGE THE LOCALSTORAGE logic WITH:
+  // POST /api/v1/auth/forgot-password o /reset-password
+  // ==========================================
+  const confirmPassBtn = $("confirm-new-password");
 
-    //FORGOT PASSWORD LOGIC
+  if (confirmPassBtn) {
+    confirmPassBtn.addEventListener("click", (event) => {
+      event.preventDefault(); // PREVENT BROWSER FROM REFRESHING AFTER SUBMITTING
 
-    // ==========================================
-    // FORGOT PASSWORD LOGIC
-    // BACK-END NOTE: CHANGE THE LOCALSTORAGE logic WITH:
-    // POST /api/v1/auth/forgot-password o /reset-password
-    // ==========================================
-    const confirmPassBtn = $("confirm-new-password");
+      const emailInput = $("reset-email")?.value.trim();
+      const newPassword = $("new-password")?.value;
 
-    if(confirmPassBtn) {
-        confirmPassBtn.addEventListener("click", (event) => {
-            event.preventDefault(); // PREVENT BROWSER FROM REFRESHING AFTER SUBMITTING 
+      if (emailInput === "" || newPassword === "") {
+        showModal(modals.emptyError);
 
-            const emailInput = $("reset-email")?.value.trim();
-            const newPassword = $("new-password")?.value;
+        return;
+      } else if (newPassword.length < 6) {
+        showModal(modals.shortError);
 
-            if(emailInput === "" || newPassword === ""){
+        return;
+      }
 
-            showModal(modals.emptyError);
-            
-                return;
-            } 
+      let users = JSON.parse(localStorage.getItem("users")) || [];
+      const userIndex = users.findIndex((user) => user.email === emailInput);
 
-            else if(newPassword.length < 6){
+      if (userIndex === -1) {
+        showModal(modals.unrecognizedAccount);
 
-                showModal(modals.shortError);
-                
-                return;
-            }
-            
-            let users = JSON.parse(localStorage.getItem("users")) || [];
-            const userIndex = users.findIndex(user => user.email === emailInput);
-            
-                if(userIndex === -1) {
-                    
-                    showModal(modals.unrecognizedAccount);
-                    
-                    return;
-                }
+        return;
+      }
 
-                if(users[userIndex].password === newPassword) {
-                    
-                    showModal(modals.matchedError);
-                    
-                    return;
-                }
+      if (users[userIndex].password === newPassword) {
+        showModal(modals.matchedError);
 
-                users[userIndex].password = newPassword; 
+        return;
+      }
 
-                localStorage.setItem("users", JSON.stringify(users));
-                
-                showModal(modals.changedPassword);
-    
-                indexRedirection();
+      users[userIndex].password = newPassword;
 
-        });
-    }
+      localStorage.setItem("users", JSON.stringify(users));
 
+      showModal(modals.changedPassword);
 
-
-
-    //ACCOUNT CREATION MESSAGE TO USERS
-
-    // ==========================================
-    // ACCOUNT CREATION (SIGN UP) LOGIC
-    // BACK-END NOTE: CONNECT HERE API endpoint:
-    // POST /api/v1/auth/register
-    // Expected Payload: { name, email, username, age, password }
-    // ==========================================
-
-    const createAccountBtn = $("account-created");
-
-    if(createAccountBtn) {
-        createAccountBtn.addEventListener("click", (event) => {
-            event.preventDefault();
-
-            const actualForm = event.target.closest("form"); //IT BASICALLY TARGETS THE CLOSEST FORM WHICH IS THE PARENT ELEMENT, THE FORM 
-            if(!actualForm) return; //STOP INSTEAD OF ERROR
-
-            const inputs = actualForm.querySelectorAll("input");
-            const hasEmpty = Array.from(inputs).some(input => input.value.trim() === ""); //INPUTS IS NOT YET A PURE ARRAY IT ONLY GIVES US NODELIST WE NEED IT TO BECOME AN ARRAY IF WE WANNA PERFROM THE SOME() METHOD
-
-            if(hasEmpty){
-
-                showModal(modals.emptyInputsMsg);
-                
-                return; 
-            }
-
-
-            //CHECK IF PASSWORDS MATCHED
-            const initialPass = $("password")?.value;
-
-            const confirmedPass = $("confirm-password")?.value; 
-
-            if(initialPass !== confirmedPass){
-
-                showModal(modals.mismatched);
-                
-                return;
-            }
-
-            if(initialPass.length < 6 || confirmedPass.length < 6 ){
-
-                showModal(modals.lessThanSix);
-            
-                return; 
-            }
-
-        
-            //SAVE USERS(SIGN UP) - LOCAL STORAGE
-            //CHECK AND GET THE INPUTS VALUES
-            //GET THE INPUT VALUES AND PASS IT TO API
-            const name = $("name")?.value; 
-            const email = $("email")?.value;
-            const username = $("username")?.value; 
-            const age = $("age")?.value;
-            const password = $("password")?.value; 
-
-            // BACK-END MOCKUP: Local Storage (replace it by fetch() POST request)
-            const users = JSON.parse(localStorage.getItem("users")) || [];
-            
-
-            //CHECKS IF AN EMAIL ALREADY EXISTS 
-            const emailExists = users.some(user => user.email === email);
-
-            if(emailExists){
-                //IF THE EMAIL EXISTS THE EXECUTION EXITS 
-                showModal(modals.alreadyExistAccount);
-
-                return; 
-            }
-
-            users.push({
-                name, 
-                email,
-                username, 
-                age,
-                password
-            });
-            //RETURN THE VALUE TO STRING THEN SAVES IT
-            localStorage.setItem("users", JSON.stringify(users));
-
-            showModal(modals.success);
-
-                indexRedirection();
-            
-        });
-    }
-
-    //EYE TOGGLE FOR REVEALING AND HIDING PASSWORD
-    const passwordInputs = {
-        signup: $("password"), 
-        current: $("user-password"),
-        new: $("new-password"),
-        confirm: $("confirm-password")
-    };
-
-
-    const toggleButton = document.querySelectorAll(".togglePassword");
-
-    if(toggleButton){
-
-    toggleButton.forEach(icon => {
-        icon.addEventListener("click", () => {
-            const target = icon.dataset.target; 
-            const input = passwordInputs[target]; 
-            
-            if(!input) return; //STOPS EXECUTION WHEN FOUND NO INPUT
-
-            //INITIAL SYNC
-            if(input.type === "password"){
-                icon.src="imgResources/close-eye.png"; 
-            } else {
-                icon.src="imgResources/view.png"
-            }
-
-            const isHidden = input.type === "password"; 
-            input.type = isHidden ? "text" : "password"; 
-
-            icon.src = isHidden ? "imgResources/view.png"  : "imgResources/close-eye.png";
-        });
+      indexRedirection();
     });
-    }
+  }
 
-    //PASSWORD STRENGTH FUNCTION
-    const checkPasswordStrength = (password) => {
-        let score = 0; 
-        if (password.length >= 6) score++; 
-        if(password.length >= 10) score++;
-        if(/[A-Z]/.test(password)) score++; 
-        if(/[a-z]/.test(password)) score++;
-        if(/[0-9]/.test(password)) score++; 
-        if(/[!@#$%^&*]/.test(password)) score++; 
+  //ACCOUNT CREATION MESSAGE TO USERS
 
-        if(password.length === 0) {
-            return {message : "", color: ""};
-        }
-        
-        if(score <= 2){
-            return {message: "Weak password 😡", color: "red"};
-        }
+  // ==========================================
+  // ACCOUNT CREATION (SIGN UP) LOGIC
+  // BACK-END NOTE: CONNECT HERE API endpoint:
+  // POST /api/v1/auth/register
+  // Expected Payload: { name, email, username, age, password }
+  // ==========================================
 
-        else if(score === 3 || score === 4){
-            return {message: "Medium password 🤨", color: "orange"}; 
-        } 
+  const createAccountBtn = $("account-created");
 
-        else if(score === 5) {
-            return{message: "Strong password 💪", color: "blue"};
-        }
+  if (createAccountBtn) {
+    createAccountBtn.addEventListener("click", (event) => {
+      event.preventDefault();
 
-        else {
-            return{message: "Excellent password 👌", color: "green"};
-        }
-    }
+      const actualForm = event.target.closest("form"); //IT BASICALLY TARGETS THE CLOSEST FORM WHICH IS THE PARENT ELEMENT, THE FORM
+      if (!actualForm) return; //STOP INSTEAD OF ERROR
 
-    //PASSWORD STRENGTH TEST
+      const inputs = actualForm.querySelectorAll("input");
+      const hasEmpty = Array.from(inputs).some(
+        (input) => input.value.trim() === "",
+      ); //INPUTS IS NOT YET A PURE ARRAY IT ONLY GIVES US NODELIST WE NEED IT TO BECOME AN ARRAY IF WE WANNA PERFROM THE SOME() METHOD
 
-    Object.entries(passwordInputs).forEach(([key, input]) => {
-        
-        if(!input) return;
-
-        input.addEventListener("input", () => {
-
-            const strength = checkPasswordStrength(input.value);
-
-            //Target message container per input
-            const msg = document.querySelector(`[data-strength="${key}"]`);
-
-            if(!msg) return;
-
-            msg.textContent = strength.message;
-            msg.style.color = strength.color;
-        });
-    });
-
-
-    //LOG IN LOGIC
-    //Login Authentication using local storage
-    // ==========================================
-    // LOG IN LOGIC
-    // BACK-END NOTE: Once integrated with the API, use the token provided by the server
-    // POST /api/v1/auth/login
-    // Expected Payload: { email: emailLogin, password: passwordLogin }
-    // Expected Response: JWT Token o Session Cookie + User Details
-    // ==========================================
-
-    const loginBtn = $("submit-data"); 
-
-    if (loginBtn) {
-
-    loginBtn.addEventListener("click", (event) => {
-
-        const emailLogin = $("login-email")?.value;
-        const passwordLogin = $("user-password")?.value;
-
-        event.preventDefault(); 
-
-        const users  = JSON.parse(localStorage.getItem("users")) || []; 
-
-        if(emailLogin === "" || passwordLogin === ""){
-
+      if (hasEmpty) {
         showModal(modals.emptyInputsMsg);
-            
-            return;
-        }
 
-        const validUser = users.find(user => user.email === emailLogin && user.password === passwordLogin);
+        return;
+      }
 
+      //CHECK IF PASSWORDS MATCHED
+      const initialPass = $("password")?.value;
 
-        if(validUser){
+      const confirmedPass = $("confirm-password")?.value;
 
-            showModal(modals.loggedIn);
+      if (initialPass !== confirmedPass) {
+        showModal(modals.mismatched);
 
-            localStorage.setItem("currentUser", JSON.stringify(validUser));
-            
+        return;
+      }
 
-            setTimeout(() => {
-                hideLoader(); 
-                console.log("REDIRECTING TO INDEX");
-                window.location.href = "/content/homepage.html";
-            }, 3000);
+      if (initialPass.length < 6 || confirmedPass.length < 6) {
+        showModal(modals.lessThanSix);
 
-        } else {
-            showModal(modals.mismatched);
-        }
-        
+        return;
+      }
+
+      //SAVE USERS(SIGN UP) - LOCAL STORAGE
+      //CHECK AND GET THE INPUTS VALUES
+      //GET THE INPUT VALUES AND PASS IT TO API
+      const name = $("name")?.value;
+      const email = $("email")?.value;
+      const username = $("username")?.value;
+      const age = $("age")?.value;
+      const password = $("password")?.value;
+
+      // BACK-END MOCKUP: Local Storage (replace it by fetch() POST request)
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      //CHECKS IF AN EMAIL ALREADY EXISTS
+      const emailExists = users.some((user) => user.email === email);
+
+      if (emailExists) {
+        //IF THE EMAIL EXISTS THE EXECUTION EXITS
+        showModal(modals.alreadyExistAccount);
+
+        return;
+      }
+
+      users.push({
+        name,
+        email,
+        username,
+        age,
+        password,
+      });
+      //RETURN THE VALUE TO STRING THEN SAVES IT
+      localStorage.setItem("users", JSON.stringify(users));
+
+      showModal(modals.success);
+
+      indexRedirection();
     });
+  }
 
-    };
+  //EYE TOGGLE FOR REVEALING AND HIDING PASSWORD
+  const passwordInputs = {
+    signup: $("password"),
+    current: $("user-password"),
+    new: $("new-password"),
+    confirm: $("confirm-password"),
+  };
 
+  const toggleButton = document.querySelectorAll(".togglePassword");
+
+  if (toggleButton) {
+    toggleButton.forEach((icon) => {
+      icon.addEventListener("click", () => {
+        const target = icon.dataset.target;
+        const input = passwordInputs[target];
+
+        if (!input) return; //STOPS EXECUTION WHEN FOUND NO INPUT
+
+        //INITIAL SYNC
+        if (input.type === "password") {
+          icon.src = "imgResources/close-eye.png";
+        } else {
+          icon.src = "imgResources/view.png";
+        }
+
+        const isHidden = input.type === "password";
+        input.type = isHidden ? "text" : "password";
+
+        icon.src = isHidden
+          ? "imgResources/view.png"
+          : "imgResources/close-eye.png";
+      });
+    });
+  }
+
+  //PASSWORD STRENGTH FUNCTION
+  const checkPasswordStrength = (password) => {
+    let score = 0;
+    if (password.length >= 6) score++;
+    if (password.length >= 10) score++;
+    if (/[A-Z]/.test(password)) score++;
+    if (/[a-z]/.test(password)) score++;
+    if (/[0-9]/.test(password)) score++;
+    if (/[!@#$%^&*]/.test(password)) score++;
+
+    if (password.length === 0) {
+      return { message: "", color: "" };
+    }
+
+    if (score <= 2) {
+      return { message: "Weak password 😡", color: "red" };
+    } else if (score === 3 || score === 4) {
+      return { message: "Medium password 🤨", color: "orange" };
+    } else if (score === 5) {
+      return { message: "Strong password 💪", color: "blue" };
+    } else {
+      return { message: "Excellent password 👌", color: "green" };
+    }
+  };
+
+  //PASSWORD STRENGTH TEST
+
+  Object.entries(passwordInputs).forEach(([key, input]) => {
+    if (!input) return;
+
+    input.addEventListener("input", () => {
+      const strength = checkPasswordStrength(input.value);
+
+      //Target message container per input
+      const msg = document.querySelector(`[data-strength="${key}"]`);
+
+      if (!msg) return;
+
+      msg.textContent = strength.message;
+      msg.style.color = strength.color;
+    });
+  });
+
+  //LOG IN LOGIC
+  //Login Authentication using local storage
+  // ==========================================
+  // LOG IN LOGIC
+  // BACK-END NOTE: Once integrated with the API, use the token provided by the server
+  // POST /api/v1/auth/login
+  // Expected Payload: { email: emailLogin, password: passwordLogin }
+  // Expected Response: JWT Token o Session Cookie + User Details
+  // ==========================================
+
+  const loginBtn = $("submit-data");
+
+  if (loginBtn) {
+    loginBtn.addEventListener("click", (event) => {
+      const emailLogin = $("login-email")?.value;
+      const passwordLogin = $("user-password")?.value;
+
+      event.preventDefault();
+
+      const users = JSON.parse(localStorage.getItem("users")) || [];
+
+      if (emailLogin === "" || passwordLogin === "") {
+        showModal(modals.emptyInputsMsg);
+
+        return;
+      }
+
+      const validUser = users.find(
+        (user) => user.email === emailLogin && user.password === passwordLogin,
+      );
+
+      if (validUser) {
+        showModal(modals.loggedIn);
+
+        localStorage.setItem("currentUser", JSON.stringify(validUser));
+
+        setTimeout(() => {
+          hideLoader();
+          console.log("REDIRECTING TO INDEX");
+          window.location.href = "/content/homepage.html";
+        }, 3000);
+      } else {
+        showModal(modals.mismatched);
+      }
+    });
+  }
 });

@@ -44,6 +44,7 @@ body {
   display: none;
   opacity: 0;
   transition: opacity 0.3s ease;
+  
 }
 
 .form-container.show,
@@ -54,6 +55,7 @@ body {
 
 /* Form Style */
 form {
+  animation: fadeInPage 1s ease-out forwards;
   background: #1e293b;
   padding: 30px;
   border-radius: 10px;
