@@ -1,5 +1,5 @@
 /* ==========================================
-   1. GLOBAL STYLES & RESETS
+  1. GLOBAL STYLES & RESETS
    ========================================== */
 html {
   scroll-behavior: smooth;
@@ -56,7 +56,7 @@ body {
 }
 
 /* ==========================================
-   2. NAVBAR & NAVIGATION
+  2. NAVBAR & NAVIGATION
    ========================================== */
 #nav-bar {
   position: sticky;
@@ -107,7 +107,7 @@ ul a.active {
 }
 
 /* ==========================================
-   3. SECTIONS (HOMEPAGE, ABOUT, CONTACT)
+  3. SECTIONS (HOMEPAGE, ABOUT, CONTACT)
    ========================================== */
 section {
   min-height: 100vh;
@@ -154,7 +154,6 @@ section {
   box-shadow: 0 3px 11px rgba(55, 189, 248, 0.3);
 }
 
-/* ABOUT US SECTION */
 #about-us {
   min-height: 100vh;
   display: flex;
@@ -186,7 +185,6 @@ section {
   line-height: 1.5;
 }
 
-/* CONTACT SECTION */
 #contact {
   min-height: 100vh;
   display: flex;
@@ -449,7 +447,6 @@ section {
   transform: translateY(-1px);
 }
 
-/* DATE WIDGET & ACCOUNT DELETE */
 #dateIcon {
   width: 24px;
   height: 24px;
@@ -663,7 +660,6 @@ section {
   display: block;
 }
 
-/* Light Mode Theme Classes */
 body.light-mode {
   background-color: whitesmoke;
   color: #0b132b;
@@ -676,6 +672,14 @@ body.light-mode a,
 body.light-mode li,
 body.light-mode span {
   color: #0b132b;
+}
+
+body.light-mode #welcome {
+  color: #0b132b;
+}
+
+body.light-mode .hero-subtitle {
+  color: #475569;
 }
 
 body.light-mode .profile-card,
@@ -727,6 +731,20 @@ body.light-mode .profile-input {
   background-color: #ffffff;
   color: #0b132b;
   border-color: #cbd5e1;
+}
+
+body.light-mode .contact-item {
+  background-color: rgba(0, 0, 0, 0.02);
+  border-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-mode .contact-item:hover {
+  background-color: rgba(0, 123, 255, 0.05);
+  border-color: rgba(0, 123, 255, 0.2);
+}
+
+body.light-mode #contact-me a {
+  color: #0b132b;
 }
 
 /* ==========================================
