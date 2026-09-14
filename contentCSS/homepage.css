@@ -1,15 +1,16 @@
-/*GLOBAL STYLES & RESETS*/
+/* ==========================================
+   1. GLOBAL STYLES & RESETS
+   ========================================== */
 html {
   scroll-behavior: smooth;
 }
-
-
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
+
 body {
   margin: 0;
   font-family:
@@ -40,17 +41,23 @@ body {
 ::-webkit-scrollbar {
   width: 8px;
 }
+
 ::-webkit-scrollbar-track {
   background: #0f172a;
 }
+
 ::-webkit-scrollbar-thumb {
   background: #334155;
   border-radius: 4px;
 }
+
 ::-webkit-scrollbar-thumb:hover {
   background: #38bdf8;
 }
-/* NAVBAR & NAVIGATION*/
+
+/* ==========================================
+   2. NAVBAR & NAVIGATION
+   ========================================== */
 #nav-bar {
   position: sticky;
   top: 0;
@@ -59,7 +66,9 @@ body {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-bottom: 1px solid #334155;
-  padding: 10px 30px;
+  padding: 10px 20px;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 ul {
@@ -70,6 +79,7 @@ ul {
   margin: 0;
   list-style: none;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
 ul a {
@@ -96,7 +106,9 @@ ul a.active {
   box-shadow: 0 4px 12px rgba(13, 56, 100, 0.3);
 }
 
-/*SECTIONS (HOMEPAGE, ABOUT, CONTACT)*/
+/* ==========================================
+   3. SECTIONS (HOMEPAGE, ABOUT, CONTACT)
+   ========================================== */
 section {
   min-height: 100vh;
 }
@@ -106,6 +118,7 @@ section {
   justify-content: center;
   align-items: center;
   text-align: center;
+  padding: 0 20px;
 }
 
 #welcome {
@@ -153,6 +166,7 @@ section {
 
 #ab-content {
   max-width: 650px;
+  width: 100%;
   padding: 45px;
   background: #111c31;
   border-radius: 16px;
@@ -251,17 +265,6 @@ section {
   text-decoration: none;
 }
 
-@media screen and (max-width: 480px) {
-  #contact-me {
-    padding: 24px 15px;
-  }
-
-  .contact-item {
-    font-size: 14px;
-  }
-}
-
-
 #email-contact-icon {
   width: 24px;
   height: 24px;
@@ -282,37 +285,16 @@ section {
   object-fit: contain;
 }
 
-.cv-cta-btn {
-  display: inline-block;
-  padding: 5px 15px;
-  background-color: #38bdf8;
-  color: #ffffff;
-  text-decoration: none;
-  font-weight: 600;
-  border-radius: 6px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
-
-.cv-cta-btn:hover {
-  background-color: #004182;
-  transform: translateY(-2px);
-  box-shadow: 0 3px 11px rgba(55, 189, 248, 0.3);
-}
-
-
-#contact-me .view-cv-btn,
-.contact-header {
-  margin-bottom: 20px;
-}
-
-/* USER PROFILE SECTION & CARDS*/
+/* ==========================================
+   4. USER PROFILE SECTION & CARDS
+   ========================================== */
 #userProfile {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding: 80px 20px;
+  box-sizing: border-box;
 }
 
 .profile-container {
@@ -322,6 +304,7 @@ section {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  box-sizing: border-box;
 }
 
 .profile-label {
@@ -336,6 +319,7 @@ section {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  width: 100%;
 }
 
 .profile-heading h2 {
@@ -348,53 +332,57 @@ section {
   background: #111c31;
   border: 1px solid #334155;
   border-radius: 14px;
-  padding: 32px;
+  padding: 24px;
   box-shadow: 0 20px 25px -5px rgba(45, 64, 75, 0.3);
   display: flex;
   flex-direction: column;
   gap: 14px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.profile-row {
+  display: grid;
+  grid-template-columns: 120px 1fr auto;
+  align-items: center;
+  width: 100%;
+  border: 1px solid #475569;
+  padding: 12px 16px;
+  background-color: #0f172a;
+  border-radius: 8px;
+  color: #e2e8f0;
+  margin: 0;
+  gap: 12px;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
+}
+
+.profile-row:hover {
+  border-color: #38bdf8;
+  background-color: #162238;
+}
+
+.profile-title {
+  font-weight: 600;
+  color: #94a3b8;
+  text-align: left;
+}
+
+.profile-value {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .profile-icon {
   width: 20px;
   height: 20px;
   object-fit: contain;
-  justify-self: end;
   opacity: 0.8;
-}
-
-.profile-card p {
-  display: grid;
-  grid-template-columns: 130px 1fr auto;
-  align-items: center;
-  width: 100%;
-  border: 1px solid #475569;
-  padding: 14px 20px;
-  background-color: #0f172a;
-  border-radius: 8px;
-  color: #e2e8f0;
-  margin: 0;
-  gap: 15px;
-  transition: all 0.2s ease;
-}
-
-.profile-card p:hover {
-  border-color: #38bdf8;
-  background-color: #162238;
-  transform: translateX(-2px);
-}
-
-.profile-card p span:first-child {
-  font-weight: 600;
-  color: #94a3b8;
-  text-align: left;
-}
-
-.profile-card .profile-value {
-  text-align: center;
-  color: #ffffff;
-  font-weight: 500;
-  background-color: transparent !important;
 }
 
 #fullname-val,
@@ -405,14 +393,15 @@ section {
 #editableEmail,
 #editableAge {
   text-transform: uppercase !important;
-  text-align: center;
 }
 
-/* PROFILE INPUTS, BUTTONS & WIDGETS */
+/* ==========================================
+   5. PROFILE INPUTS, BUTTONS & WIDGETS
+   ========================================== */
 .profile-input {
   background-color: #0b132b;
   color: #f1f5f9;
-  padding: 8px 14px;
+  padding: 8px 12px;
   border: 1px solid #475569;
   border-radius: 6px;
   font-size: 14px;
@@ -421,6 +410,7 @@ section {
   width: 100%;
   outline: none;
   transition: all 0.2s ease;
+  box-sizing: border-box;
 }
 
 .profile-input:focus {
@@ -442,11 +432,6 @@ section {
   box-shadow: 0 4px 12px rgba(56, 189, 248, 0.25);
 }
 
-#saveButton:active,
-#editButton:active {
-  transform: translateY(1px);
-}
-
 #logout-btn {
   background: transparent;
   color: #f8fafc;
@@ -462,10 +447,9 @@ section {
   background-color: #ef4444;
   border-color: #ef4444;
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(204, 130, 111, 0.25);
 }
 
-/* DATE WIDGET ELEMENTS */
+/* DATE WIDGET & ACCOUNT DELETE */
 #dateIcon {
   width: 24px;
   height: 24px;
@@ -489,7 +473,6 @@ section {
   transform: scale(1.1);
 }
 
-/* ACCOUNT DELETE ELEMENT */
 #delete-account {
   color: #ef4444;
   cursor: pointer;
@@ -523,7 +506,9 @@ section {
   cursor: pointer;
 }
 
-/* TOOLTIPS & COPY TO CLIPBOARD */
+/* ==========================================
+   6. TOOLTIPS & COPY TO CLIPBOARD
+   ========================================== */
 .email-copy-wrapper {
   display: inline-flex;
   align-items: center;
@@ -568,19 +553,7 @@ section {
   transition:
     opacity 0.15s ease,
     transform 0.15s ease;
-  font-family: sans-serif;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.tooltip::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  border-width: 4px;
-  border-style: solid;
-  border-color: #1f2937 transparent transparent transparent;
 }
 
 .copy-button:hover .tooltip {
@@ -594,12 +567,9 @@ section {
   transform: translateX(-50%) translateY(-3px);
 }
 
-.copy-button.copied .tooltip::after {
-  border-color: #10b981 transparent transparent transparent;
-}
-
-/* MODALS, LOADERS & UTILITIES*/
-
+/* ==========================================
+   7. MODALS & LOADERS
+   ========================================== */
 #icon-loading:has(#form-loader:not(.hidden)) {
   position: fixed !important;
   inset: 0 !important;
@@ -612,14 +582,11 @@ section {
   align-items: center !important;
 }
 
-/* LOADER */
-
 #form-loader {
   position: static !important;
   width: 60px !important;
   height: 60px !important;
   margin: 0 !important;
-  transform: none !important;
   display: block !important;
 }
 
@@ -643,59 +610,37 @@ section {
   transform: scale(1.1);
 }
 
-#logout-msg {
-  border: none;
-  border-radius: 12px;
-  padding: 30px 40px;
-  text-align: left;
-  background-color: whitesmoke;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
-  max-width: 400px;
-  width: 90%;
-}
-
-#logout-msg::backdrop {
-  background-color: rgba(2, 6, 23, 0.75);
-  backdrop-filter: blur(4px);
-}
-
+#logout-msg,
 #profileUp-msg {
   border: none;
   border-radius: 12px;
   padding: 30px 40px;
   background-color: whitesmoke;
+  color: #0b132b;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   max-width: 400px;
   width: 90%;
-  text-align: center;
-  margin: auto;
+  box-sizing: border-box;
 }
 
+#logout-msg::backdrop,
 #profileUp-msg::backdrop {
   background-color: rgba(2, 6, 23, 0.75);
   backdrop-filter: blur(4px);
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
-title {
-  background-color: #e4e9f0;
-  border-radius: 4px;
-}
-
-/* THEME TOGGLE (DARK / LIGHT MODE) */
+/* ==========================================
+   8. THEME TOGGLE (DARK / LIGHT MODE)
+   ========================================== */
 .theme-toggle-container {
   cursor: pointer;
   display: flex;
   align-items: center;
   margin-right: auto;
-}
-
-.theme-toggle-container {
   transition:
     transform 0.5s ease,
     box-shadow 0.3s ease;
@@ -703,7 +648,6 @@ title {
 
 .theme-toggle-container:hover {
   transform: translateY(-2px);
-  box-shadow: 0 3px 11px rgba(55, 189, 248, 0.3);
 }
 
 .icon {
@@ -719,13 +663,10 @@ title {
   display: block;
 }
 
-/* LIGHT MODE OVERRIDES */
+/* Light Mode Theme Classes */
 body.light-mode {
   background-color: whitesmoke;
   color: #0b132b;
-  transition:
-    background-color 0.3s,
-    color 0.5s;
 }
 
 body.light-mode h1,
@@ -745,17 +686,17 @@ body.light-mode #contact-me {
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
 }
 
-body.light-mode .profile-card p {
+body.light-mode .profile-row {
   background-color: #f8fafc;
   border-color: #e2e8f0;
   color: #0b132b;
 }
 
-body.light-mode .profile-card p span:first-child {
+body.light-mode .profile-title {
   color: #64748b;
 }
 
-body.light-mode .profile-card .profile-value {
+body.light-mode .profile-value {
   color: #0b132b;
 }
 
@@ -782,65 +723,15 @@ body.light-mode #logout-btn:hover {
   color: #ffffff;
 }
 
-body.light-mode #contact-me a {
-  color: #0284c7;
-}
-
-body.light-mode .hero-subtitle {
-  color: #475569;
-}
-
-body.light-mode footer p {
-  color: #475569;
-}
-
-body.light-mode .profile-heading p,
-body.light-mode .profile-heading h2 {
-  color: #0b132b;
-}
-
-body.light-mode #welcome {
-  color: #0b132b;
-}
-
 body.light-mode .profile-input {
   background-color: #ffffff;
   color: #0b132b;
   border-color: #cbd5e1;
 }
 
-body.light-mode .profile-input:focus {
-  background-color: #ffffff;
-  border-color: #0284c7;
-  box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.15);
-}
-
-body.light-mode #ab-content h2 {
-  color: #0b132b;
-}
-
-body.light-mode #ab-content p {
-  color: #475569;
-}
-
-body.light-mode #tooltip-text {
-  color: whitesmoke;
-}
-
-body.light-mode #resume .cv-cta-btn {
-  background-color: #38bdf8;
-  color: black;
-  
-}
-
-body.light-mode #resume .cv-cta-btn:hover {
-  background-color: #0ea5e9;
-  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
-  transform: translateY(-2px);
-}
-
-
-/* FOOTER & MEDIA QUERIES */
+/* ==========================================
+   9. FOOTER & MEDIA QUERIES (MOBILE FIXES)
+   ========================================== */
 footer {
   border-top: 2px solid #94a3b8;
   text-align: center;
@@ -848,14 +739,65 @@ footer {
   color: #94a3b8;
 }
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+  #nav-bar {
+    padding: 10px 12px;
+  }
+
   ul {
     gap: 6px;
+    justify-content: center;
   }
+
+  ul a {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+
   .profile-container {
-    max-width: 90%;
+    max-width: 100%;
+    padding: 0 10px;
   }
 
+  .profile-card {
+    padding: 16px;
+  }
 
+  .profile-row {
+    grid-template-columns: 1fr;
+    gap: 6px;
+    text-align: left;
+    padding: 12px;
+  }
+
+  .profile-row .profile-value,
+  .profile-row .profile-title {
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
+  }
+
+  .profile-icon {
+    display: none;
+  }
 }
 
+@media screen and (max-width: 480px) {
+  ul {
+    gap: 4px;
+  }
+
+  ul a {
+    font-size: 12px;
+    padding: 5px 8px;
+  }
+
+  #logout-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  #contact-me {
+    padding: 24px 15px;
+  }
+}
