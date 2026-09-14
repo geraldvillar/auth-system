@@ -3,7 +3,6 @@
 document.addEventListener("DOMContentLoaded", () => {
   //HELPER FUNCTION - SYNC THE ID OF ELEMENTS
   const $ = (id) => document.getElementById(id);
-  const topButtons = $("top-buttons");
   const formLoader = $("form-loader");
   const landingContainer = $("landing-container");
 

@@ -6,7 +6,7 @@
     <link rel="icon" type="image/icon" href="/imgResources/computer-security.png" />
     <script defer type="module" src="/contentScript/homepage.js"></script>
     <script defer type="module" src="/contentScript/getUserInput.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="UTF-8" />
   </head>
 
@@ -168,55 +168,48 @@
         <p id="question"></p>
       </div>
     </section>
+<section id="contact">
+  <div id="contact-me">
+    <div class="contact-header">
+      <h2>How to reach me</h2>
+      <p>Developer: Gerald Villar</p>
+        <p id="resume"> <a href="https://drive.google.com/file/d/1F1tiouZ1hxe5dXYZzHJ4wokAHJH21bgK/view?usp=sharing"
+            target="_blank" rel="noopener noreferrer" class="cv-cta-btn">View CV</a> </p>
+      <p>You can reach me through:</p>
+    </div>
+  
 
-    <section id="contact">
-      <div id="contact-me">
-        <h2>How to reach me</h2>
-        <p>Developer: Gerald Villar</p>
-        <p>You can reach me through:</p>
-        <p>
-          Github:
-          <a href="https://github.com/geraldvillar" target="_blank"
-            >https://github.com/geraldvillar</a
-          >
-        </p>
-        <p>
-          My email:
-          <span class="email-copy-wrapper">
-            <span id="email-text">geraldvillarp@gmail.com</span>
-            <button
-              id="copy-btn"
-              class="copy-button"
-              aria-label="Copy email address"
-            >
-              <svg
-                xmlns="http://w3.org"
-                width="14"
-                height="14"
-                fill="currentColor"
-                viewBox="0 0 16 16"
-              >
-                <path
-                  d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"
-                />
-                <path
-                  d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"
-                />
-              </svg>
-              <span class="tooltip" id="tooltip-text">Copy</span>
-            </button>
-          </span>
-        </p>
-        <p>
-          LinkedIn:
-          <a href="https://www.linkedin.com/in/gerald-villar/" target="_blank"
-            >https://www.linkedin.com/in/gerald-villar/</a
-          >
-        </p>
-
-        <p id="resume"> <a href="https://drive.google.com/file/d/1F1tiouZ1hxe5dXYZzHJ4wokAHJH21bgK/view?usp=sharing" target="_blank" rel="noopener noreferrer" class="cv-cta-btn">View CV</a> </p>
+  <div id="contact-box">
+    <div class="contact-item">
+      <img src="/imgResources/github.png" id="github" alt="Github Icon">
+      <a href="https://github.com/geraldvillar" target="_blank">Visit my Github Profile</a>
+    </div>
+  
+    <div class="contact-item">
+      <img src="/imgResources/email.png" id="email-contact-icon" alt="Email Icon">
+      <div class="email-row-content">
+        <span>My email:</span>
+        <span class="email-copy-wrapper">
+          <span id="email-text">geraldvillarp@gmail.com</span>
+          <button id="copy-btn" class="copy-button" aria-label="Copy email address">
+            <svg xmlns="http://www.w3.org" width="14" height="14" fill="currentColor" viewBox="0 0 16 16">
+              <path
+                d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z" />
+              <path
+                d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z" />
+            </svg>
+            <span class="tooltip" id="tooltip-text">Copy</span>
+          </button>
+        </span>
       </div>
-    </section>
+    </div>
+  
+    <div class="contact-item">
+      <img src="/imgResources/linkedin.png" id="linkedin" alt="LinkedIn Icon">
+      <a href="https://www.linkedin.com/in/gerald-villar/" target="_blank">Visit my LinkedIn Profile</a>
+    </div>
+  </div>
+</section>
     </div>
 
     <div id="icon-loading">

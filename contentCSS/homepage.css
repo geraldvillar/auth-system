@@ -3,10 +3,13 @@ html {
   scroll-behavior: smooth;
 }
 
-* {
+
+
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
-
 body {
   margin: 0;
   font-family:
@@ -135,7 +138,7 @@ section {
 .cv-cta-btn:hover {
   background-color: #004182;
   transform: translateY(-2px);
-   box-shadow: 0 3px 11px rgba(55, 189, 248, 0.3);
+  box-shadow: 0 3px 11px rgba(55, 189, 248, 0.3);
 }
 
 /* ABOUT US SECTION */
@@ -169,27 +172,138 @@ section {
   line-height: 1.5;
 }
 
-/*CONTACT SECTION*/
+/* CONTACT SECTION */
 #contact {
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 80px 20px;
+  padding: 40px 16px;
+  width: 100%;
 }
 
 #contact-me {
   max-width: 650px;
-  padding: 50px 80px;
+  width: 100%;
+  padding: 30px 20px;
   background: #111c31;
   border-radius: 16px;
   border: 1px solid #0031758e;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.contact-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 8px;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+.contact-item:hover img {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.contact-item img {
+  transition: transform 0.3s ease;
+}
+
+#contact-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 420px;
+  justify-content: flex-start;
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all 0.3s ease;
+  word-break: break-word;
+}
+
+.contact-item:hover {
+  background-color: rgba(0, 123, 255, 0.08);
+  border-color: rgba(0, 123, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 #contact-me a {
   color: whitesmoke;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+  #contact-me {
+    padding: 24px 15px;
+  }
+
+  .contact-item {
+    font-size: 14px;
+  }
+}
+
+
+#email-contact-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.email-row-content {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+#linkedin,
+#github {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+}
+
+.cv-cta-btn {
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: #38bdf8;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cv-cta-btn:hover {
+  background-color: #004182;
+  transform: translateY(-2px);
+  box-shadow: 0 3px 11px rgba(55, 189, 248, 0.3);
+}
+
+
+#contact-me .view-cv-btn,
+.contact-header {
+  margin-bottom: 20px;
 }
 
 /* USER PROFILE SECTION & CARDS*/
@@ -741,4 +855,7 @@ footer {
   .profile-container {
     max-width: 90%;
   }
+
+
 }
+
