@@ -120,6 +120,24 @@ section {
   margin-top: 15px;
 }
 
+.cv-cta-btn {
+  display: inline-block;
+  padding: 5px 15px;
+  background-color: #38bdf8;
+  color: #ffffff;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cv-cta-btn:hover {
+  background-color: #004182;
+  transform: translateY(-2px);
+   box-shadow: 0 3px 11px rgba(55, 189, 248, 0.3);
+}
+
 /* ABOUT US SECTION */
 #about-us {
   min-height: 100vh;
@@ -694,6 +712,19 @@ body.light-mode #ab-content p {
 body.light-mode #tooltip-text {
   color: whitesmoke;
 }
+
+body.light-mode #resume .cv-cta-btn {
+  background-color: #38bdf8;
+  color: black;
+  
+}
+
+body.light-mode #resume .cv-cta-btn:hover {
+  background-color: #0ea5e9;
+  box-shadow: 0 4px 12px rgba(14, 165, 233, 0.4);
+  transform: translateY(-2px);
+}
+
 
 /* FOOTER & MEDIA QUERIES */
 footer {
