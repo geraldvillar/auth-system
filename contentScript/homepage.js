@@ -246,11 +246,19 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     if (elements.creationDateText) {
-      const now = new Date();
-      elements.creationDateText.textContent = now.toLocaleDateString("en-US", {
-        year: "numeric",
-        month: "long",
-        day: "numeric",
+      let creationDate = localStorage.getItem("account_creation_date");
+
+      if(!creationDate) {
+        creationDate = new Date().toISOString();
+        localStorage.setItem("account_creation_date", creationDate);
+      }
+
+      const dateObj = new Date(creationDate);
+      elements.creationDateText.textContent = isNaN(dateObj.getTime()) ? "N/A"
+      : dateObj.toLocaleDateString("en-US", {
+        year: "numeric", 
+        month: "long", 
+        day: "numeric"
       });
     }
 

@@ -417,6 +417,12 @@ section {
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
 }
 
+.profile-input:hover {
+
+  box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.15);
+
+}
+
 #saveButton,
 #editButton {
   transition:
@@ -610,6 +616,8 @@ section {
 #logout-msg,
 #profileUp-msg {
   border: none;
+  text-align: center;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   border-radius: 12px;
   padding: 30px 40px;
   background-color: whitesmoke;
@@ -684,8 +692,10 @@ body.light-mode .hero-subtitle {
 
 body.light-mode .profile-card,
 body.light-mode #ab-content,
-body.light-mode #contact-me {
+body.light-mode #contact-me, 
+body-light-mode #about-us  {
   background-color: #ffffff;
+  color: #0b132b;
   border-color: #cbd5e1;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
 }
@@ -745,6 +755,15 @@ body.light-mode .contact-item:hover {
 
 body.light-mode #contact-me a {
   color: #0b132b;
+}
+
+body.light-mode #question {
+  color: #0b132b;
+}
+
+body.light-mode #ab-content h2 {
+  color: #0b132b;
+
 }
 
 /* ==========================================
@@ -819,3 +838,5 @@ footer {
     padding: 24px 15px;
   }
 }
+
+
