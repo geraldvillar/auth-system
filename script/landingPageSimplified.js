@@ -195,22 +195,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const createAccountBtn = $("account-created");
 
   if (createAccountBtn) {
+    const actualForm = createAccountBtn.closest("form"); //IT BASICALLY TARGETS THE CLOSEST FORM WHICH IS THE PARENT ELEMENT, THE FORM
+
+    if (actualForm) {
+      const inputs = actualForm.querySelectorAll("input");
+
+      // Validate all inputs to enable/disable button dynamically
+      const validateFormInputs = () => {
+        const allFilled = Array.from(inputs).every(
+          (input) => input.value.trim() !== "",
+        );
+
+        if (allFilled) {
+          createAccountBtn.removeAttribute("disabled");
+        } else {
+          createAccountBtn.setAttribute("disabled", "true");
+        }
+      };
+
+      inputs.forEach((input) => {
+        input.addEventListener("input", validateFormInputs);
+      });
+    }
+
     createAccountBtn.addEventListener("click", (event) => {
       event.preventDefault();
 
-      const actualForm = event.target.closest("form"); //IT BASICALLY TARGETS THE CLOSEST FORM WHICH IS THE PARENT ELEMENT, THE FORM
-      if (!actualForm) return; //STOP INSTEAD OF ERROR
-
-      const inputs = actualForm.querySelectorAll("input");
-      const hasEmpty = Array.from(inputs).some(
-        (input) => input.value.trim() === "",
-      ); //INPUTS IS NOT YET A PURE ARRAY IT ONLY GIVES US NODELIST WE NEED IT TO BECOME AN ARRAY IF WE WANNA PERFROM THE SOME() METHOD
-
-      if (hasEmpty) {
-        showModal(modals.emptyInputsMsg);
-
-        return;
-      }
+      const actualForm = event.target.closest("form");
+      if (!actualForm) return;
 
       //CHECK IF PASSWORDS MATCHED
       const initialPass = $("password")?.value;
