@@ -143,10 +143,11 @@
                     <input type="password" id="user-password" name="user-password" placeholder="Enter your password" />
                     <img src="imgResources/close-eye.png" class="togglePassword" data-target="current">
                     </div>
-                   
+                
                 </div>
-                <button id="submit-data" type="submit">Login</button>
+                <button id="submit-data" type="submit" disabled>Login</button>
                 <button id="recover-password" type="button">Forgot Password?</button>
+                <small id="form-note" class="form-note">Please fill out all fields to enable login button.</small>
 
             </fieldset>
         </form>
@@ -174,7 +175,8 @@
                     <p data-strength="new"></p>
             
             </div>
-                <button id="confirm-new-password" type="button">Confirm New Password</button>
+                <button id="confirm-new-password" type="button" disabled>Confirm New Password</button>
+                <small id="form-note" class="form-note">Please fill out all fields to enable confirmation button.</small>
             </fieldset>
         </form>
     </div>

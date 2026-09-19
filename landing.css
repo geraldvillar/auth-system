@@ -281,6 +281,25 @@ dialog::backdrop {
   color: #94a3b8;
 }
 
+#submit-data:disabled {
+  background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+    transform: none;
+}
+
+#confirm-new-password:disabled {
+  background-color: #cccccc;
+    color: #666666;
+    cursor: not-allowed;
+    opacity: 0.6;
+    box-shadow: none;
+    transform: none;
+}
+
+
 /* Form Loader */
 .form-loader {
   position: fixed;

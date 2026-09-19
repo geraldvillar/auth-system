@@ -140,13 +140,31 @@ document.addEventListener("DOMContentLoaded", () => {
   // POST /api/v1/auth/forgot-password o /reset-password
   // ==========================================
   const confirmPassBtn = $("confirm-new-password");
+  const resetEmail = $("reset-email")
+  const newPass = $("new-password");
+
+  const isNewPasswordValid = () => {
+    const registeredEmailVal = resetEmail?.value.trim() || ""; 
+    const newPassVal = newPass?.value.trim() || "";
+
+    if(registeredEmailVal === "" || newPass === ""){
+      confirmPassBtn.setAttribute("disabled", true);
+    } else {
+      confirmPassBtn.removeAttribute("disabled");
+    }
+  }
+
+  if(resetEmail && newPass) {
+    resetEmail.addEventListener("input", isNewPasswordValid);
+    newPass.addEventListener("input", isNewPasswordValid);
+  }
 
   if (confirmPassBtn) {
     confirmPassBtn.addEventListener("click", (event) => {
       event.preventDefault(); // PREVENT BROWSER FROM REFRESHING AFTER SUBMITTING
 
-      const emailInput = $("reset-email")?.value.trim();
-      const newPassword = $("new-password")?.value;
+      const emailInput = resetEmail.value.trim();
+      const newPassword = newPass?.value;
 
       if (emailInput === "" || newPassword === "") {
         showModal(modals.emptyError);
@@ -367,22 +385,37 @@ document.addEventListener("DOMContentLoaded", () => {
   // Expected Response: JWT Token o Session Cookie + User Details
   // ==========================================
 
+
+
   const loginBtn = $("submit-data");
+  const passwordInput = $("user-password");
+  const emailInput = $("login-email");
+
+  const validateForm = () => {
+    const emailValue = emailInput?.value.trim() || "";
+    const passwordValue = passwordInput?.value.trim() || "";
+    
+    if(emailValue === "" || passwordValue === "") {
+      loginBtn.setAttribute("disabled", "true");
+    } else{
+      loginBtn.removeAttribute("disabled");
+    }
+
+  };
+
+  if(emailInput && passwordInput) {
+    emailInput.addEventListener("input", validateForm);
+    passwordInput.addEventListener("input", validateForm);
+  }
 
   if (loginBtn) {
     loginBtn.addEventListener("click", (event) => {
-      const emailLogin = $("login-email")?.value;
-      const passwordLogin = $("user-password")?.value;
-
       event.preventDefault();
 
+      const emailLogin = emailInput?.value;
+      const passwordLogin = passwordInput?.value;
+
       const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      if (emailLogin === "" || passwordLogin === "") {
-        showModal(modals.emptyInputsMsg);
-
-        return;
-      }
 
       const validUser = users.find(
         (user) => user.email === emailLogin && user.password === passwordLogin,
