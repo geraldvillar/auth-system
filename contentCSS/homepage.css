@@ -391,6 +391,7 @@ section {
 #editableEmail,
 #editableAge {
   text-transform: uppercase !important;
+  text-align: center;
 }
 
 /* ==========================================

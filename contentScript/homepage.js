@@ -5,6 +5,7 @@ import { showLoader, hideLoader, $ } from "../script/utils.js";
 import { showModal } from "../script/modal.js";
 
 document.addEventListener("DOMContentLoaded", () => {
+
   const iconLoading = document.getElementById("icon-loading");
 
   // Check authentication (BACK-END NOTE: Replace with server session check / JWT verification)
@@ -13,21 +14,47 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!currentUser) {
     window.location.href = "index.html";
     return;
-  }
+  };
+ 
+  //SCROLLSPY ACTIVE STATE FOR LINK ON SCROLL
+  const sections = document.querySelectorAll("section"); 
+  const navlinks = document.querySelectorAll("ul a[href^='#']");
 
-  //ACTIVE STATE FOR LINKS
+  const observerOptions = {
+    root: null, 
+    rootMargin: "-20% 0px -70% 0px", 
+    threshold: 0
+  };
 
-  const navLinks = document.querySelectorAll("ul a");
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if(entry.isIntersecting){
+        const id = entry.target.getAttribute("id");
 
-  navLinks.forEach((link) => {
-    link.addEventListener("click", function () {
-      navLinks.forEach((nav) => nav.classList.remove("active"));
-
-      this.classList.add("active");
+        navlinks.forEach((link) => {
+          link.classList.remove("active"); 
+          if(link.getAttribute("href") === `#${id}`){
+            link.classList.add("active");
+          }
+        })
+      }
     });
+  }, observerOptions);
+
+   sections.forEach((section) => {
+    observer.observe(section);
   });
 
-  // POPULATE PROFILE UI ELEMENTSso
+  navlinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navlinks.forEach((nav) => nav.classList.remove("active"));
+      link.classList.add("active");
+    });
+  });
+ 
+
+  
+  // POPULATE PROFILE UI ELEMENTS
   const fullnameEl = $("fullname-val");
   const usernameEl = $("username-val");
   const ageEl = $("age-val");
@@ -52,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let index = 0;
   const message = ` , ${currentUser.name} !`;
 
-  function typeText() {
+  const typeText = () => {
     if (index < message.length) {
       welcome.textContent += message[index];
       index++;
