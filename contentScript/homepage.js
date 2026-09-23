@@ -18,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
  
   //SCROLLSPY ACTIVE STATE FOR LINK ON SCROLL
   const sections = document.querySelectorAll("section"); 
-  const navlinks = document.querySelectorAll("ul a[href^='#']");
+  const navLinks = document.querySelectorAll("ul a[href^='#']");
 
   const observerOptions = {
     root: null, 
@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if(entry.isIntersecting){
         const id = entry.target.getAttribute("id");
 
-        navlinks.forEach((link) => {
+        navLinks.forEach((link) => {
           link.classList.remove("active"); 
           if(link.getAttribute("href") === `#${id}`){
             link.classList.add("active");
@@ -45,9 +45,9 @@ document.addEventListener("DOMContentLoaded", () => {
     observer.observe(section);
   });
 
-  navlinks.forEach((link) => {
+  navLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      navlinks.forEach((nav) => nav.classList.remove("active"));
+      navLinks.forEach((nav) => nav.classList.remove("active"));
       link.classList.add("active");
     });
   });
@@ -161,43 +161,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileUpdate = $("profileUp-msg");
   let activeUser = currentUser;
 
-  const fullnameValEl = $("fullname-val");
-  const usernameValEl = $("username-val");
-  const ageValEl = $("age-val");
-  const emailValEl = $("email-val");
-
-  const editFullName = $("editableName");
-  const editUsername = $("editableUsername");
-  const editAge = $("editableAge");
-  const editEmail = $("editableEmail");
+const profileFields = [
+    { key: "name", display: $("fullname-val"), input: $("editableName") },
+    { key: "username", display: $("username-val"), input: $("editableUsername") },
+    { key: "age", display: $("age-val"), input: $("editableAge") },
+    { key: "email", display: $("email-val"), input: $("editableEmail") }
+  ];
 
   const editButton = $("editButton");
   const saveButton = $("saveButton");
 
-  const displayElements = [fullnameValEl, usernameValEl, ageValEl, emailValEl];
-  const editInputs = [editFullName, editUsername, editAge, editEmail];
-
-  // BACKEND NOTE: Function to load and render user data.
-  // In a full-stack app, this data will come from a GET request response
-  // instead of relying solely on local session state.
-  function loadProfileData(user) {
-    if (fullnameValEl) fullnameValEl.textContent = user.name || "N/A";
-    if (usernameValEl) usernameValEl.textContent = user.username || "N/A";
-    if (ageValEl) ageValEl.textContent = user.age || "N/A";
-    if (emailValEl) emailValEl.textContent = user.email || "N/A";
-
-    if (editFullName) editFullName.value = user.name || "";
-    if (editUsername) editUsername.value = user.username || "";
-    if (editAge) editAge.value = user.age || "";
-    if (editEmail) editEmail.value = user.email || "";
-  }
+  const loadProfileData = (user) => {
+    profileFields.forEach(({key, display, input}) => {
+      const val = user[key] || "";
+      if(display) display.textContent = val || "N/A"; 
+      if(input) input.value = val;
+    });
+  };
 
   loadProfileData(activeUser);
 
-  if (editButton && saveButton) {
+  if(editButton && saveButton) {
     editButton.addEventListener("click", () => {
-      showLoader(loader);
+      showLoader(); 
 
+      
       // BACKEND NOTE: Network Request Simulation.
       // Replace this setTimeout block with an async/await fetch() or Axios PUT/PATCH request.
       // Example:
@@ -207,6 +195,61 @@ document.addEventListener("DOMContentLoaded", () => {
       //     body: JSON.stringify(updatedUser)
       // });
       // const result = await response.json();
+      
+      setTimeout(() => {
+        hideLoader();
+
+        profileFields.forEach(({display, input}) => {
+          if(display) display.classList.add("hidden"); 
+          if(input) display.classList.remove("hidden");
+        });
+        editButton.classList.add("hidden"); 
+        saveButton.classList.remove("hidden");
+      }, 500);
+    });
+
+    saveButton.addEventListener("click", () => {
+      const iconLoading = $("icon-loading");
+      if(iconLoading) iconLoading.style.top = `${window.scrollY}px`;
+      showLoader();
+
+      setTimeout(() => {
+        hideLoader(); 
+        
+        const updatedUser = profileFields.reduce((acc, {key, input}) => {
+          acc[key] = input ? input.value : input; 
+          return acc; 
+          
+        }, {...activeUser});
+
+        activeUser = updatedUser; 
+
+        loadProfileData(activeUser);
+
+        profileFields.forEach(({display, input}) => {
+          if(display) display.classList.remove("hidden"); 
+          if(input) input.classList.remove("hidden");
+        });
+
+        saveButton.classList.add("hidden");
+        editButton.classList.remove("hidden");
+
+        if(profileUpdate) {
+          showModal(profileUpdate);
+        }
+
+      }, 500);
+    });
+  }
+
+ 
+
+  loadProfileData(activeUser);
+
+  if (editButton && saveButton) {
+    editButton.addEventListener("click", () => {
+      showLoader(loader);
+
 
       setTimeout(() => {
         hideLoader(loader);
