@@ -1,12 +1,12 @@
-//LOGIC MAIN SOURCE FOR MODULES
+// ---LOGIC MAIN SOURCE FOR MODULES---
 
 document.addEventListener("DOMContentLoaded", () => {
-  //HELPER FUNCTION - SYNC THE ID OF ELEMENTS
+  // ---HELPER FUNCTION - SYNC THE ID OF ELEMENTS---
   const $ = (id) => document.getElementById(id);
   const formLoader = $("form-loader");
   const landingContainer = $("landing-container");
 
-  //NAVIGATION BUTTONS AND FORMS
+  // ---NAVIGATION BUTTONS AND FORMS---
   const UI = {
     buttons: {
       signUp: $("sign-up-btn"),
@@ -21,7 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   };
 
-  //LOADING ANIMATION HELPER FUNCTIONS
+  // ---LOADING ANIMATION HELPER FUNCTIONS---
 
   const showLoader = () => {
     formLoader?.classList.remove("hidden");
@@ -31,15 +31,15 @@ document.addEventListener("DOMContentLoaded", () => {
     formLoader?.classList.add("hidden");
   };
 
-  //HELPER FUNCTION FOR NAVIGATION
+  // ---HELPER FUNCTION FOR NAVIGATION---
 
   const showForm = (activeForm) => {
     if (!activeForm) return;
 
     showLoader();
 
-    //EXTRACT VALUE FROM OBJECT SOURCE
-    //FORMS ARE SET HIDDEN BY DEFAULT
+    // ---EXTRACT VALUE FROM OBJECT SOURCE---
+    // ---FORMS ARE SET HIDDEN BY DEFAULT---
 
     Object.values(UI.forms).forEach((form) => {
       if (!form) return;
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }, 500);
   };
 
-  //EVENT LISTENERS FOR NAVIGATION
+  // ---EVENT LISTENERS FOR NAVIGATION---
   //DRY
   const buttonFormMap = {
     signUp: UI.forms.signUp,
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  //MODAL IDS
+  // ---MODAL IDS---
 
   const modals = {
     success: $("account-new"),
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alreadyExistAccount: $("alreadyExistAccount-msg"),
   };
 
-  // HELPER FUNCTION TO SHOW MODALS//
+  // ---HELPER FUNCTION TO SHOW MODALS---
   const showModal = (modal, duration = 3000) => {
     if (!modal) return;
     showLoader();
@@ -113,7 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
     ); //IF THE CLOSE BUTTON IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE
   };
 
-  //CLOSE ICON BUTTON (FIXED LOCATION) READER
+  // ---CLOSE ICON BUTTON (FIXED LOCATION) READER---
   const closeIcons = document.querySelectorAll(".close-icon");
 
   closeIcons.forEach((icon) => {
@@ -125,7 +125,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  //HELPER FUNCTION FOR INDEX REDIRECTION
+  // ---HELPER FUNCTION FOR INDEX REDIRECTION---
   const indexRedirection = () => {
     setTimeout(() => {
       window.location.href = "index.html";
@@ -134,11 +134,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   //FORGOT PASSWORD LOGIC
 
-  // ==========================================
-  // FORGOT PASSWORD LOGIC
+ 
+  // ---FORGOT PASSWORD LOGIC---
   // BACK-END NOTE: CHANGE THE LOCALSTORAGE logic WITH:
   // POST /api/v1/auth/forgot-password o /reset-password
-  // ==========================================
+ 
   const confirmPassBtn = $("confirm-new-password");
   const resetEmail = $("reset-email")
   const newPass = $("new-password");
@@ -201,7 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //ACCOUNT CREATION MESSAGE TO USERS
+  // ---ACCOUNT CREATION MESSAGE TO USERS---
 
   // ==========================================
   // ACCOUNT CREATION (SIGN UP) LOGIC
@@ -242,7 +242,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const actualForm = event.target.closest("form");
       if (!actualForm) return;
 
-      //CHECK IF PASSWORDS MATCHED
+      // ---CHECK IF PASSWORDS MATCHED---
       const initialPass = $("password")?.value;
 
       const confirmedPass = $("confirm-password")?.value;
@@ -297,7 +297,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //EYE TOGGLE FOR REVEALING AND HIDING PASSWORD
+  // ---EYE TOGGLE FOR REVEALING AND HIDING PASSWORD---
   const passwordInputs = {
     signup: $("password"),
     current: $("user-password"),
@@ -332,7 +332,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  //PASSWORD STRENGTH FUNCTION
+  // ---PASSWORD STRENGTH FUNCTION---
   const checkPasswordStrength = (password) => {
     let score = 0;
     if (password.length >= 6) score++;
@@ -357,7 +357,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  //PASSWORD STRENGTH TEST
+  // ---PASSWORD STRENGTH TEST---
 
   Object.entries(passwordInputs).forEach(([key, input]) => {
     if (!input) return;
@@ -375,18 +375,14 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  //LOG IN LOGIC
+  // ---LOG IN LOGIC---
   //Login Authentication using local storage
-  // ==========================================
   // LOG IN LOGIC
   // BACK-END NOTE: Once integrated with the API, use the token provided by the server
   // POST /api/v1/auth/login
   // Expected Payload: { email: emailLogin, password: passwordLogin }
   // Expected Response: JWT Token o Session Cookie + User Details
-  // ==========================================
-
-
-
+ 
   const loginBtn = $("submit-data");
   const passwordInput = $("user-password");
   const emailInput = $("login-email");
