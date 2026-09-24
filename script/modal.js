@@ -25,3 +25,13 @@ export const showModal = (modal, duration = 3000) => {
             if(modal) modal.close();
         });
     });
+
+
+    // ---HELPER FUNCTION FOR INDEX REDIRECTION---
+  export const indexRedirection = () => {
+    setTimeout(() => {
+
+      window.location.href = "../index.html";
+
+    }, 3000);
+  };

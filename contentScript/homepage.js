@@ -2,15 +2,18 @@
 
 import { getCurrentUser } from "../script/auth.js";
 import { showLoader, hideLoader, $ } from "../script/utils.js";
-import { showModal } from "../script/modal.js";
+import { showModal, indexRedirection } from "../script/modal.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
   const iconLoading = document.getElementById("icon-loading");
+  const loginRedirection = indexRedirection;
 
   // Check authentication (BACK-END NOTE: Replace with server session check / JWT verification)
   const currentUser = getCurrentUser();
 
   if (!currentUser) {
+  
     window.location.href = "index.html";
     return;
   }
@@ -31,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if(sessionExpiredMsg) {
         sessionExpiredMsg.showModal();
       } else {
-        window.location.href = "../index.html";
+        loginRedirection();
       }
     }, 10 * 60 * 1000);
   };
@@ -46,7 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const sessionCloseIcon = document.querySelector("#sessionExpired-msg .close-icon");
       if(sessionCloseIcon){
         sessionCloseIcon.addEventListener("click", () =>{
-          window.location.href = "../index.html";
+          loginRedirection();
         });
       }
 
@@ -139,8 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
     showLoader(loader);
 
     setTimeout(() => {
-      hideLoader();
 
+      hideLoader(loader);
       if (logoutModal && typeof logoutModal.showModal === "function");
       {
         showModal(logoutModal);
@@ -148,8 +151,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         localStorage.removeItem("currentUser");
-        window.location.href = "../index.html";
-      }, 1500);
+          loginRedirection();
+      }, 1000);
     }, 1500);
   });
 
@@ -382,7 +385,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         alert("Account successfully deleted.");
-        window.location.href = "../index.html";
+        loginRedirection();
       }, 1500);
     });
   }
