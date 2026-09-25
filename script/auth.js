@@ -20,3 +20,4 @@ export const setCurrentUser = (user) => {
 export const getCurrentUser = () => {
     return JSON.parse(localStorage.getItem("currentUser"));
 };
+

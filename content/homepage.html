@@ -78,32 +78,37 @@
           </div>
         </div>
 
+      
         <div class="profile-card">
-          <div class="profile-row">
-            <span class="profile-title">Name:</span>
-            <span id="fullname-val" class="profile-value">N/A</span>
-            <input type="text" id="editableName" class="profile-input hidden" placeholder="Edit Your Name" />
-            <img src="/imgResources/id-cardii.png" class="profile-icon" />
-          </div>
-          <div class="profile-row">
-            <span class="profile-title">Username:</span>
-            <span id="username-val" class="profile-value">N/A</span>
-            <input type="text" id="editableUsername" class="profile-input hidden" placeholder="Edit Your Username" />
-            <img src="/imgResources/user.png" class="profile-icon" />
-          </div>
-          <div class="profile-row">
-            <span class="profile-title">Age:</span>
-            <span id="age-val" class="profile-value">N/A</span>
-            <input type="number" id="editableAge" class="profile-input hidden" placeholder="Edit Your Age" />
-            <img src="/imgResources/age.png" class="profile-icon" />
-          </div>
-          <div class="profile-row">
-            <span class="profile-title">Email Address:</span>
-            <span id="email-val" class="profile-value">N/A</span>
-            <input type="email" id="editableEmail" class="profile-input hidden" placeholder="Edit Your Email" />
-            <img src="/imgResources/email.png" class="profile-icon" />
-          </div>
-        </div>
+         <div class="profile-card">
+  <div class="profile-row">
+    <span class="profile-title">Name:</span>
+    <span id="fullname-val" class="profile-value">N/A</span>
+    <input type="text" id="editableName" class="profile-input hidden" placeholder="Edit Your Name" />
+    <img src="/imgResources/id-cardii.png" class="profile-icon" />
+  </div>
+  
+  <div class="profile-row">
+    <span class="profile-title">Username:</span>
+    <span id="username-val" class="profile-value">N/A</span>
+    <input type="text" id="editableUsername" class="profile-input hidden" placeholder="Edit Your Username" />
+    <img src="/imgResources/user.png" class="profile-icon" />
+  </div>
+  
+  <div class="profile-row">
+    <span class="profile-title">Age:</span>
+    <span id="age-val" class="profile-value">N/A</span>
+    <input type="number" id="editableAge" class="profile-input hidden" placeholder="Edit Your Age" />
+    <img src="/imgResources/age.png" class="profile-icon" />
+  </div>
+  
+  <div class="profile-row">
+    <span class="profile-title">Email Address:</span>
+    <span id="email-val" class="profile-value">N/A</span>
+    <input type="email" id="editableEmail" class="profile-input hidden" placeholder="Edit Your Email" />
+    <img src="/imgResources/email.png" class="profile-icon" />
+  </div>
+</div>
         <div
           class="profile-actions"
           style="display: flex; gap: 10px; margin-top: 15px"
@@ -227,6 +232,22 @@
         />
       </dialog>
     </div>
+
+      <div id="sessionExpired">
+    <dialog id="sessionExpired-msg">
+      <p>Session expired. Due to screen inactivity</p>
+      <img
+        src="/imgResources/close.png"
+        class="close-icon"
+        data-modal="sessionExpired-msg"
+      />
+    </dialog>
+  </div>
+
+      <button id="backToTopBtn" class="back-to-top hidden" title="Go to top">
+        <img id="arrow-up" src="/imgResources/drag-up.png" alt="Top" /> 
+        </button>
+
   </body>
 
   <footer>

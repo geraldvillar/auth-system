@@ -1,47 +1,84 @@
-//BEGINNING OF ORTHOGONAL TO INDEX PAGE, INDEX SCRIPT AND OTHER COMPONENTS
+// ---BEGINNING OF ORTHOGONAL TO INDEX PAGE, INDEX SCRIPT AND OTHER COMPONENTS---
 
 import { getCurrentUser } from "../script/auth.js";
 import { showLoader, hideLoader, $ } from "../script/utils.js";
-import { showModal } from "../script/modal.js";
+import { showModal, indexRedirection } from "../script/modal.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const iconLoading = document.getElementById("icon-loading");
+  const loginRedirection = indexRedirection;
 
   // Check authentication (BACK-END NOTE: Replace with server session check / JWT verification)
   const currentUser = getCurrentUser();
 
   if (!currentUser) {
+  
     window.location.href = "index.html";
     return;
+  }
+
+  // ---SESSION TIMEOUT---
+  let inactivityTimer; 
+  const sessionExpiredMsg = $("sessionExpired-msg");
+
+  const resetInactivityTimer = () => {
+
+    if (sessionExpiredMsg && sessionExpiredMsg.open) return;
+    clearTimeout(inactivityTimer);
+
+    inactivityTimer = setTimeout(() => {
+
+      localStorage.removeItem("currentUser");
+
+      if(sessionExpiredMsg) {
+        sessionExpiredMsg.showModal();
+      } else {
+        loginRedirection();
+      }
+    }, 10 * 60 * 1000);
   };
- 
-  //SCROLLSPY ACTIVE STATE FOR LINK ON SCROLL
-  const sections = document.querySelectorAll("section"); 
+      window.addEventListener("mousemove", resetInactivityTimer);
+      window.addEventListener("mousedown", resetInactivityTimer); 
+      window.addEventListener("click", resetInactivityTimer); 
+      window.addEventListener("scroll", resetInactivityTimer);
+      window.addEventListener("keypress", resetInactivityTimer);
+
+      resetInactivityTimer();
+    
+      const sessionCloseIcon = document.querySelector("#sessionExpired-msg .close-icon");
+      if(sessionCloseIcon){
+        sessionCloseIcon.addEventListener("click", () =>{
+          loginRedirection();
+        });
+      }
+
+  // ---SCROLLSPY ACTIVE STATE FOR LINK ON SCROLL---
+  const sections = document.querySelectorAll("section");
   const navLinks = document.querySelectorAll("ul a[href^='#']");
 
   const observerOptions = {
-    root: null, 
-    rootMargin: "-20% 0px -70% 0px", 
-    threshold: 0
+    root: null,
+    rootMargin: "-20% 0px -70% 0px",
+    threshold: 0,
   };
 
   const observer = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
-      if(entry.isIntersecting){
+      if (entry.isIntersecting) {
         const id = entry.target.getAttribute("id");
 
         navLinks.forEach((link) => {
-          link.classList.remove("active"); 
-          if(link.getAttribute("href") === `#${id}`){
+          link.classList.remove("active");
+          if (link.getAttribute("href") === `#${id}`) {
             link.classList.add("active");
           }
-        })
+        });
       }
     });
   }, observerOptions);
 
-   sections.forEach((section) => {
+  sections.forEach((section) => {
     observer.observe(section);
   });
 
@@ -51,10 +88,8 @@ document.addEventListener("DOMContentLoaded", () => {
       link.classList.add("active");
     });
   });
- 
 
-  
-  // POPULATE PROFILE UI ELEMENTS
+  // ---POPULATE PROFILE UI ELEMENTS---
   const fullnameEl = $("fullname-val");
   const usernameEl = $("username-val");
   const ageEl = $("age-val");
@@ -73,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
     emailEl.innerHTML = `Email Address: ${currentUser.email || "N/A"} <img src="/imgResources/email.png" class="profile-icon">`;
   }
 
-  // TYPING EFFECT FOR WELCOME GREETING
+  // ---TYPING EFFECT FOR WELCOME GREETING---
   const welcome = document.getElementById("welcome");
 
   let index = 0;
@@ -93,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(typeText, 300);
       }, 5000);
     }
-  }
+  };
   typeText();
 
   // Logout logic (BACK-END NOTE: Replace localStorage removal with POST /api/v1/auth/logout endpoint)
@@ -107,8 +142,8 @@ document.addEventListener("DOMContentLoaded", () => {
     showLoader(loader);
 
     setTimeout(() => {
-      hideLoader();
 
+      hideLoader(loader);
       if (logoutModal && typeof logoutModal.showModal === "function");
       {
         showModal(logoutModal);
@@ -116,12 +151,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       setTimeout(() => {
         localStorage.removeItem("currentUser");
-        window.location.href = "../index.html";
-      }, 1500);
+          loginRedirection();
+      }, 1000);
     }, 1500);
   });
 
-  // TYPING EFFECT FOR BIO/QUESTION CONTAINER
+  // ---TYPING EFFECT FOR BIO/QUESTION CONTAINER---
   const messageQuest = $("question");
 
   let mesIndex = 0;
@@ -150,7 +185,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
   typingMessage();
 
-  //FOR PROFILE UPDATING INFO AND SAVE
+  // --- SCROLL TO TOP ARROW LOGIC ---
+  const backToTopBtn = $("backToTopBtn");
+  const userProfileSection = $("userProfile");
+
+  if (backToTopBtn && userProfileSection) {
+    window.addEventListener("scroll", () => {
+      const secondSectionPosition = userProfileSection.offsetTop; //Top part of the section
+
+      if (window.scrollY >= secondSectionPosition - 150) {
+        backToTopBtn.classList.remove("hidden");
+      } else {
+        backToTopBtn.classList.add("hidden");
+      }
+    });
+
+    backToTopBtn.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+    });
+  }
+
+  // ---FOR PROFILE UPDATING INFO AND SAVE---
 
   // BACKEND NOTE: PROFILE UPDATING & SAVING SYSTEM
 
@@ -161,31 +219,34 @@ document.addEventListener("DOMContentLoaded", () => {
   const profileUpdate = $("profileUp-msg");
   let activeUser = currentUser;
 
-const profileFields = [
+  const profileFields = [
     { key: "name", display: $("fullname-val"), input: $("editableName") },
-    { key: "username", display: $("username-val"), input: $("editableUsername") },
+    {
+      key: "username",
+      display: $("username-val"),
+      input: $("editableUsername"),
+    },
     { key: "age", display: $("age-val"), input: $("editableAge") },
-    { key: "email", display: $("email-val"), input: $("editableEmail") }
+    { key: "email", display: $("email-val"), input: $("editableEmail") },
   ];
 
   const editButton = $("editButton");
   const saveButton = $("saveButton");
 
   const loadProfileData = (user) => {
-    profileFields.forEach(({key, display, input}) => {
+    profileFields.forEach(({ key, display, input }) => {
       const val = user[key] || "";
-      if(display) display.textContent = val || "N/A"; 
-      if(input) input.value = val;
+      if (display) display.textContent = val || "N/A";
+      if (input) input.value = val;
     });
   };
 
   loadProfileData(activeUser);
 
-  if(editButton && saveButton) {
+  if (editButton && saveButton) {
     editButton.addEventListener("click", () => {
-      showLoader(); 
+      showLoader(loader);
 
-      
       // BACKEND NOTE: Network Request Simulation.
       // Replace this setTimeout block with an async/await fetch() or Axios PUT/PATCH request.
       // Example:
@@ -195,67 +256,14 @@ const profileFields = [
       //     body: JSON.stringify(updatedUser)
       // });
       // const result = await response.json();
-      
-      setTimeout(() => {
-        hideLoader();
-
-        profileFields.forEach(({display, input}) => {
-          if(display) display.classList.add("hidden"); 
-          if(input) display.classList.remove("hidden");
-        });
-        editButton.classList.add("hidden"); 
-        saveButton.classList.remove("hidden");
-      }, 500);
-    });
-
-    saveButton.addEventListener("click", () => {
-      const iconLoading = $("icon-loading");
-      if(iconLoading) iconLoading.style.top = `${window.scrollY}px`;
-      showLoader();
-
-      setTimeout(() => {
-        hideLoader(); 
-        
-        const updatedUser = profileFields.reduce((acc, {key, input}) => {
-          acc[key] = input ? input.value : input; 
-          return acc; 
-          
-        }, {...activeUser});
-
-        activeUser = updatedUser; 
-
-        loadProfileData(activeUser);
-
-        profileFields.forEach(({display, input}) => {
-          if(display) display.classList.remove("hidden"); 
-          if(input) input.classList.remove("hidden");
-        });
-
-        saveButton.classList.add("hidden");
-        editButton.classList.remove("hidden");
-
-        if(profileUpdate) {
-          showModal(profileUpdate);
-        }
-
-      }, 500);
-    });
-  }
-
- 
-
-  loadProfileData(activeUser);
-
-  if (editButton && saveButton) {
-    editButton.addEventListener("click", () => {
-      showLoader(loader);
-
 
       setTimeout(() => {
         hideLoader(loader);
 
-        displayElements.forEach((el) => el.classList.add("hidden"));
-        editInputs.forEach((el) => el.classList.remove("hidden"));
+        profileFields.forEach(({ display, input }) => {
+          if (display) display.classList.add("hidden");
+          if (input) input.classList.remove("hidden");
+        });
 
         editButton.classList.add("hidden");
         saveButton.classList.remove("hidden");
@@ -263,175 +271,208 @@ const profileFields = [
     });
 
     saveButton.addEventListener("click", () => {
-      const iconLoading = document.getElementById("icon-loading");
-      iconLoading.style.top = `${window.scrollY}px`;
+      const iconLoading = $("icon-loading");
+      if (iconLoading) iconLoading.style.top = `${window.scrollY}px`;
       showLoader(loader);
 
       setTimeout(() => {
         hideLoader(loader);
 
-        const updatedUser = {
-          ...activeUser,
-          name: editFullName.value,
-          username: editUsername.value,
-          age: editAge.value,
-          email: editEmail.value,
-        };
+        const updatedUser = profileFields.reduce(
+          (acc, { key, input }) => {
+            acc[key] = input ? input.value : "";
+            return acc;
+          },
+          { ...activeUser },
+        );
 
-        // BACKEND NOTE: Temporary Local Persistence (Client-Side).
-        // This simulates updating the current session storage/database.
+        activeUser = updatedUser;
 
-        localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+        localStorage.setItem("currentUser", JSON.stringify(activeUser));
 
         let allUsers = JSON.parse(localStorage.getItem("users")) || [];
         allUsers = allUsers.map((u) =>
-          u.email === activeUser.email ? updatedUser : u,
+          u.email === activeUser.email ? activeUser : u,
         );
         localStorage.setItem("users", JSON.stringify(allUsers));
 
-        activeUser = updatedUser;
         loadProfileData(activeUser);
 
-        displayElements.forEach((el) => el.classList.remove("hidden"));
-        editInputs.forEach((el) => el.classList.add("hidden"));
+        profileFields.forEach(({ display, input }) => {
+          if (display) display.classList.remove("hidden");
+          if (input) input.classList.add("hidden");
+        });
 
         saveButton.classList.add("hidden");
         editButton.classList.remove("hidden");
 
-        showModal(profileUpdate);
-      }, 2000);
+        if (profileUpdate) {
+          showModal(profileUpdate);
+        }
+      }, 500);
     });
+  }
 
-    //DATE INFO: DATE OF ACCOUNT CREATION & DELETE ACCOUNT
-    const q = (id) => document.querySelector(id);
-    const elements = {
-      dateIcon: q("#dateIcon"),
-      settingsDropdown: q("#settingsDropdown"),
-      creationDateText: q("#creationDateText"),
-      deleteAccountTrigger: q("#delete-account"),
-      confirmDeleteDiv: q("#confirm-delete"),
-      yesBtn: q("#yes"),
-      noBtn: q("#no"),
-      iconLoading: q("#icon-loading"),
-    };
+  // ---DATE INFO: DATE OF ACCOUNT CREATION & DELETE ACCOUNT---
+  const q = (id) => document.querySelector(id);
+  
+  const elements = {
+    dateIcon: q("#dateIcon"),
+    settingsDropdown: q("#settingsDropdown"),
+    creationDateText: q("#creationDateText"),
+    deleteAccountTrigger: q("#delete-account"),
+    confirmDeleteDiv: q("#confirm-delete"),
+    yesBtn: q("#yes"),
+    noBtn: q("#no"),
+    iconLoading: q("#icon-loading"),
+  };
 
-    if (elements.creationDateText) {
-      let creationDate = localStorage.getItem("account_creation_date");
+  if (elements.creationDateText) {
+    let creationDate = localStorage.getItem("account_creation_date");
 
-      if(!creationDate) {
-        creationDate = new Date().toISOString();
-        localStorage.setItem("account_creation_date", creationDate);
+    if (!creationDate) {
+      creationDate = new Date().toISOString();
+      localStorage.setItem("account_creation_date", creationDate);
+    }
+
+    const dateObj = new Date(creationDate);
+    elements.creationDateText.textContent = isNaN(dateObj.getTime())
+      ? "N/A"
+      : dateObj.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        });
+  }
+
+  document.addEventListener("click", (e) => {
+      // 2. ---TOGGLE SETTINGS DROPDOWN---
+      if(e.target.closest("#dateIcon")) {
+        elements.settingsDropdown?.classList.toggle("hidden");
       }
 
-      const dateObj = new Date(creationDate);
-      elements.creationDateText.textContent = isNaN(dateObj.getTime()) ? "N/A"
-      : dateObj.toLocaleDateString("en-US", {
-        year: "numeric", 
-        month: "long", 
-        day: "numeric"
-      });
-    }
+      // 3. ---TOGGLE DELETE CONFIRMATION BOX---
+      if(e.target.closest("#delete-account")) {
+        elements.confirmDeleteDiv?.classList.toggle("hidden");
+      }
 
-    // 2. TOGGLE SETTINGS DROPDOWN
-    if (elements.dateIcon && elements.settingsDropdown) {
-      elements.dateIcon.addEventListener("click", () => {
-        elements.settingsDropdown.classList.toggle("hidden");
-      });
-    }
-
-    // 3. TOGGLE DELETE CONFIRMATION BOX
-    if (elements.deleteAccountTrigger && elements.confirmDeleteDiv) {
-      elements.deleteAccountTrigger.addEventListener("click", () => {
-        elements.confirmDeleteDiv.classList.toggle("hidden");
-      });
-    }
-
-    // 4. CANCEL DELETE (NO BUTTON)
-    if (elements.noBtn && elements.confirmDeleteDiv) {
-      elements.noBtn.addEventListener("click", () => {
+      // 4. ---CANCEL DELETE (NO BUTTON)---
+      if(e.target.closest("#no")) {
         elements.confirmDeleteDiv.classList.add("hidden");
-      });
-    }
+      }
 
-    // 5. CONFIRM DELETE (YES BUTTON)
-    if (elements.yesBtn) {
-      elements.yesBtn.addEventListener("click", () => {
-        
+  // 5. ---CONFIRM DELETE (YES BUTTON)---
+      if(e.target.closest("#yes")) {
         showLoader(loader);
 
         setTimeout(() => {
           hideLoader(loader);
-
           localStorage.removeItem("currentUser");
+          // 3. ---TOGGLE DELETE CONFIRMATION BOX---
+  if (elements.deleteAccountTrigger && elements.confirmDeleteDiv) {
+    elements.deleteAccountTrigger.addEventListener("click", () => {
+      elements.confirmDeleteDiv.classList.toggle("hidden");
+    });
+  }
 
-          // BACK-END NOTE: Once a database and backend server are integrated, replace this
-          // with an API call (e.g., fetch('/api/users/' + activeUser.id, { method: 'DELETE' }))
+  // 4. ---CANCEL DELETE (NO BUTTON)---
+  if (elements.noBtn && elements.confirmDeleteDiv) {
+    elements.noBtn.addEventListener("click", () => {
+      elements.confirmDeleteDiv.classList.add("hidden");
+    });
+  }
+
+  // 5. ---CONFIRM DELETE (YES BUTTON)---
+  if (elements.yesBtn) {
+    elements.yesBtn.addEventListener("click", () => {
+      showLoader(loader);
+
+      setTimeout(() => {
+        hideLoader(loader);
+
+        localStorage.removeItem("currentUser");
+
+        // BACK-END NOTE: Once a database and backend server are integrated, replace this
+        // with an API call (e.g., fetch('/api/users/' + activeUser.id, { method: 'DELETE' }))
+        let allUsers = JSON.parse(localStorage.getItem("users")) || [];
+
+        if (typeof activeUser !== "undefined" && activeUser) {
+          allUsers = allUsers.filter((u) => u.email !== activeUser.email);
+          localStorage.setItem("users", JSON.stringify(allUsers));
+        }
+
+        alert("Account successfully deleted.");
+        loginRedirection();
+      }, 1500);
+    });
+  }
           let allUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-          if (typeof activeUser !== "undefined" && activeUser) {
-            allUsers = allUsers.filter((u) => u.email !== activeUser.email);
+          if(activeUser) {
+            allUsers = allUsers.filter((u) => u.email !== activeUser.email); 
             localStorage.setItem("users", JSON.stringify(allUsers));
           }
 
-          alert("Account successfully deleted.");
-          window.location.href = "../index.html";
+          alert("Account successfully deleted. ");
+          loginRedirection();
         }, 1500);
-      });
-    }
+      }
+  });
 
-    //ANIMATION FOR DATE
-    let startTime = null;
-    const duration = 1500;
 
-    const animation = (timestamp) => {
-      if (!timestamp) startTime = timestamp;
-      const elapsed = timestamp - startTime;
+  // ---ANIMATION FOR DATE---
+  let startTime = null;
+  const duration = 1500;
 
-      const progress = (elapsed % duration) / duration;
-      const scale = 1 + Math.sin(progress * Math.PI * 2) * 0.12;
+  const animation = (timestamp) => {
+    if (!timestamp) startTime = timestamp;
+    const elapsed = timestamp - startTime;
 
-      const rotation = Math.sin(progress * Math.PI * 4) * 5;
+    const progress = (elapsed % duration) / duration;
+    const scale = 1 + Math.sin(progress * Math.PI * 2) * 0.12;
 
-      dateIcon.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
+    const rotation = Math.sin(progress * Math.PI * 4) * 5;
 
-      requestAnimationFrame(animation);
-    };
+    dateIcon.style.transform = `scale(${scale}) rotate(${rotation}deg)`;
 
     requestAnimationFrame(animation);
-  }
+  };
+
+  requestAnimationFrame(animation);
 
   const themeToggleBtn = $("themeToggleBtn");
   const lightIcon = $("lightIcon");
   const darkIcon = $("darkIcon");
 
-  themeToggleBtn.addEventListener("click", () => {
+  themeToggleBtn?.addEventListener("click", () => {
     document.body.classList.toggle("light-mode");
-
     lightIcon.classList.toggle("active");
     lightIcon.classList.toggle("hidden");
-
     darkIcon.classList.toggle("active");
     darkIcon.classList.toggle("hidden");
   });
-});
 
-const copyBtn = document.getElementById("copy-btn");
-const emailText = document.getElementById("email-text").innerText;
-const tooltipText = document.getElementById("tooltip-text");
+  // ---COPY EMAIL LOGIC---
+  const copyBtn = document.getElementById("copy-btn");
+  const emailText = document.getElementById("email-text").innerText;
+  const tooltipText = document.getElementById("tooltip-text");
 
-copyBtn.addEventListener("click", () => {
-  navigator.clipboard
-    .writeText(emailText)
-    .then(() => {
-      tooltipText.innerText = "Copied!";
-      copyBtn.classList.add("copied");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard
+        .writeText(emailText)
+        .then(() => {
+          tooltipText.innerText = "Copied!";
+          copyBtn.classList.add("copied");
 
-      setTimeout(() => {
-        copyBtn.classList.remove("copied");
-        tooltipText.innerText = "Copy";
-      }, 1500);
-    })
-    .catch((err) => {
-      console.error("Clipboard copy failed: ", err);
+          setTimeout(() => {
+            copyBtn.classList.remove("copied");
+            tooltipText.innerText = "Copy";
+          }, 1500);
+        })
+        .catch((err) => {
+          console.error("Clipboard copy failed: ", err);
+        });
     });
+  }
 });

@@ -139,21 +139,24 @@ form button:hover {
 
 /* Dialog Modal */
 dialog {
-  border: none;
+ border: none;
   text-align: center;
   font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   border-radius: 12px;
   padding: 30px 40px;
-  background-color: whitesmoke;
+  background-color: rgba(245, 245, 245, 0.85);
+  backdrop-filter: blur(10px);
   color: #0b132b;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   max-width: 400px;
+  -webkit-backdrop-filter: blur(10px);
   width: 90%;
   box-sizing: border-box;
+  z-index: 9999;
 }
 
 dialog::backdrop {
-  background-color: rgba(2, 6, 23, 0.75);
+   background-color: rgba(2, 6, 23, 0.75);
   backdrop-filter: blur(4px);
 }
 
