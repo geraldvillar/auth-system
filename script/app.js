@@ -1,4 +1,4 @@
-// ---LOGIC MAIN SOURCE FOR MODULES---
+// ---UTILITY MODULES---
 
 document.addEventListener("DOMContentLoaded", () => {
   // ---HELPER FUNCTION - SYNC THE ID OF ELEMENTS---
@@ -382,7 +382,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // POST /api/v1/auth/login
   // Expected Payload: { email: emailLogin, password: passwordLogin }
   // Expected Response: JWT Token o Session Cookie + User Details
- 
+
   const loginBtn = $("submit-data");
   const passwordInput = $("user-password");
   const emailInput = $("login-email");

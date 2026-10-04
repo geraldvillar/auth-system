@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!currentUser) {
   
-    window.location.href = "index.html";
+    loginRedirection();
     return;
   }
 
