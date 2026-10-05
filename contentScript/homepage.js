@@ -6,7 +6,7 @@ import { showModal, indexRedirection } from "../script/modal.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
-  const iconLoading = document.getElementById("icon-loading");
+ 
   const loginRedirection = indexRedirection;
 
   // Check authentication (BACK-END NOTE: Replace with server session check / JWT verification)
@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!currentUser) {
   
-    loginRedirection();
+   loginRedirection();
     return;
   }
 
@@ -78,9 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }, observerOptions);
 
+
   sections.forEach((section) => {
     observer.observe(section);
   });
+  
 
   navLinks.forEach((link) => {
     link.addEventListener("click", () => {
@@ -236,7 +238,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const loadProfileData = (user) => {
     profileFields.forEach(({ key, display, input }) => {
       const val = user[key] || "";
-      if (display) display.textContent = val || "N/A";
+      if (display) display.textContent = val || "N/A"; 
       if (input) input.value = val;
     });
   };
@@ -315,7 +317,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ---DATE INFO: DATE OF ACCOUNT CREATION & DELETE ACCOUNT---
   const q = (id) => document.querySelector(id);
-  
   const elements = {
     dateIcon: q("#dateIcon"),
     settingsDropdown: q("#settingsDropdown"),
@@ -345,30 +346,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
   }
 
-  document.addEventListener("click", (e) => {
-      // 2. ---TOGGLE SETTINGS DROPDOWN---
-      if(e.target.closest("#dateIcon")) {
-        elements.settingsDropdown?.classList.toggle("hidden");
-      }
+  // 2. ---TOGGLE SETTINGS DROPDOWN---
+  if (elements.dateIcon && elements.settingsDropdown) {
+    elements.dateIcon.addEventListener("click", () => {
+      elements.settingsDropdown.classList.toggle("hidden");
+    });
+  }
 
-      // 3. ---TOGGLE DELETE CONFIRMATION BOX---
-      if(e.target.closest("#delete-account")) {
-        elements.confirmDeleteDiv?.classList.toggle("hidden");
-      }
-
-      // 4. ---CANCEL DELETE (NO BUTTON)---
-      if(e.target.closest("#no")) {
-        elements.confirmDeleteDiv.classList.add("hidden");
-      }
-
-  // 5. ---CONFIRM DELETE (YES BUTTON)---
-      if(e.target.closest("#yes")) {
-        showLoader(loader);
-
-        setTimeout(() => {
-          hideLoader(loader);
-          localStorage.removeItem("currentUser");
-          // 3. ---TOGGLE DELETE CONFIRMATION BOX---
+  // 3. ---TOGGLE DELETE CONFIRMATION BOX---
   if (elements.deleteAccountTrigger && elements.confirmDeleteDiv) {
     elements.deleteAccountTrigger.addEventListener("click", () => {
       elements.confirmDeleteDiv.classList.toggle("hidden");
@@ -406,19 +391,6 @@ document.addEventListener("DOMContentLoaded", () => {
       }, 1500);
     });
   }
-          let allUsers = JSON.parse(localStorage.getItem("users")) || [];
-
-          if(activeUser) {
-            allUsers = allUsers.filter((u) => u.email !== activeUser.email); 
-            localStorage.setItem("users", JSON.stringify(allUsers));
-          }
-
-          alert("Account successfully deleted. ");
-          loginRedirection();
-        }, 1500);
-      }
-  });
-
 
   // ---ANIMATION FOR DATE---
   let startTime = null;
@@ -444,10 +416,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const lightIcon = $("lightIcon");
   const darkIcon = $("darkIcon");
 
-  themeToggleBtn?.addEventListener("click", () => {
+  themeToggleBtn.addEventListener("click", () => {
     document.body.classList.toggle("light-mode");
+
     lightIcon.classList.toggle("active");
     lightIcon.classList.toggle("hidden");
+
     darkIcon.classList.toggle("active");
     darkIcon.classList.toggle("hidden");
   });
