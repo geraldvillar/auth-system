@@ -1,4 +1,4 @@
-import { $ } from "../script/utils";
+import { $ } from "../independents/utils.js";
 
 // --- ID SELECTORS ---
 
@@ -8,7 +8,7 @@ export const signUpForm = $("account-created");
 
 export const authElements = {
     signUp: {
-        form: $("account-created").closest("form"), 
+        form: signUpForm.closest("form"), 
 
     },
 

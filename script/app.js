@@ -1,5 +1,13 @@
 // ---UTILITY MODULES---
 
+//Test only: 
+
+import { authElements } from "../constants/selectors.js";
+console.log(authElements);
+
+import { signUpInputs } from "../constants/formInputs.js";
+console.log(signUpInputs);
+
 document.addEventListener("DOMContentLoaded", () => {
   // ---HELPER FUNCTION - SYNC THE ID OF ELEMENTS---
   const $ = (id) => document.getElementById(id);
