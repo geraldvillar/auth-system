@@ -3,12 +3,14 @@
 //Test only: 
 
 import { authElements } from "../constants/selectors.js";
-console.log(authElements);
 
-import { signUpInputs } from "../constants/formInputs.js";
-console.log(signUpInputs);
+
+import { authInputs } from "../constants/formInputs.js";
+
 
 document.addEventListener("DOMContentLoaded", () => {
+  console.log(authElements);
+  console.log(authInputs);
   // ---HELPER FUNCTION - SYNC THE ID OF ELEMENTS---
   const $ = (id) => document.getElementById(id);
   const formLoader = $("form-loader");
