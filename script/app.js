@@ -1,16 +1,8 @@
 // ---UTILITY MODULES---
 
-//Test only: 
-
-import { authElements } from "../constants/selectors.js";
-
-
-import { authInputs } from "../constants/formInputs.js";
-
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log(authElements);
-  console.log(authInputs);
+
   // ---HELPER FUNCTION - SYNC THE ID OF ELEMENTS---
   const $ = (id) => document.getElementById(id);
   const formLoader = $("form-loader");
@@ -156,6 +148,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const isNewPasswordValid = () => {
     const registeredEmailVal = resetEmail?.value.trim() || ""; 
     const newPassVal = newPass?.value.trim() || "";
+    
 
     if(registeredEmailVal === "" || newPass === ""){
       confirmPassBtn.setAttribute("disabled", true);
@@ -236,7 +229,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (allFilled) {
           createAccountBtn.removeAttribute("disabled");
-        } else {
+        } else { 
           createAccountBtn.setAttribute("disabled", "true");
         }
       };
@@ -300,6 +293,10 @@ document.addEventListener("DOMContentLoaded", () => {
       });
       //RETURN THE VALUE TO STRING THEN SAVES IT
       localStorage.setItem("users", JSON.stringify(users));
+
+      actualForm.reset();
+
+      createAccountBtn.setAttribute("disabled", "true");
 
       showModal(modals.success);
 
