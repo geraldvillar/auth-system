@@ -1,12 +1,11 @@
 // ---UTILITY MODULES---
+import { $, showForm, showModal } from "./helpers/helperFunctions.js";
 
 
 document.addEventListener("DOMContentLoaded", () => {
 
   // ---HELPER FUNCTION - SYNC THE ID OF ELEMENTS---
-  const $ = (id) => document.getElementById(id);
-  const formLoader = $("form-loader");
-  const landingContainer = $("landing-container");
+
 
   // ---NAVIGATION BUTTONS AND FORMS---
   const UI = {
@@ -22,6 +21,7 @@ document.addEventListener("DOMContentLoaded", () => {
       forgot: $("forgot-password"),
     },
   };
+  const formsList = Object.values(UI.forms);
 
   // ---LOADING ANIMATION HELPER FUNCTIONS---
 
@@ -33,27 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     formLoader?.classList.add("hidden");
   };
 
-  // ---HELPER FUNCTION FOR NAVIGATION---
-
-  const showForm = (activeForm) => {
-    if (!activeForm) return;
-
-    showLoader();
-
-    // ---EXTRACT VALUE FROM OBJECT SOURCE---
-    // ---FORMS ARE SET HIDDEN BY DEFAULT---
-
-    Object.values(UI.forms).forEach((form) => {
-      if (!form) return;
-      form.classList.remove("show");
-    });
-
-    setTimeout(() => {
-      activeForm.classList.add("show");
-      landingContainer?.classList.add("hidden");
-      hideLoader();
-    }, 500);
-  };
+  
 
   // ---EVENT LISTENERS FOR NAVIGATION---
   //DRY
@@ -66,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   Object.entries(UI.buttons).forEach(([key, button]) => {
     button?.addEventListener("click", () => {
-      showForm(buttonFormMap[key]);
+      showForm(buttonFormMap[key], formsList);
     });
   });
 
@@ -88,33 +68,7 @@ document.addEventListener("DOMContentLoaded", () => {
     alreadyExistAccount: $("alreadyExistAccount-msg"),
   };
 
-  // ---HELPER FUNCTION TO SHOW MODALS---
-  const showModal = (modal, duration = 3000) => {
-    if (!modal) return;
-    showLoader();
-
-    const loadTimer = setTimeout(() => {
-      hideLoader();
-      modal.showModal();
-    }, 2000);
-
-    //AUTO CLOSE MODALS//
-
-    const timeOutId = setTimeout(() => {
-      modal.close();
-    }, duration); //AUTOMATIC CLOSE
-
-    modal.addEventListener(
-      "close",
-      () => {
-        clearTimeout(loadTimer);
-        clearTimeout(timeOutId);
-        hideLoader();
-      },
-      { once: true },
-    ); //IF THE CLOSE BUTTON IS PRESSED THE SETTIMEOUT IS CANCELLED AND THE MODAL CLOSES ONCE
-  };
-
+  
   // ---CLOSE ICON BUTTON (FIXED LOCATION) READER---
   const closeIcons = document.querySelectorAll(".close-icon");
 
