@@ -1,42 +1,18 @@
-// ---UTILITY MODULES---
-import { $, showForm, showModal } from "./helpers/helperFunctions.js";
-
+// script/app.js
+import { UI, $ } from "../helpers/domReferences.js";
+import {
+  showLoader,
+  hideLoader,
+  showForm,
+  showModal,
+  indexRedirection,
+  checkPasswordStrength,
+} from "../helpers/helperFunctions.js";
 
 document.addEventListener("DOMContentLoaded", () => {
-
-  // ---HELPER FUNCTION - SYNC THE ID OF ELEMENTS---
-
-
-  // ---NAVIGATION BUTTONS AND FORMS---
-  const UI = {
-    buttons: {
-      signUp: $("sign-up-btn"),
-      login: $("login-btn"),
-      forgot: $("recover-password"),
-      existingAccount: $("login-link"), //REDIRECTED TO LOGIN PAGE
-    },
-    forms: {
-      signUp: $("user-info"),
-      login: $("login-user"),
-      forgot: $("forgot-password"),
-    },
-  };
   const formsList = Object.values(UI.forms);
 
-  // ---LOADING ANIMATION HELPER FUNCTIONS---
-
-  const showLoader = () => {
-    formLoader?.classList.remove("hidden");
-  };
-
-  const hideLoader = () => {
-    formLoader?.classList.add("hidden");
-  };
-
-  
-
-  // ---EVENT LISTENERS FOR NAVIGATION---
-  //DRY
+  // --- NAVIGATION EVENT LISTENERS ---
   const buttonFormMap = {
     signUp: UI.forms.signUp,
     login: UI.forms.login,
@@ -46,90 +22,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
   Object.entries(UI.buttons).forEach(([key, button]) => {
     button?.addEventListener("click", () => {
-      showForm(buttonFormMap[key], formsList);
+      showForm(buttonFormMap[key]);
     });
   });
 
-  // ---MODAL IDS---
-
-  const modals = {
-    success: $("account-new"),
-    failed: $("account-failed"),
-    changedPassword: $("changed-pass"),
-    matchedError: $("matched-error-msg"),
-    emptyError: $("insufficient-length-msg"),
-    shortError: $("lessThanSix-msg"),
-    emptyInputsMsg: $("empty-input-msg"),
-    lessThanSix: $("lessThanSixChar-msg"),
-    mismatched: $("mismatched-msg"),
-    loggedIn: $("successLogInMsg"),
-    incorrectCredential: $("incorrectEmailPassMsg"),
-    unrecognizedAccount: $("unrecognized-account-msg"),
-    alreadyExistAccount: $("alreadyExistAccount-msg"),
-  };
-
-  
-  // ---CLOSE ICON BUTTON (FIXED LOCATION) READER---
-  const closeIcons = document.querySelectorAll(".close-icon");
-
-  closeIcons.forEach((icon) => {
+  // --- CLOSE ICON BUTTON READER ---
+  document.querySelectorAll(".close-icon").forEach((icon) => {
     icon.addEventListener("click", () => {
       const modalId = icon.dataset.modal;
       const modal = document.getElementById(modalId);
-
       if (modal) modal.close();
     });
   });
 
-  // ---HELPER FUNCTION FOR INDEX REDIRECTION---
-  const indexRedirection = () => {
-    setTimeout(() => {
-      window.location.href = "index.html";
-    }, 3000);
-  };
-
-  //FORGOT PASSWORD LOGIC
-
- 
-  // ---FORGOT PASSWORD LOGIC---
-  // BACK-END NOTE: CHANGE THE LOCALSTORAGE logic WITH:
-  // POST /api/v1/auth/forgot-password o /reset-password
- 
-  const confirmPassBtn = $("confirm-new-password");
-  const resetEmail = $("reset-email")
-  const newPass = $("new-password");
+  // ==========================================
+  // --- FORGOT PASSWORD LOGIC ---
+  // BACK-END NOTE: CHANGE THE LOCALSTORAGE LOGIC WITH:
+  // POST /api/v1/auth/forgot-password or /reset-password
+  // ==========================================
+  const { resetEmail, newPassword: newPassInput, confirmPass } = UI.inputs;
 
   const isNewPasswordValid = () => {
-    const registeredEmailVal = resetEmail?.value.trim() || ""; 
-    const newPassVal = newPass?.value.trim() || "";
-    
+    const registeredEmailVal = resetEmail?.value.trim() || "";
+    const newPassVal = newPassInput?.value.trim() || "";
 
-    if(registeredEmailVal === "" || newPass === ""){
-      confirmPassBtn.setAttribute("disabled", true);
+    if (registeredEmailVal === "" || newPassVal === "") {
+      confirmPass?.setAttribute("disabled", "true");
     } else {
-      confirmPassBtn.removeAttribute("disabled");
+      confirmPass?.removeAttribute("disabled");
     }
-  }
+  };
 
-  if(resetEmail && newPass) {
+  if (resetEmail && newPassInput) {
     resetEmail.addEventListener("input", isNewPasswordValid);
-    newPass.addEventListener("input", isNewPasswordValid);
+    newPassInput.addEventListener("input", isNewPasswordValid);
   }
 
-  if (confirmPassBtn) {
-    confirmPassBtn.addEventListener("click", (event) => {
-      event.preventDefault(); // PREVENT BROWSER FROM REFRESHING AFTER SUBMITTING
+  if (confirmPass) {
+    confirmPass.addEventListener("click", (event) => {
+      event.preventDefault();
 
       const emailInput = resetEmail.value.trim();
-      const newPassword = newPass?.value;
+      const newPassword = newPassInput?.value;
 
       if (emailInput === "" || newPassword === "") {
-        showModal(modals.emptyError);
-
+        showModal(UI.modals.emptyError);
         return;
       } else if (newPassword.length < 6) {
-        showModal(modals.shortError);
-
+        showModal(UI.modals.shortError);
         return;
       }
 
@@ -137,28 +77,21 @@ document.addEventListener("DOMContentLoaded", () => {
       const userIndex = users.findIndex((user) => user.email === emailInput);
 
       if (userIndex === -1) {
-        showModal(modals.unrecognizedAccount);
-
+        showModal(UI.modals.unrecognizedAccount);
         return;
       }
 
       if (users[userIndex].password === newPassword) {
-        showModal(modals.matchedError);
-
+        showModal(UI.modals.matchedError);
         return;
       }
 
       users[userIndex].password = newPassword;
-
       localStorage.setItem("users", JSON.stringify(users));
-
-      showModal(modals.changedPassword);
-
+      showModal(UI.modals.changedPassword);
       indexRedirection();
     });
   }
-
-  // ---ACCOUNT CREATION MESSAGE TO USERS---
 
   // ==========================================
   // ACCOUNT CREATION (SIGN UP) LOGIC
@@ -166,16 +99,14 @@ document.addEventListener("DOMContentLoaded", () => {
   // POST /api/v1/auth/register
   // Expected Payload: { name, email, username, age, password }
   // ==========================================
-
-  const createAccountBtn = $("account-created");
+  const createAccountBtn = UI.buttons.createAccount;
 
   if (createAccountBtn) {
-    const actualForm = createAccountBtn.closest("form"); //IT BASICALLY TARGETS THE CLOSEST FORM WHICH IS THE PARENT ELEMENT, THE FORM
+    const actualForm = createAccountBtn.closest("form");
 
     if (actualForm) {
       const inputs = actualForm.querySelectorAll("input");
 
-      // Validate all inputs to enable/disable button dynamically
       const validateFormInputs = () => {
         const allFilled = Array.from(inputs).every(
           (input) => input.value.trim() !== "",
@@ -183,7 +114,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (allFilled) {
           createAccountBtn.removeAttribute("disabled");
-        } else { 
+        } else {
           createAccountBtn.setAttribute("disabled", "true");
         }
       };
@@ -199,89 +130,60 @@ document.addEventListener("DOMContentLoaded", () => {
       const actualForm = event.target.closest("form");
       if (!actualForm) return;
 
-      // ---CHECK IF PASSWORDS MATCHED---
-      const initialPass = $("password")?.value;
-
-      const confirmedPass = $("confirm-password")?.value;
+      const initialPass = UI.inputs.password?.value;
+      const confirmedPass = UI.inputs.confirmPassword?.value;
 
       if (initialPass !== confirmedPass) {
-        showModal(modals.mismatched);
-
+        showModal(UI.modals.mismatched);
         return;
       }
 
       if (initialPass.length < 6 || confirmedPass.length < 6) {
-        showModal(modals.lessThanSix);
-
+        showModal(UI.modals.lessThanSix);
         return;
       }
 
-      //SAVE USERS(SIGN UP) - LOCAL STORAGE
-      //CHECK AND GET THE INPUTS VALUES
-      //GET THE INPUT VALUES AND PASS IT TO API
-      const name = $("name")?.value;
-      const email = $("email")?.value;
-      const username = $("username")?.value;
-      const age = $("age")?.value;
-      const password = $("password")?.value;
+      const name = UI.inputs.name?.value;
+      const email = UI.inputs.email?.value;
+      const username = UI.inputs.username?.value;
+      const age = UI.inputs.age?.value;
+      const password = UI.inputs.password?.value;
 
       // BACK-END MOCKUP: Local Storage (replace it by fetch() POST request)
       const users = JSON.parse(localStorage.getItem("users")) || [];
-
-      //CHECKS IF AN EMAIL ALREADY EXISTS
       const emailExists = users.some((user) => user.email === email);
 
       if (emailExists) {
-        //IF THE EMAIL EXISTS THE EXECUTION EXITS
-        showModal(modals.alreadyExistAccount);
-
+        showModal(UI.modals.alreadyExistAccount);
         return;
       }
 
-      users.push({
-        name,
-        email,
-        username,
-        age,
-        password,
-      });
-      //RETURN THE VALUE TO STRING THEN SAVES IT
+      users.push({ name, email, username, age, password });
       localStorage.setItem("users", JSON.stringify(users));
-
       actualForm.reset();
-
       createAccountBtn.setAttribute("disabled", "true");
-
-      showModal(modals.success);
-
+      showModal(UI.modals.success);
       indexRedirection();
     });
   }
 
-  // ---EYE TOGGLE FOR REVEALING AND HIDING PASSWORD---
-  const passwordInputs = {
-    signup: $("password"),
-    current: $("user-password"),
-    new: $("new-password"),
-    confirm: $("confirm-password"),
+  // --- EYE TOGGLE FOR PASSWORD ---
+  const passwordInputsMap = {
+    signup: UI.inputs.password,
+    current: UI.inputs.userPassword,
+    new: UI.inputs.newPassword,
+    confirm: UI.inputs.confirmPassword,
   };
 
-  const toggleButton = document.querySelectorAll(".togglePassword");
+  const toggleButtons = document.querySelectorAll(".togglePassword");
 
-  if (toggleButton) {
-    toggleButton.forEach((icon) => {
+  if (toggleButtons) {
+    toggleButtons.forEach((icon) => {
       icon.addEventListener("click", () => {
         const target = icon.dataset.target;
-        const input = passwordInputs[target];
+        const input = passwordInputsMap[target];
 
-        if (!input) return; //STOPS EXECUTION WHEN FOUND NO INPUT
-
-        //INITIAL SYNC
-        if (input.type === "password") {
-          icon.src = "imgResources/close-eye.png";
-        } else {
-          icon.src = "imgResources/view.png";
-        }
+        if (!input) return;
 
         const isHidden = input.type === "password";
         input.type = isHidden ? "text" : "password";
@@ -293,40 +195,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // ---PASSWORD STRENGTH FUNCTION---
-  const checkPasswordStrength = (password) => {
-    let score = 0;
-    if (password.length >= 6) score++;
-    if (password.length >= 10) score++;
-    if (/[A-Z]/.test(password)) score++;
-    if (/[a-z]/.test(password)) score++;
-    if (/[0-9]/.test(password)) score++;
-    if (/[!@#$%^&*]/.test(password)) score++;
-
-    if (password.length === 0) {
-      return { message: "", color: "" };
-    }
-
-    if (score <= 2) {
-      return { message: "Weak password 😡", color: "red" };
-    } else if (score === 3 || score === 4) {
-      return { message: "Medium password 🤨", color: "orange" };
-    } else if (score === 5) {
-      return { message: "Strong password 💪", color: "blue" };
-    } else {
-      return { message: "Excellent password 👌", color: "green" };
-    }
-  };
-
-  // ---PASSWORD STRENGTH TEST---
-
-  Object.entries(passwordInputs).forEach(([key, input]) => {
+  // --- PASSWORD STRENGTH TEST ---
+  Object.entries(passwordInputsMap).forEach(([key, input]) => {
     if (!input) return;
 
     input.addEventListener("input", () => {
       const strength = checkPasswordStrength(input.value);
-
-      //Target message container per input
       const msg = document.querySelector(`[data-strength="${key}"]`);
 
       if (!msg) return;
@@ -336,33 +210,31 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // ---LOG IN LOGIC---
-  //Login Authentication using local storage
+  // ==========================================
   // LOG IN LOGIC
   // BACK-END NOTE: Once integrated with the API, use the token provided by the server
   // POST /api/v1/auth/login
   // Expected Payload: { email: emailLogin, password: passwordLogin }
-  // Expected Response: JWT Token o Session Cookie + User Details
+  // Expected Response: JWT Token or Session Cookie + User Details
+  // ==========================================
+  const loginBtn = UI.buttons.submitLogin;
+  const passwordInput = UI.inputs.userPassword;
+  const emailInput = UI.inputs.loginEmail;
 
-  const loginBtn = $("submit-data");
-  const passwordInput = $("user-password");
-  const emailInput = $("login-email");
-
-  const validateForm = () => {
+  const validateLoginForm = () => {
     const emailValue = emailInput?.value.trim() || "";
     const passwordValue = passwordInput?.value.trim() || "";
-    
-    if(emailValue === "" || passwordValue === "") {
-      loginBtn.setAttribute("disabled", "true");
-    } else{
-      loginBtn.removeAttribute("disabled");
-    }
 
+    if (emailValue === "" || passwordValue === "") {
+      loginBtn?.setAttribute("disabled", "true");
+    } else {
+      loginBtn?.removeAttribute("disabled");
+    }
   };
 
-  if(emailInput && passwordInput) {
-    emailInput.addEventListener("input", validateForm);
-    passwordInput.addEventListener("input", validateForm);
+  if (emailInput && passwordInput) {
+    emailInput.addEventListener("input", validateLoginForm);
+    passwordInput.addEventListener("input", validateLoginForm);
   }
 
   if (loginBtn) {
@@ -373,23 +245,20 @@ document.addEventListener("DOMContentLoaded", () => {
       const passwordLogin = passwordInput?.value;
 
       const users = JSON.parse(localStorage.getItem("users")) || [];
-
       const validUser = users.find(
         (user) => user.email === emailLogin && user.password === passwordLogin,
       );
 
       if (validUser) {
-        showModal(modals.loggedIn);
-
+        showModal(UI.modals.loggedIn);
         localStorage.setItem("currentUser", JSON.stringify(validUser));
 
         setTimeout(() => {
           hideLoader();
-          console.log("REDIRECTING TO INDEX");
           window.location.href = "/content/homepage.html";
         }, 3000);
       } else {
-        showModal(modals.mismatched);
+        showModal(UI.modals.mismatched);
       }
     });
   }
