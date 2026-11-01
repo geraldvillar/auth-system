@@ -26,15 +26,47 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   });
 
-  // --- CLOSE ICON BUTTON READER ---
-  document.querySelectorAll(".close-icon").forEach((icon) => {
-    icon.addEventListener("click", () => {
-      const modalId = icon.dataset.modal;
-      const modal = document.getElementById(modalId);
-      if (modal) modal.close();
-    });
-  });
+  //EVENT DELEGATION PRAGMATIC WAY 
 
+  // --- CLOSE ICON BUTTON READER ---
+
+   const passwordInputsMap = {
+    signup: UI.inputs.password,
+    current: UI.inputs.userPassword,
+    new: UI.inputs.newPassword,
+    confirm: UI.inputs.confirmPassword,
+  };
+
+document.addEventListener("click", (event) => {
+
+  const closeIcon = event.target.closest(".close-icon"); 
+  if(closeIcon) {
+    const modalId = closeIcon.dataset.modal;
+    const modal = document.getElementById(modalId); 
+
+    if(modal) modal.close(); 
+    return; 
+  }
+
+
+  const toggleBtn = event.target.closest(".toggle-password"); 
+
+  if(toggleBtn) {
+    const target = toggleBtn.dataset.target; 
+    const input = passwordInputsMap[target];
+
+    if(input) {
+      const isHidden = input.type === "password"; 
+      input.type = isHidden ? "text" : "password"; 
+
+      toggleBtn.src = isHidden ? "imgResources/view.png" 
+      : "imgResources/close-eye.png";
+    }
+    return; 
+  }
+});
+
+  
   // ==========================================
   // --- FORGOT PASSWORD LOGIC ---
   // BACK-END NOTE: CHANGE THE LOCALSTORAGE LOGIC WITH:
@@ -164,34 +196,6 @@ document.addEventListener("DOMContentLoaded", () => {
       createAccountBtn.setAttribute("disabled", "true");
       showModal(UI.modals.success);
       indexRedirection();
-    });
-  }
-
-  // --- EYE TOGGLE FOR PASSWORD ---
-  const passwordInputsMap = {
-    signup: UI.inputs.password,
-    current: UI.inputs.userPassword,
-    new: UI.inputs.newPassword,
-    confirm: UI.inputs.confirmPassword,
-  };
-
-  const toggleButtons = document.querySelectorAll(".togglePassword");
-
-  if (toggleButtons) {
-    toggleButtons.forEach((icon) => {
-      icon.addEventListener("click", () => {
-        const target = icon.dataset.target;
-        const input = passwordInputsMap[target];
-
-        if (!input) return;
-
-        const isHidden = input.type === "password";
-        input.type = isHidden ? "text" : "password";
-
-        icon.src = isHidden
-          ? "imgResources/view.png"
-          : "imgResources/close-eye.png";
-      });
     });
   }
 
